@@ -8,7 +8,7 @@ export default function Header() {
   const [openMobile, setOpenMobile] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-black/5 bg-cream-alt/90 backdrop-blur">
       <div className="container-x flex h-[72px] items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-brand/15 text-lg">
@@ -39,7 +39,7 @@ export default function Header() {
                   />
                 </svg>
               </button>
-              <div className="invisible absolute left-0 top-full min-w-[220px] rounded-xl border border-gray-100 bg-white p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:opacity-100">
+              <div className="invisible absolute left-0 top-full min-w-[220px] rounded-xl border border-black/5 bg-cream-alt p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:opacity-100">
                 {group.items.map((item) => (
                   <Link
                     key={item.href + item.label}
@@ -87,7 +87,7 @@ export default function Header() {
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
             <path
               d={openMobile ? "M6 6l12 12M6 18L18 6" : "M4 7h16M4 12h16M4 17h16"}
-              stroke="#374151"
+              stroke="#2F3325"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
@@ -96,7 +96,7 @@ export default function Header() {
       </div>
 
       {openMobile && (
-        <div className="border-t border-gray-100 bg-white px-5 py-4 lg:hidden">
+        <div className="border-t border-black/5 bg-cream-alt px-5 py-4 lg:hidden">
           {primaryNav.map((group) => (
             <div key={group.label} className="py-2">
               <p className="mb-1 text-xs font-bold uppercase tracking-wide text-gray-400">

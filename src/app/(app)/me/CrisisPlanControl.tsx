@@ -79,14 +79,18 @@ export function CrisisPlanControl() {
             }
           />
         ))}
-        <div className="flex items-center gap-4">
-          <button type="submit" disabled={save.isPending} className="btn-primary">
+        <div className="flex items-center gap-4 pt-1">
+          <button
+            type="submit"
+            disabled={save.isPending}
+            className="btn-primary px-5 py-2.5"
+          >
             {t("me.plan.save")}
           </button>
           <button
             type="button"
             onClick={() => setEditing(false)}
-            className="text-sm font-semibold text-gray-500"
+            className="text-sm font-semibold text-earth/70 hover:text-earth"
           >
             {t("me.plan.cancel")}
           </button>
@@ -98,32 +102,32 @@ export function CrisisPlanControl() {
   return (
     <div>
       {current ? (
-        <dl className="space-y-3">
+        <dl className="space-y-3.5">
           {FIELDS.map((field) => (
             <div key={field.key}>
-              <dt className="text-sm font-semibold text-gray-700">
+              <dt className="text-xs font-semibold uppercase tracking-wide text-earth/70">
                 {t(field.labelKey)}
               </dt>
-              <dd className="mt-0.5 whitespace-pre-wrap text-sm text-gray-900">
+              <dd className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-ink">
                 {current[field.key] || "—"}
               </dd>
             </div>
           ))}
         </dl>
       ) : (
-        <p className="text-sm text-gray-500">{t("me.plan.none")}</p>
+        <p className="text-sm text-earth/70">{t("me.plan.none")}</p>
       )}
 
       <div className="mt-4 flex items-center gap-3">
         <button
           type="button"
           onClick={startEditing}
-          className="text-sm font-semibold text-brand"
+          className="text-sm font-semibold text-brand hover:text-brand-dark"
         >
           {t("me.plan.edit")}
         </button>
         {justSaved && (
-          <span className="text-xs text-gray-400">{t("me.plan.saved")}</span>
+          <span className="text-xs text-earth/60">{t("me.plan.saved")}</span>
         )}
       </div>
     </div>

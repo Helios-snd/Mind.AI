@@ -1,9 +1,7 @@
-# Mind.AI — site rebuild (Next.js + Tailwind)
+# Mind.AI — marketing site (Next.js + Tailwind)
 
-A framework rebuild of the marketing site at [mind.ai](https://www.mind.ai/), whose
-live version is a Create React App SPA. Content and layout were reconstructed from
-the rendered pages; **all imagery is greybox placeholder** (`<Placeholder>`), to be
-swapped for real assets.
+The marketing site and pre-onboarding flow for Mind.AI. **All imagery is greybox
+placeholder** (`<Placeholder>`), to be swapped for real assets.
 
 ## Stack
 
@@ -19,38 +17,33 @@ npm run dev      # http://localhost:3000
 npm run build && npm run start
 ```
 
-## Pages built
+## Pages
 
-| Route | Source page | Notes |
-|---|---|---|
-| `/` | `/` | Full landing page, all sections |
-| `/depression` `/anxiety` `/adhd` | same | Driven by `src/data/services.ts` + `ServicePage` |
-| `/tobacco-addiction` | same | Article shell — body copy is a TODO |
-| `/counseling-vs-psychotherapy` | same | Article shell — body copy is a TODO |
-| `/our-experts` | `/Ourexperts` | Demo doctor data |
-| `/find-your-doctor` | same | 10-step quiz shell; only Q1 wording is real |
-| `/volunteer` | same | Form |
-| `/faq` | same | Questions captured; **answers are TODO** |
-| `/careers` | `/Careers` | Full application form |
-| `/contact-us` | same | Contact details + form |
-| `/news` | same | Post titles only |
-| `/all-resources` | same | Videos / blogs / assessments / music |
-| `/privacy-policy` | same | Condensed from live text — confirm with legal |
-| `/terms-and-conditions` | same | Empty on live site |
-| `/login` | `/login` | Placeholder auth screen (was out of scope) |
-| `/students-wellbeing` `/for-corporates` | Services menu | Coming-soon stubs (not captured) |
+| Route | Notes |
+|---|---|
+| `/` | Landing page, all sections |
+| `/depression` `/anxiety` `/adhd` | Driven by `src/data/services.ts` + `ServicePage` |
+| `/tobacco-addiction` | Article shell — body copy is a TODO |
+| `/counseling-vs-psychotherapy` | Article shell — body copy is a TODO |
+| `/our-experts` | Demo doctor data |
+| `/find-your-doctor` | 10-step matching questionnaire → experts list |
+| `/volunteer` | Form |
+| `/faq` | Questions listed; **answers are TODO** |
+| `/careers` | Application form |
+| `/contact-us` | Contact details + form |
+| `/news` | Post titles only |
+| `/all-resources` | Videos / blogs / assessments / music |
+| `/privacy-policy` | **Confirm with legal** |
+| `/terms-and-conditions` | Copy pending |
+| `/login` | Placeholder auth screen |
+| `/students-wellbeing` `/for-corporates` | Coming-soon stubs |
 
-## Route changes from the original
+## Design tokens
 
-Slugs normalized to kebab-case: `/Ourexperts` → `/our-experts`,
-`/Careers` → `/careers`. The live "About Us" link points to `/faq` (no dedicated
-About page exists) — preserved.
-
-## Design tokens (sampled from the live build)
-
-- Brand: `#F0703A` (hover `#CC6235`)
-- Creams: `#FFF5EA`, `#FFF7E9`
-- Text: Tailwind gray scale (900/800/700/600/500)
+- Brand: `#56663A` (deep olive), hover `#3F4A2B`
+- Sage `#D9DCA8`, creams `#F5EBD7` / `#FCF8EE`
+- Text: `ink` `#2F3325`, `earth` `#6B6250`, plus the Tailwind gray scale
+- See `tailwind.config.ts` for the full palette
 
 ## TODO before launch
 
@@ -60,5 +53,5 @@ About page exists) — preserved.
 - Add full article bodies for the two blog posts
 - Publish Terms & Conditions copy
 - Wire forms (volunteer, careers, contact, newsletter) to a backend
-- Build `/login` auth, `/find-your-doctor` real questions, assessments, music
+- Build `/login` auth, `/find-your-doctor` matching logic, assessments, music
 - Add `sitemap.ts` / `robots.ts`, real metadata + OG images

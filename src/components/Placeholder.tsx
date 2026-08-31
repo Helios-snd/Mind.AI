@@ -1,6 +1,6 @@
 /**
- * Greybox placeholder. The brief calls for placeholder imagery everywhere the
- * original uses illustrations / photos / logos — swap these for real assets later.
+ * Greybox placeholder standing in for illustrations / photos / logos —
+ * swap these for real assets later.
  */
 export default function Placeholder({
   label,

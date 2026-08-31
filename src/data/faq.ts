@@ -1,5 +1,4 @@
-// Question list captured from /faq. Answers are collapsed on the live site and
-// were not captured — fill from the Mind.AI content team.
+// FAQ questions grouped by category. Answers are pending.
 
 export type FaqCategory = { category: string; questions: string[] };
 

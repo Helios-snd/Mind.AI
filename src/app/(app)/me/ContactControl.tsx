@@ -80,17 +80,21 @@ export function ContactControl() {
           onChange={set("phone")}
           error={errors.phone}
         />
-        <p className="text-sm text-gray-600">
+        <p className="text-sm leading-relaxed text-earth">
           {t("onboarding.crisis.contact.helper")}
         </p>
-        <div className="flex items-center gap-4">
-          <button type="submit" disabled={save.isPending} className="btn-primary">
+        <div className="flex items-center gap-4 pt-1">
+          <button
+            type="submit"
+            disabled={save.isPending}
+            className="btn-primary px-5 py-2.5"
+          >
             {t("me.plan.save")}
           </button>
           <button
             type="button"
             onClick={() => setEditing(false)}
-            className="text-sm font-semibold text-gray-500"
+            className="text-sm font-semibold text-earth/70 hover:text-earth"
           >
             {t("me.plan.cancel")}
           </button>
@@ -103,8 +107,10 @@ export function ContactControl() {
     <div>
       {current ? (
         <div className="text-sm">
-          <p className="font-semibold text-gray-900">{current.name}</p>
-          <p className="text-gray-600">
+          <p className="font-display text-base font-semibold text-ink">
+            {current.name}
+          </p>
+          <p className="mt-0.5 text-earth">
             {t("me.contact.relationshipLine", {
               relationship: current.relationship,
               phone: current.phone,
@@ -112,19 +118,19 @@ export function ContactControl() {
           </p>
         </div>
       ) : (
-        <p className="text-sm text-gray-500">{t("me.contact.none")}</p>
+        <p className="text-sm text-earth/70">{t("me.contact.none")}</p>
       )}
 
       <div className="mt-4 flex items-center gap-3">
         <button
           type="button"
           onClick={startEditing}
-          className="text-sm font-semibold text-brand"
+          className="text-sm font-semibold text-brand hover:text-brand-dark"
         >
           {t("me.plan.edit")}
         </button>
         {justSaved && (
-          <span className="text-xs text-gray-400">{t("me.plan.saved")}</span>
+          <span className="text-xs text-earth/60">{t("me.plan.saved")}</span>
         )}
       </div>
     </div>

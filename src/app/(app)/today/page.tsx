@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useT } from "@/i18n";
 import { useOnboardingProgress } from "@/api/hooks";
+import { AppHeader } from "@/components/AppHeader";
 import { CheckInForm, type CheckInDraft } from "./CheckInForm";
 import { Acknowledgement } from "./Acknowledgement";
 import { reflect } from "./reflect";
@@ -49,7 +50,7 @@ export default function TodayPage() {
   if (entries === null) {
     return (
       <Screen>
-        <p role="status" className="text-gray-600">
+        <p role="status" className="text-earth">
           {t("state.loading")}
         </p>
       </Screen>
@@ -60,9 +61,7 @@ export default function TodayPage() {
   if (todays && !reopened) {
     return (
       <Screen>
-        <h1 className="font-display text-2xl font-semibold text-gray-900">
-          {t("today.done.heading")}
-        </h1>
+        <AppHeader title={t("today.done.heading")} />
         <div className="mt-6">
           <Acknowledgement
             reflection={reflect(todays)}
@@ -87,18 +86,18 @@ export default function TodayPage() {
   return (
     <Screen>
       {returning && (
-        <div className="mb-8 rounded-2xl bg-cream p-4">
-          <p className="font-semibold text-gray-900">{t("today.back.title")}</p>
-          <p className="mt-1 text-sm text-gray-600">{t("today.back.body")}</p>
+        <div className="mb-7 animate-fade-up rounded-2xl border border-brand/15 bg-brand/[0.06] p-4">
+          <p className="text-sm font-semibold text-ink">{t("today.back.title")}</p>
+          <p className="mt-1 text-sm text-earth">{t("today.back.body")}</p>
         </div>
       )}
 
-      <h1 className="font-display text-2xl font-semibold text-gray-900">
-        {t("today.checkin.heading")}
-      </h1>
-      <p className="mt-2 text-sm text-gray-600">{t("today.checkin.sub")}</p>
+      <AppHeader
+        title={t("today.checkin.heading")}
+        subtitle={t("today.checkin.sub")}
+      />
 
-      <div className="mt-8">
+      <div className="mt-7">
         <CheckInForm onSubmit={submit} />
       </div>
     </Screen>
@@ -107,6 +106,6 @@ export default function TodayPage() {
 
 function Screen({ children }: { children: React.ReactNode }) {
   return (
-    <div className="container-x max-w-xl py-10 pb-28 sm:py-14">{children}</div>
+    <div className="container-x max-w-xl pt-8 pb-28 sm:pt-12">{children}</div>
   );
 }

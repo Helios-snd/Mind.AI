@@ -23,17 +23,17 @@ export function LanguageControl() {
             disabled={isSaving}
             aria-pressed={active}
             onClick={() => setLanguage(option.value)}
-            className={`rounded-lg border px-4 py-2 text-sm font-semibold transition-colors ${
+            className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
               active
-                ? "border-brand bg-brand text-white"
-                : "border-gray-300 text-gray-700 hover:border-brand/40"
+                ? "border-brand bg-brand text-white shadow-soft"
+                : "border-ink/12 text-earth hover:border-brand/40 hover:text-ink"
             }`}
           >
             {option.label}
           </button>
         );
       })}
-      <span className="inline-flex items-center gap-1.5 rounded-lg border border-dashed border-gray-300 px-4 py-2 text-sm font-semibold text-gray-400">
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-ink/15 px-4 py-2 text-sm font-semibold text-earth/40">
         हिन्दी
         <span className="text-[10px] font-bold uppercase tracking-wide">
           {t("me.language.hindiSoon")}

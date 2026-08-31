@@ -15,6 +15,14 @@ export type CheckInDraft = {
 
 const DEFAULT_SLEEP = 7;
 
+function Legend({ children }: { children: React.ReactNode }) {
+  return (
+    <legend className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-earth/80">
+      {children}
+    </legend>
+  );
+}
+
 export function CheckInForm({
   onSubmit,
 }: {
@@ -27,38 +35,36 @@ export function CheckInForm({
 
   return (
     <form
-      className="space-y-9"
+      className="animate-fade-up"
       onSubmit={(event) => {
         event.preventDefault();
         if (mood === null) return;
         onSubmit({ mood, sleepHours, note: note.trim() });
       }}
     >
-      <fieldset>
-        <legend className="mb-3 text-sm font-semibold text-gray-700">
-          {t("today.mood.legend")}
-        </legend>
-        <MoodScale value={mood} onChange={setMood} />
-      </fieldset>
+      <div className="card space-y-8 p-5 sm:p-6">
+        <fieldset>
+          <Legend>{t("today.mood.legend")}</Legend>
+          <MoodScale value={mood} onChange={setMood} />
+        </fieldset>
 
-      <fieldset>
-        <legend className="mb-3 text-sm font-semibold text-gray-700">
-          {t("today.sleep.legend")}
-        </legend>
-        <SleepSlider value={sleepHours} onChange={setSleepHours} />
-      </fieldset>
+        <fieldset>
+          <Legend>{t("today.sleep.legend")}</Legend>
+          <SleepSlider value={sleepHours} onChange={setSleepHours} />
+        </fieldset>
 
-      <div>
-        <p className="mb-2 text-sm font-semibold text-gray-700">
-          {t("today.note.legend")}
-        </p>
-        <NoteField value={note} onChange={setNote} />
+        <div>
+          <p className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-earth/80">
+            {t("today.note.legend")}
+          </p>
+          <NoteField value={note} onChange={setNote} />
+        </div>
       </div>
 
       <button
         type="submit"
         disabled={mood === null}
-        className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-50"
+        className="btn-primary mt-5 w-full shadow-soft disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
       >
         {t("today.submit")}
       </button>

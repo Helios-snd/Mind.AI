@@ -1,4 +1,4 @@
-// Captured from /Ourexperts on the live site (demo data).
+// Demo data for the /our-experts page.
 
 export type Expert = {
   name: string;

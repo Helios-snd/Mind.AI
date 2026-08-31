@@ -3,24 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Section } from "@/components/Section";
-
-// The live pre-assessment has 10 steps. Only Q1 wording was captured from the
-// live site; the rest are placeholders for the Mind.AI content team.
-const questions: { q: string; options: string[] }[] = [
-  {
-    q: "Where would you like to meet your therapist?",
-    options: ["Online", "In person", "No preference"],
-  },
-  { q: "Question 2 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 3 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 4 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 5 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 6 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 7 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 8 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 9 — placeholder", options: ["Option A", "Option B", "Option C"] },
-  { q: "Question 10 — placeholder", options: ["Option A", "Option B", "Option C"] },
-];
+import { EMERGENCY_HELPLINE } from "@/data/nav";
+import { matchQuestions as questions } from "@/data/therapistMatch";
 
 export default function Page() {
   const [step, setStep] = useState(0);
@@ -119,6 +103,13 @@ export default function Page() {
             </Link>
           </div>
         )}
+
+        <p className="mx-auto mt-6 max-w-md text-center text-xs text-gray-400">
+          If you need urgent support, call{" "}
+          <a href="tel:18008914416" className="font-semibold text-brand">
+            {EMERGENCY_HELPLINE}
+          </a>
+        </p>
       </div>
     </Section>
   );

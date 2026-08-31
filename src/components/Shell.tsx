@@ -1,7 +1,9 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { HelpNowGateProvider, useHelpNowGate } from "@/help/HelpNowGate";
 import HelpNowLauncher from "@/help/HelpNowLauncher";
+import TabDock from "@/components/TabDock";
 
 /**
  * The authenticated app frame. Renders the current screen and owns the
@@ -18,11 +20,16 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
 function ShellFrame({ children }: { children: React.ReactNode }) {
   const { visible } = useHelpNowGate();
+  const pathname = usePathname() ?? "";
+
+  // The dock is the app's tab nav; onboarding is a linear flow without it.
+  const showDock = pathname !== "/onboarding";
 
   return (
     <>
       <main className="flex-1">{children}</main>
-      <HelpNowLauncher visible={visible} />
+      <HelpNowLauncher visible={visible} raised={showDock} />
+      {showDock && <TabDock />}
     </>
   );
 }

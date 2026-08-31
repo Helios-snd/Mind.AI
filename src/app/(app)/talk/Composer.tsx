@@ -70,12 +70,9 @@ export function Composer({ onSend }: { onSend: (text: string) => void }) {
   const recording = voice.state === "recording" || voice.state === "requesting";
 
   return (
-    <div
-      className="shrink-0 border-t border-gray-100 bg-white px-4 pt-3"
-      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 5rem)" }}
-    >
+    <div className="shrink-0 border-t border-ink/[0.06] bg-cream/80 px-4 pb-3 pt-3 backdrop-blur">
       {(showHint || voice.state === "denied") && (
-        <p className="mb-2 text-xs text-gray-500">
+        <p className="mb-2 text-xs leading-relaxed text-earth/70">
           {voice.state === "denied"
             ? t("talk.mic.denied")
             : t("talk.mic.done")}
@@ -83,30 +80,30 @@ export function Composer({ onSend }: { onSend: (text: string) => void }) {
       )}
 
       {recording ? (
-        <div className="flex items-center justify-between rounded-2xl border border-brand/40 bg-cream px-4 py-3">
-          <span className="flex items-center gap-2 text-sm font-semibold text-gray-800">
-            <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-brand" />
+        <div className="flex items-center justify-between rounded-2xl border border-brand/30 bg-brand/5 px-4 py-3">
+          <span className="flex items-center gap-2.5 text-sm font-semibold text-ink">
+            <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-crisis" />
             {t("talk.mic.recording", { time: mmss(voice.seconds) })}
           </span>
           <span className="flex gap-4">
             <button
               type="button"
               onClick={voice.cancel}
-              className="text-sm font-semibold text-gray-500"
+              className="text-sm font-semibold text-earth/70 hover:text-earth"
             >
               {t("talk.mic.cancel")}
             </button>
             <button
               type="button"
               onClick={stopVoice}
-              className="text-sm font-semibold text-brand"
+              className="text-sm font-semibold text-brand hover:text-brand-dark"
             >
               {t("talk.mic.stop")}
             </button>
           </span>
         </div>
       ) : (
-        <div className="flex items-end gap-2">
+        <div className="flex items-end gap-2 rounded-[22px] border border-ink/10 bg-cream-alt p-1.5 shadow-soft transition focus-within:border-brand/40 focus-within:ring-4 focus-within:ring-brand/10">
           {voice.state === "idle" && (
             <button
               type="button"
@@ -115,7 +112,7 @@ export function Composer({ onSend }: { onSend: (text: string) => void }) {
                 setShowHint(false);
                 voice.start();
               }}
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-brand hover:bg-cream"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-earth transition-colors hover:bg-brand/10 hover:text-brand"
             >
               <MicIcon className="h-5 w-5" />
             </button>
@@ -136,7 +133,7 @@ export function Composer({ onSend }: { onSend: (text: string) => void }) {
             }}
             rows={1}
             placeholder={t("talk.composer.placeholder")}
-            className="max-h-36 w-full resize-none overflow-y-auto rounded-2xl border border-gray-300 px-4 py-2.5 text-sm"
+            className="max-h-36 w-full resize-none self-center overflow-y-auto border-0 bg-transparent px-2 py-2 text-sm text-ink placeholder:text-earth/50 focus:outline-none focus:ring-0"
           />
 
           <button
@@ -144,14 +141,14 @@ export function Composer({ onSend }: { onSend: (text: string) => void }) {
             aria-label={t("talk.composer.send")}
             onClick={submit}
             disabled={text.trim().length === 0}
-            className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand text-white transition-opacity hover:bg-brand-dark disabled:opacity-40"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-soft transition-all hover:bg-brand-dark disabled:scale-90 disabled:opacity-30 disabled:shadow-none"
           >
             <SendIcon className="h-5 w-5" />
           </button>
         </div>
       )}
 
-      <p className="mt-1.5 hidden text-[11px] text-gray-400 sm:block">
+      <p className="mt-2 hidden text-center text-[11px] text-earth/50 sm:block">
         {t("talk.composer.hint")}
       </p>
     </div>

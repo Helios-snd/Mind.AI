@@ -1,15 +1,15 @@
 /**
  * Original SVG artwork for Mind.AI — hand-authored, no third-party assets.
- * Palette follows the brand tokens: brand #F0703A, light #F8946B,
- * peach #FFD9C6, cream #FFF5EA, ink #111827.
+ * Palette follows the brand tokens: brand (deep olive) #56663A, light (sage)
+ * #87945A, sage #D9DCA8, cream #F5EBD7, ink #2F3325, earth #8C8A6E.
  */
 
-const INK = "#111827";
-const BRAND = "#F0703A";
-const LIGHT = "#F8946B";
-const PEACH = "#FFD9C6";
-const CREAM = "#FFF5EA";
-const LAV = "#C7B8E6";
+const INK = "#2F3325";
+const BRAND = "#56663A";
+const LIGHT = "#87945A";
+const PEACH = "#D9DCA8";
+const CREAM = "#F5EBD7";
+const LAV = "#8C8A6E";
 
 type ArtProps = { className?: string };
 
@@ -61,9 +61,9 @@ export function MeditationScene({ className }: ArtProps) {
       <circle cx="205" cy="120" r="26" fill={PEACH} />
       <path d="M181 118c2-20 12-32 24-32s22 12 24 32c-16-8-32-8-48 0z" fill={INK} />
       {/* sprout */}
-      <path d="M205 92c0-12 6-20 16-22-2 12-8 20-16 22z" fill="#7BB661" />
-      <path d="M205 92c0-10-5-17-14-19 1 11 6 17 14 19z" fill="#95C97E" />
-      <line x1="205" y1="98" x2="205" y2="86" stroke="#7BB661" strokeWidth="3" />
+      <path d="M205 92c0-12 6-20 16-22-2 12-8 20-16 22z" fill="#6E8C4A" />
+      <path d="M205 92c0-10-5-17-14-19 1 11 6 17 14 19z" fill="#8AA96A" />
+      <line x1="205" y1="98" x2="205" y2="86" stroke="#6E8C4A" strokeWidth="3" />
       {/* face */}
       <path d="M197 122q4 4 8 0" stroke={INK} strokeWidth="2.5" fill="none" strokeLinecap="round" />
       <path d="M211 122q4 4 8 0" stroke={INK} strokeWidth="2.5" fill="none" strokeLinecap="round" />
@@ -93,7 +93,7 @@ export function MatchScene({ className }: ArtProps) {
       {/* person B */}
       <path d="M232 246c4-34 18-52 40-52s36 18 40 52z" fill={LAV} />
       <circle cx="272" cy="164" r="20" fill={PEACH} />
-      <path d="M254 162c2-14 8-24 18-24s16 10 18 24c-12-6-24-6-36 0z" fill="#5B4B8A" />
+      <path d="M254 162c2-14 8-24 18-24s16 10 18 24c-12-6-24-6-36 0z" fill="#4A443A" />
       {/* speech bubbles */}
       <rect x="150" y="96" width="60" height="34" rx="14" fill="#fff" />
       <circle cx="168" cy="113" r="4" fill={BRAND} />
@@ -291,7 +291,7 @@ export function TopicThumb({
     [BRAND, LIGHT],
     [LIGHT, PEACH],
     [LAV, LIGHT],
-    ["#7BB661", LIGHT],
+    ["#6E8C4A", LIGHT],
   ];
   const [a, b] = palettes[h % palettes.length];
   const gid = `g${h}`;
@@ -331,7 +331,7 @@ export function Avatar({ name, className }: ArtProps & { name: string }) {
     .join("")
     .toUpperCase();
   const h = hash(name);
-  const bg = [BRAND, LIGHT, LAV, "#7BB661"][h % 4];
+  const bg = [BRAND, LIGHT, LAV, "#6E8C4A"][h % 4];
   return (
     <Frame className={className} viewBox="0 0 64 64" label={`${name} avatar`}>
       <circle cx="32" cy="32" r="32" fill={CREAM} />

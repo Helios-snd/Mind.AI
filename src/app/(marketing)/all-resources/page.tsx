@@ -108,7 +108,7 @@ export default function Page() {
       <Section id="music" className="bg-cream">
         <SectionHeading
           title="Calming Music"
-          subtitle="Curated audio to help you relax, focus and sleep. (Placeholder section — the live menu links here.)"
+          subtitle="Curated audio to help you relax, focus and sleep."
         />
         <div className="grid gap-6 sm:grid-cols-3">
           {["Focus", "Sleep", "Unwind"].map((m) => (

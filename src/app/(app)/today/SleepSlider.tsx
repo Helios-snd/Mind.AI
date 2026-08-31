@@ -24,12 +24,17 @@ export function SleepSlider({
           hours: value % 1 === 0 ? n(value) : `${n(Math.floor(value))}½`,
         });
 
+  const pct = ((value - MIN) / (MAX - MIN)) * 100;
+
   return (
     <div>
       <label htmlFor={id} className="sr-only">
         {t("today.sleep.legend")}
       </label>
-      <p className="font-display text-lg text-gray-900" aria-live="polite">
+      <p
+        className="font-display text-xl font-semibold text-ink"
+        aria-live="polite"
+      >
         {readout}
       </p>
       <input
@@ -41,9 +46,12 @@ export function SleepSlider({
         value={value}
         onChange={(event) => onChange(Number(event.target.value))}
         aria-valuetext={readout}
-        className="mt-3 w-full accent-brand"
+        className="slider mt-3.5 w-full"
+        style={{
+          background: `linear-gradient(to right, #56663A ${pct}%, rgba(107,98,80,0.18) ${pct}%)`,
+        }}
       />
-      <div className="mt-1 flex justify-between text-xs text-gray-400">
+      <div className="mt-2 flex justify-between text-xs text-earth/60">
         <span>{n(MIN)}</span>
         <span>{n(MAX)}</span>
       </div>

@@ -133,9 +133,11 @@ export default function TalkPage() {
   };
 
   return (
-    <div className="mx-auto flex h-[100dvh] max-w-xl flex-col">
-      <header className="shrink-0 border-b border-gray-100 px-5 py-3">
-        <h1 className="font-display text-base font-semibold text-gray-900">
+    // Column stops above the floating dock + raised help pill (~9.5rem incl.
+    // safe area) so the composer and its Send button never sit under them.
+    <div className="mx-auto flex h-[calc(100dvh-9.5rem-env(safe-area-inset-bottom,0px))] max-w-xl flex-col">
+      <header className="shrink-0 border-b border-ink/[0.06] bg-cream/70 px-5 py-3.5 backdrop-blur">
+        <h1 className="font-display text-lg font-bold tracking-tight text-ink">
           {t("talk.heading")}
         </h1>
       </header>
@@ -144,11 +146,26 @@ export default function TalkPage() {
         {showDisclosure && <Disclosure onDismiss={dismissDisclosure} />}
 
         {messages === null ? (
-          <p role="status" className="text-gray-600">
+          <p role="status" className="text-earth">
             {t("state.loading")}
           </p>
         ) : messages.length === 0 ? (
-          <p className="mt-10 text-center text-gray-500">{t("talk.body")}</p>
+          <div className="mt-16 flex flex-col items-center text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6 text-brand"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 12a7 7 0 0 1-7 7H8l-4 3v-4.6A7 7 0 0 1 4 12a7 7 0 0 1 7-7h2a7 7 0 0 1 7 7Z" />
+              </svg>
+            </div>
+            <p className="mt-4 text-earth">{t("talk.body")}</p>
+          </div>
         ) : (
           <MessageList messages={messages} typing={typing} onRetry={retry} />
         )}

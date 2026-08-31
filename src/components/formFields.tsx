@@ -33,7 +33,10 @@ export function TextArea({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1 block text-sm font-semibold text-gray-700">
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-earth/80"
+      >
         {label}
       </label>
       <textarea
@@ -44,10 +47,10 @@ export function TextArea({
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? fieldErrorId(id) : undefined}
-        className="w-full rounded-lg border border-gray-300 p-3 text-sm"
+        className="field resize-none"
       />
       {error && (
-        <p id={fieldErrorId(id)} className="mt-1 text-sm text-brand-dark">
+        <p id={fieldErrorId(id)} className="mt-1 text-sm text-crisis">
           {error}
         </p>
       )}
@@ -74,7 +77,10 @@ export function TextField({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1 block text-sm font-semibold text-gray-700">
+      <label
+        htmlFor={id}
+        className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-earth/80"
+      >
         {label}
       </label>
       <input
@@ -85,10 +91,10 @@ export function TextField({
         onChange={(event) => onChange(event.target.value)}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? fieldErrorId(id) : undefined}
-        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
+        className="field"
       />
       {error && (
-        <p id={fieldErrorId(id)} className="mt-1 text-sm text-brand-dark">
+        <p id={fieldErrorId(id)} className="mt-1 text-sm text-crisis">
           {error}
         </p>
       )}

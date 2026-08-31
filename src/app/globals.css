@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply bg-white text-gray-800 antialiased;
+  @apply bg-cream text-gray-800 antialiased;
 }
 
 @layer components {
@@ -16,28 +16,74 @@ body {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark;
+    @apply inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-lg border border-brand px-6 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white;
+    @apply inline-flex items-center justify-center rounded-xl border border-brand px-6 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white;
   }
 
   .h-display {
     @apply font-display font-bold tracking-tight text-gray-900;
   }
+
+  /* Warm off-white surface that sits above the cream page ground. */
+  .card {
+    @apply rounded-2xl border border-ink/[0.06] bg-cream-alt shadow-soft;
+  }
+
+  /* Text inputs / textareas across the student app. */
+  .field {
+    @apply w-full rounded-xl border border-ink/10 bg-cream-alt/60 px-4 py-3 text-sm text-gray-900 placeholder:text-earth/50 transition focus:border-brand/50 focus:bg-cream-alt focus:outline-none focus:ring-4 focus:ring-brand/10;
+  }
+}
+
+/* Range slider — used by the Today sleep control. Track fill is set inline. */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 9999px;
+  outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: #56663a;
+  border: 3px solid #fcf8ee;
+  box-shadow: 0 2px 8px -2px rgba(47, 51, 37, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.slider::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+}
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: #56663a;
+  border: 3px solid #fcf8ee;
+  box-shadow: 0 2px 8px -2px rgba(47, 51, 37, 0.35);
+  cursor: pointer;
+}
+.slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 6px rgba(86, 102, 58, 0.15);
 }
 
 /* Greybox placeholder used everywhere real imagery/photography belongs. */
 .placeholder-box {
-  background-color: #f3f4f6;
+  background-color: #ede7d6;
   background-image: linear-gradient(
       45deg,
-      rgba(240, 112, 58, 0.06) 25%,
+      rgba(86, 102, 58, 0.07) 25%,
       transparent 25%,
       transparent 50%,
-      rgba(240, 112, 58, 0.06) 50%,
-      rgba(240, 112, 58, 0.06) 75%,
+      rgba(86, 102, 58, 0.07) 50%,
+      rgba(86, 102, 58, 0.07) 75%,
       transparent 75%,
       transparent
     );

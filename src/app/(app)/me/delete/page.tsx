@@ -24,7 +24,7 @@ export default function DeleteAccountPage() {
 
   if (done) {
     return (
-      <div className="container-x max-w-xl py-16">
+      <div className="container-x max-w-xl py-16 pb-28">
         <p role="status" className="font-display text-lg text-gray-900">
           {t("me.delete.done")}
         </p>
@@ -63,7 +63,7 @@ export default function DeleteAccountPage() {
           type="button"
           disabled={!armed}
           onClick={wipe}
-          className="inline-flex items-center justify-center rounded-lg bg-brand-dark px-6 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center justify-center rounded-lg bg-crisis px-6 py-3 text-sm font-semibold text-white hover:bg-crisis-dark disabled:cursor-not-allowed disabled:opacity-40"
         >
           {t("me.delete.button")}
         </button>

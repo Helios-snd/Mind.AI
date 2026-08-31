@@ -3,7 +3,7 @@ import { footerNav, EMERGENCY_HELPLINE } from "@/data/nav";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 bg-gray-900 text-gray-300">
+    <footer className="mt-24 bg-ink text-gray-300">
       <div className="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {footerNav.map((group) => (
           <div key={group.label}>
@@ -54,7 +54,8 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className="container-x pb-6 text-xs text-gray-500">
+        {/* pb-28 keeps this last line clear of the fixed dock. */}
+        <div className="container-x pb-28 text-xs text-gray-500">
           Emergency Helpline: If you are in crisis or need urgent support, please
           call {EMERGENCY_HELPLINE}
         </div>

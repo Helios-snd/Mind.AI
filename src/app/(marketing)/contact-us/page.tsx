@@ -19,8 +19,7 @@ export default function Page() {
             <div>
               <dt className="font-semibold text-gray-800">Location:</dt>
               <dd className="text-gray-600">
-                Plot no 146, ground floor, sector 2B, Vaishali, Ghaziabad, Uttar
-                Pradesh, 201010
+                Ram Nagar, Sodepur, Khardah, Kolkata, West Bengal, 700110
               </dd>
             </div>
             <div>
@@ -37,8 +36,8 @@ export default function Page() {
             <div>
               <dt className="font-semibold text-gray-800">Phone:</dt>
               <dd>
-                <a href="tel:+918595967394" className="text-brand hover:underline">
-                  +91 85959 67394
+                <a href="tel:+919907061973" className="text-brand hover:underline">
+                  +91 99070 61973
                 </a>
               </dd>
             </div>

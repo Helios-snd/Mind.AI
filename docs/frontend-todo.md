@@ -12,7 +12,7 @@ real endpoints, no auth, no agent calls. Each section ends with a
 | Area | State |
 |---|---|
 | Conventions / infra (i18n, tokens, reduced-motion, async states) | ✅ mostly in place |
-| App shell & tab bar | ❌ not started — `Shell.tsx` has no navigation |
+| App shell & tab bar | ✅ built — MagicUI-style floating `Dock` (`motion`) in `Shell` |
 | Tab 1 — Today | ✅ built (frontend, localStorage + fixture reflection) |
 | Tab 2 — Talk | ✅ built (frontend, localStorage thread + fixture replies) |
 | Tab 3 — Trends | ✅ built (frontend, SVG chart + fixture TREND + `/data` record) |
@@ -43,18 +43,37 @@ Legend: `[x]` done · `[~]` partial (see note) · `[ ]` not started.
 
 ---
 
-## Shared — app shell & tab bar   ❌
+## Shared — app shell & tab bar   ✅
 
-`src/components/Shell.tsx` renders only `{children}` + the help launcher. There
-is no navigation anywhere.
+A MagicUI-style floating **`Dock`** — `src/components/Dock.tsx` (adapted, `motion`
+is the only new dep), driven by `src/components/TabDock.tsx`, mounted in
+`Shell.tsx`. Icons in `src/components/icons.tsx`.
 
-- [ ] Bottom tab bar `src/app/(app)/_components/TabBar.tsx` — Today / Talk /
-      Trends / Me. Fixed bottom, above the help launcher, safe-area padding.
-- [ ] Active state from `usePathname()`, icons + labels, 44px targets.
-- [ ] `role="navigation"`, `aria-current="page"` on the active tab.
-- [ ] Hide the tab bar on `/onboarding`; show once `completedAt` is set.
-- [ ] `(app)/layout.tsx` renders `<TabBar/>` for the 4 tabs, not onboarding.
-- [ ] i18n keys `nav.today` / `nav.talk` / `nav.trends` / `nav.me`.
+- [x] Floating icon+label dock, bottom-centre, `backdrop-blur`, cursor
+      magnification on desktop (`disableMagnification` under reduced motion),
+      static on touch.
+- [x] Active state from `usePathname()` — `aria-current="page"` + `bg-brand/10`
+      + `text-brand`. `/me/*` keeps Me active; `/data` `/human` highlight none.
+- [x] `<nav aria-label>`, keyboard focus ring, ≥44px targets (52px base).
+- [x] Hidden on `/onboarding` (`pathname !== "/onboarding"` in Shell). Also
+      rendered by `(marketing)/layout.tsx` so it shows across the whole site;
+      its tabs route a not-yet-onboarded visitor into `/onboarding`. `Footer`
+      gained `pb-28` for dock clearance.
+- [x] i18n `nav.label` / `nav.today` / `nav.talk` / `nav.trends` / `nav.me` (EN/BN).
+- [x] "Need help now" pill is now **consistent on every screen** — same
+      lifebuoy pill, raised above the dock (`HelpNowButton` `raised`), including
+      `/talk` (the earlier header-link treatment was removed). `/talk`'s column
+      is shortened (`100dvh − 9.5rem`) so the composer clears the pill + dock.
+- [x] Sheet open-state lives in `HelpNowGate` (`openSheet`/`closeSheet`);
+      marketing layout wraps its launcher in `HelpNowGateProvider`.
+- [x] **Visual pass on all 4 tabs** — shared `AppHeader`; `.card` / `.field`
+      helpers + `shadow-soft`/`shadow-card` tokens; warm `ink`/`earth` text;
+      fixed the invisible mood-selection (now a filled brand chip + label) and
+      the invisible `bg-cream`-on-`bg-cream` cards; styled sleep slider,
+      chat bubbles (asymmetric radius, cream-alt assistant), trend chart
+      (area-fill gradient, haloed latest point), Me section cards.
+- [x] Fixed a latent bug: `sm:py-14` on the tab pages was overriding `pb-28`,
+      so bottom content slid under the dock on desktop — now `pt-… pb-28`.
 
 **Backend later:** none.
 

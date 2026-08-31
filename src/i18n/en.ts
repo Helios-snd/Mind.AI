@@ -103,6 +103,13 @@ export const en = {
   "help.stay.title": "Just stay with me",
   "help.stay.subtitle": "No calls. I'll be here.",
 
+  // Navigation
+  "nav.label": "Main",
+  "nav.today": "Today",
+  "nav.talk": "Talk",
+  "nav.trends": "Trends",
+  "nav.me": "Me",
+
   // Authenticated stub screens
   "today.heading": "Today",
   "today.body": "You're set up. This is where each day will start.",

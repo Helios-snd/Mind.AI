@@ -57,23 +57,23 @@ export function NoteField({
 
   if (recording) {
     return (
-      <div className="flex items-center justify-between rounded-lg border border-brand/40 bg-cream px-4 py-3">
-        <span className="flex items-center gap-2 text-sm font-semibold text-gray-800">
-          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-brand" />
+      <div className="flex items-center justify-between rounded-xl border border-brand/30 bg-brand/5 px-4 py-3.5">
+        <span className="flex items-center gap-2.5 text-sm font-semibold text-ink">
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-crisis" />
           {t("today.note.mic.recording", { time: mmss(voice.seconds) })}
         </span>
         <span className="flex gap-4">
           <button
             type="button"
             onClick={voice.cancel}
-            className="text-sm font-semibold text-gray-500"
+            className="text-sm font-semibold text-earth/70 hover:text-earth"
           >
             {t("today.note.mic.cancel")}
           </button>
           <button
             type="button"
             onClick={stopVoice}
-            className="text-sm font-semibold text-brand"
+            className="text-sm font-semibold text-brand hover:text-brand-dark"
           >
             {t("today.note.mic.stop")}
           </button>
@@ -95,10 +95,10 @@ export function NoteField({
         }}
         rows={3}
         placeholder={t("today.note.placeholder")}
-        className="w-full resize-none rounded-lg border border-gray-300 p-3 text-sm"
+        className="field resize-none"
       />
-      <div className="mt-2 flex items-start justify-between gap-3">
-        <p className="text-xs text-gray-500">
+      <div className="mt-2.5 flex items-start justify-between gap-3">
+        <p className="text-xs leading-relaxed text-earth/70">
           {showTranscribeHint
             ? t("today.note.mic.done")
             : voice.state === "denied"
@@ -112,7 +112,7 @@ export function NoteField({
               setShowTranscribeHint(false);
               voice.start();
             }}
-            className="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand"
+            className="flex shrink-0 items-center gap-1.5 rounded-full border border-brand/25 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/5"
           >
             <MicIcon className="h-4 w-4" />
             {t("today.note.mic.start")}

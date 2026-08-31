@@ -103,6 +103,13 @@ export const bn = {
   "help.stay.title": "শুধু আমার পাশে থাকো",
   "help.stay.subtitle": "কোনো ফোন নয়। আমি এখানেই আছি।",
 
+  // Navigation
+  "nav.label": "প্রধান",
+  "nav.today": "আজ",
+  "nav.talk": "কথা বলো",
+  "nav.trends": "প্রবণতা",
+  "nav.me": "আমি",
+
   // Authenticated stub screens
   "today.heading": "আজ",
   "today.body": "তোমার সেটআপ শেষ। প্রতিটা দিন এখান থেকেই শুরু হবে।",

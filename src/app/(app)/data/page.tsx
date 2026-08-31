@@ -54,7 +54,7 @@ export default function StoredDataPage() {
   const setup = progress.data;
 
   return (
-    <div className="container-x max-w-xl py-10 pb-28 sm:py-14">
+    <div className="container-x max-w-xl pt-10 pb-28 sm:pt-14">
       <Link href="/trends" className="text-sm font-semibold text-brand">
         ← {t("data.back")}
       </Link>
@@ -95,7 +95,7 @@ export default function StoredDataPage() {
                 <button
                   type="button"
                   onClick={() => removeCheckIn(entry.at)}
-                  className="shrink-0 text-xs font-semibold text-brand-dark"
+                  className="shrink-0 text-xs font-semibold text-crisis"
                 >
                   {t("data.delete")}
                 </button>
@@ -123,7 +123,7 @@ export default function StoredDataPage() {
             <button
               type="button"
               onClick={removeThread}
-              className="shrink-0 text-xs font-semibold text-brand-dark"
+              className="shrink-0 text-xs font-semibold text-crisis"
             >
               {t("data.convo.delete")}
             </button>

@@ -4,7 +4,7 @@ import { Section } from "@/components/Section";
 
 export const metadata: Metadata = { title: "Login | Mind.AI" };
 
-// Placeholder auth screen — the live /login flow was out of scope for this pass.
+// Placeholder auth screen — not yet wired to a backend.
 export default function Page() {
   return (
     <Section>

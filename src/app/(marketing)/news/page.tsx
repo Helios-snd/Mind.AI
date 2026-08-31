@@ -4,7 +4,6 @@ import { Section } from "@/components/Section";
 
 export const metadata: Metadata = { title: "News | Mind.AI" };
 
-// Titles captured from /news on the live site.
 const posts = [
   "Long work hours and mental health problems",
   "ISKCON guru Gauranga Das shared chat with Google CEO",

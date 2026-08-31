@@ -15,23 +15,26 @@ export function Acknowledgement({
   const t = useT();
 
   return (
-    <div className="space-y-6">
+    <div className="animate-fade-up space-y-6">
       <div role="status" className="space-y-2">
-        <p className="font-display text-xl leading-relaxed text-gray-900">
+        <p className="font-display text-xl leading-relaxed text-ink">
           {t(reflection.ackKey)}
         </p>
-        {hadNote && <p className="text-gray-600">{t("today.ack.noted")}</p>}
+        {hadNote && (
+          <p className="text-sm text-earth">{t("today.ack.noted")}</p>
+        )}
       </div>
 
       {reflection.suggestion && (
-        <div className="rounded-2xl border border-gray-200 bg-cream p-5">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
+        <div className="card p-5">
+          <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-brand">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand" />
             {t("today.suggest.label")}
           </p>
-          <p className="mt-2 font-semibold text-gray-900">
+          <p className="mt-2.5 font-display text-base font-semibold text-ink">
             {t(reflection.suggestion.titleKey)}
           </p>
-          <p className="mt-1 text-sm leading-relaxed text-gray-600">
+          <p className="mt-1 text-sm leading-relaxed text-earth">
             {t(reflection.suggestion.bodyKey)}
           </p>
         </div>
@@ -41,7 +44,7 @@ export function Acknowledgement({
         <button
           type="button"
           onClick={onAddMore}
-          className="text-sm font-semibold text-brand"
+          className="text-sm font-semibold text-brand hover:text-brand-dark"
         >
           {t("today.done.addMore")}
         </button>

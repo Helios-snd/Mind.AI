@@ -50,8 +50,8 @@ export function MessageList({
   return (
     <div className="space-y-6">
       {groupByDay(messages).map((group) => (
-        <div key={group.key} className="space-y-3">
-          <p className="text-center text-[11px] font-semibold uppercase tracking-widest text-gray-300">
+        <div key={group.key} className="space-y-2.5">
+          <p className="text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-earth/50">
             {dayLabel(group.key, t, language)}
           </p>
           {group.items.map((message) => (
@@ -82,11 +82,17 @@ function Bubble({
   const mine = message.role === "user";
 
   return (
-    <div className={`flex flex-col ${mine ? "items-end" : "items-start"}`}>
+    <div
+      className={`flex animate-fade-up flex-col ${
+        mine ? "items-end" : "items-start"
+      }`}
+    >
       <div
         aria-live={live ? "polite" : undefined}
-        className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-          mine ? "bg-brand text-white" : "bg-gray-100 text-gray-900"
+        className={`max-w-[85%] whitespace-pre-wrap px-4 py-2.5 text-sm leading-relaxed shadow-soft ${
+          mine
+            ? "rounded-[18px] rounded-br-md bg-brand text-white"
+            : "rounded-[18px] rounded-bl-md border border-ink/[0.06] bg-cream-alt text-ink"
         } ${message.status === "failed" ? "opacity-60" : ""}`}
       >
         {message.text}
@@ -95,7 +101,7 @@ function Bubble({
         <button
           type="button"
           onClick={() => onRetry(message.id)}
-          className="mt-1 text-xs font-semibold text-brand-dark"
+          className="mt-1 text-xs font-semibold text-crisis hover:text-crisis-dark"
         >
           {t("talk.failed")} {t("talk.retry")}
         </button>
@@ -109,19 +115,19 @@ function TypingIndicator() {
   const reduced = usePrefersReducedMotion();
 
   if (reduced) {
-    return <p className="text-sm text-gray-400">{t("talk.typing")}</p>;
+    return <p className="text-sm text-earth/60">{t("talk.typing")}</p>;
   }
 
   return (
     <div
-      className="flex items-center gap-1.5 rounded-2xl bg-gray-100 px-4 py-3"
+      className="flex w-fit items-center gap-1.5 rounded-[18px] rounded-bl-md border border-ink/[0.06] bg-cream-alt px-4 py-3 shadow-soft"
       role="status"
       aria-label={t("talk.typing")}
     >
       {[0, 150, 300].map((delay) => (
         <span
           key={delay}
-          className="h-2 w-2 animate-bounce rounded-full bg-gray-400"
+          className="h-2 w-2 animate-bounce rounded-full bg-brand/60"
           style={{ animationDelay: `${delay}ms` }}
         />
       ))}

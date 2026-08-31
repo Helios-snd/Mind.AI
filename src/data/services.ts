@@ -1,4 +1,4 @@
-// Content captured from the live mind.ai service pages (/depression, /anxiety, /adhd).
+// Condition content for the /depression, /anxiety and /adhd service pages.
 
 export type SignCluster = { title: string; points: string[] };
 export type ServiceType = { name: string; blurb: string };

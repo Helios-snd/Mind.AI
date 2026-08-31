@@ -1,5 +1,4 @@
-// Navigation structure mirrored from the live mind.ai header/footer.
-// Route slugs are normalized to kebab-case (e.g. /Ourexperts -> /our-experts).
+// Header and footer navigation structure. Route slugs are kebab-case.
 
 export type NavLink = { label: string; href: string };
 export type NavGroup = { label: string; items: NavLink[]; href?: string };

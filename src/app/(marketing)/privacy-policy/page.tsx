@@ -4,8 +4,7 @@ import { Section } from "@/components/Section";
 export const metadata: Metadata = { title: "Privacy Policy | Mind.AI" };
 
 /**
- * Text mirrored from the live /privacy-policy page (last updated October 06, 2024).
- * Structure preserved; confirm the canonical copy with Mind.AI's legal team before launch.
+ * Privacy policy. Confirm the canonical copy with legal before launch.
  */
 export default function Page() {
   return (

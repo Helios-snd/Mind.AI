@@ -1,26 +1,27 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
+import { useHelpNowGate } from "./HelpNowGate";
 import HelpNowButton from "./HelpNowButton";
 import HelpNowSheet from "./HelpNowSheet";
 
 /**
- * The persistent "Need help now" button plus its sheet, with open-state and
- * focus-return wiring. Used by the app Shell (every authenticated screen) and by
- * the marketing layout, so it is always one tap away from the home page too.
+ * The "Need help now" pill plus its sheet. Used by the app Shell (every
+ * authenticated screen) and by the marketing layout.
+ *
+ * The sheet's open state lives in HelpNowGate so it can also be opened from
+ * elsewhere if needed.
  */
 export default function HelpNowLauncher({
   visible = true,
+  raised = false,
 }: {
   visible?: boolean;
+  /** Lift the pill above the app's bottom dock (Shell passes this in-app). */
+  raised?: boolean;
 }) {
-  const [open, setOpen] = useState(false);
+  const { sheetOpen, openSheet, closeSheet } = useHelpNowGate();
   const triggerRef = useRef<HTMLButtonElement>(null);
-
-  const close = useCallback(() => {
-    setOpen(false);
-    triggerRef.current?.focus();
-  }, []);
 
   if (!visible) return null;
 
@@ -28,10 +29,11 @@ export default function HelpNowLauncher({
     <>
       <HelpNowButton
         triggerRef={triggerRef}
-        expanded={open}
-        onOpen={() => setOpen(true)}
+        expanded={sheetOpen}
+        raised={raised}
+        onOpen={() => openSheet(triggerRef.current)}
       />
-      {open && <HelpNowSheet onClose={close} />}
+      {sheetOpen && <HelpNowSheet onClose={closeSheet} />}
     </>
   );
 }
