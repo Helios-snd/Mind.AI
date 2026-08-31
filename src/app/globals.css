@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-white text-gray-800 antialiased;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-lg border border-brand px-6 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white;
+  }
+
+  .h-display {
+    @apply font-display font-bold tracking-tight text-gray-900;
+  }
+}
+
+/* Greybox placeholder used everywhere real imagery/photography belongs. */
+.placeholder-box {
+  background-color: #f3f4f6;
+  background-image: linear-gradient(
+      45deg,
+      rgba(240, 112, 58, 0.06) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(240, 112, 58, 0.06) 50%,
+      rgba(240, 112, 58, 0.06) 75%,
+      transparent 75%,
+      transparent
+    );
+  background-size: 28px 28px;
+}
