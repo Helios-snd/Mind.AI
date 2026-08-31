@@ -80,6 +80,20 @@ export const mockClient: MockClient = {
     return progress.contact ? structuredClone(progress.contact) : null;
   },
 
+  async saveCrisisPlan(plan) {
+    await guard();
+    progress = { ...progress, crisisPlan: plan };
+    persist();
+    return structuredClone(plan);
+  },
+
+  async saveContact(contact) {
+    await guard();
+    progress = { ...progress, contact };
+    persist();
+    return structuredClone(contact);
+  },
+
   _reset() {
     progress = { step: 1 };
     persist();

@@ -15,8 +15,8 @@ real endpoints, no auth, no agent calls. Each section ends with a
 | App shell & tab bar | ❌ not started — `Shell.tsx` has no navigation |
 | Tab 1 — Today | ✅ built (frontend, localStorage + fixture reflection) |
 | Tab 2 — Talk | ✅ built (frontend, localStorage thread + fixture replies) |
-| Tab 3 — Trends | ❌ route does not exist |
-| Tab 4 — Me | ❌ route does not exist |
+| Tab 3 — Trends | ✅ built (frontend, SVG chart + fixture TREND + `/data` record) |
+| Tab 4 — Me | ✅ built (frontend, editable plan/contact via mock, `/data` + `/me/delete` + `/human`) |
 | Need Help Now sheet | 🟡 ~80% — 4 doors, focus trap, compose, plan all built; small gaps |
 | Onboarding | 🟡 ~75% — all 4 steps built & refresh-resilient; missing Hindi, progress indicator, 18 DASS items |
 | Escalation & Screening UI | ❌ not started |
@@ -124,42 +124,60 @@ SCREENING can take over the thread one item at a time.
 
 ---
 
-## Tab 3 — TRENDS (the mood meter)   ❌
+## Tab 3 — TRENDS (the mood meter)   ✅ (frontend)
 
-Route: `src/app/(app)/trends/page.tsx` — **does not exist yet.**
+Route: `src/app/(app)/trends/` — `page.tsx` + `TrendChart.tsx`, `data.ts`.
+Record view at `src/app/(app)/data/page.tsx` → `/data`.
 
-- [ ] Weekly chart, four toggleable series (mood / sleep / energy / social).
-- [ ] Each series plotted against the user's **own baseline band** (shaded),
-      never a population average. Hard-code the band per series for now.
-- [ ] Inline SVG or tiny lib; keep the chart visually quiet.
-- [ ] Plain-language **insight sentence** directly beneath — the primary content.
-- [ ] "Noticed patterns" list, 2–4 items, observations not judgements.
-- [ ] "See everything stored about me" → plain-language record list with
-      per-item delete (mutates local fixture + `localStorage`).
-- [ ] Empty state ("check in for about a week and this fills in").
-- [ ] Loading + error/retry.
+- [x] Weekly chart, four toggleable series (mood / sleep / energy / social),
+      one shown at a time via a segmented control.
+- [x] Each series drawn against the user's **own baseline band** (brand-tint
+      `<rect>` + dashed edges), per-series scale, never a population average.
+- [x] Hand-rolled inline SVG, deliberately quiet — one line, muted band, week
+      date labels, emphasized last point. `role="img"` + `<title>`.
+- [x] Plain-language **insight sentence** directly beneath, as the lead content;
+      "patterns I've noticed" list (3 items, observations not judgements).
+      Both from `data.ts` fixture — `TODO(backend): TREND`.
+- [x] "See everything stored about me" → `/data`: check-ins with plain-language
+      summaries + **per-item delete**, conversation count + delete, setup shown
+      read-only. Deletes mutate `localStorage` live (`deleteCheckIn`,
+      `clearThread`).
+- [x] Empty state until ≥ 3 check-ins; `?demo=1` forces the populated chart.
+- [x] Current week's mood + sleep fold in from real check-ins (`buildTrends`).
+- [ ] `/data` setup rows are read-only — editing + account-delete land with the
+      Me tab; wire `/data` in as the Me tab's "data controls" target then.
 
 **Backend later:** TREND agent owns baseline / slope / weekly insight; record
 list + real delete from the store.
 
 ---
 
-## Tab 4 — ME (profile & controls)   ❌
+## Tab 4 — ME (profile & controls)   ✅ (frontend)
 
-Route: `src/app/(app)/me/page.tsx` — **does not exist yet.**
+Route: `src/app/(app)/me/` — `page.tsx` + `LanguageControl`, `CrisisPlanControl`,
+`ContactControl`, `wipe.ts`; plus `me/delete/page.tsx`, `human/page.tsx`.
 
-- [ ] Language toggle → existing `useLanguage()` (EN / বাংলা / हिन्दी).
-- [ ] Crisis plan display from `useCrisisPlan()` + edit form (reuse
-      `StepCrisisPlan` field components) + `useSaveCrisisPlan()` mock mutation.
-- [ ] Trusted contact from `useContact()`, editable, "doesn't have to be family"
-      helper, never prefilled to parent/guardian.
-- [ ] Data controls: see-everything view; delete-account-and-data confirm screen
-      (type-to-confirm, clears `aimind.*`); retention statement.
-- [ ] Permanent "talk to a real person" route (static "how referral works" +
-      help sheet).
-- [ ] Grouped section-list layout, tappable rows.
+- [x] Language toggle → `useLanguage()` (EN / বাংলা active; हिन्दी shown as a
+      disabled "soon" chip until the `Language` type is widened).
+- [x] Crisis plan: display from `useCrisisPlan()` + inline edit form (Save /
+      Cancel) via `useSaveCrisisPlan()` — a new mock mutation. Fields reuse the
+      extracted `src/components/formFields.tsx` (also now used by onboarding
+      step 4).
+- [x] Trusted contact: display + inline edit via `useSaveContact()`, required +
+      phone validation, "doesn't have to be family" helper, never prefilled.
+- [x] Data controls: "see everything stored" → `/data`; retention statement;
+      "delete everything" → `/me/delete` (type-DELETE-to-confirm, `wipe.ts`
+      clears every `aimind.*` key + resets the mock, then hard-navigates to
+      `/onboarding`).
+- [x] "Talk to a real person" → `/human` — Tele-MANAS 14416 (`tel:`) + campus
+      counsellor explainer. Row is a permanent section on the Me page.
+- [x] Grouped section-list layout.
+- [x] API layer: `saveCrisisPlan` / `saveContact` added to `ApiClient`,
+      `mockClient`, and `hooks.ts` (caches for plan, contact and onboarding stay
+      in sync).
 
-**Backend later:** real profile read/write; account deletion; referral creation.
+**Backend later:** real profile read/write; account-deletion endpoint (erases
+the server record + referral history); referral creation.
 
 ---
 

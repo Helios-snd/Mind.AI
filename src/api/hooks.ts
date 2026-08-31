@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { mockClient } from "./mockClient";
-import type { OnboardingProgress } from "./types";
+import type { CrisisPlan, OnboardingProgress, TrustedContact } from "./types";
 
 const api = mockClient;
 
@@ -52,5 +52,31 @@ export function useContact() {
   return useQuery({
     queryKey: queryKeys.contact,
     queryFn: () => api.getContact(),
+  });
+}
+
+export function useSaveCrisisPlan() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (plan: CrisisPlan) => api.saveCrisisPlan(plan),
+    onSuccess: (plan) => {
+      qc.setQueryData(queryKeys.crisisPlan, plan);
+      qc.setQueryData<OnboardingProgress>(queryKeys.onboarding, (prev) =>
+        prev ? { ...prev, crisisPlan: plan } : prev,
+      );
+    },
+  });
+}
+
+export function useSaveContact() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (contact: TrustedContact) => api.saveContact(contact),
+    onSuccess: (contact) => {
+      qc.setQueryData(queryKeys.contact, contact);
+      qc.setQueryData<OnboardingProgress>(queryKeys.onboarding, (prev) =>
+        prev ? { ...prev, contact } : prev,
+      );
+    },
   });
 }

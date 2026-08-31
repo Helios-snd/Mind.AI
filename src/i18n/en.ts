@@ -259,6 +259,47 @@ export const en = {
   "data.setup.contact": "Trusted contact",
   "data.setup.contact.none": "None chosen",
   "data.setup.editHint": "Edit these in your profile.",
+
+  // Me — profile and controls
+  "me.heading": "Me",
+  "me.sub": "Your settings, your words, your data.",
+  "me.language.title": "Language",
+  "me.language.hindiSoon": "soon",
+  "me.plan.title": "Your crisis plan",
+  "me.plan.none": "You haven't written one yet.",
+  "me.plan.edit": "Edit",
+  "me.plan.save": "Save",
+  "me.plan.cancel": "Cancel",
+  "me.plan.saved": "Saved",
+  "me.contact.title": "Trusted contact",
+  "me.contact.none": "No one chosen yet.",
+  "me.contact.relationshipLine": "{relationship} · {phone}",
+  "me.human.title": "A real person, any time",
+  "me.human.row": "Talk to a real person",
+  "me.human.always":
+    "The “Need help now” button is on every screen — it never goes away.",
+  "me.data.title": "Your data",
+  "me.data.see": "See everything stored about me",
+  "me.data.retention":
+    "What you write is kept so patterns can show over time. Nothing is shared outside this app, and your college never reads it.",
+  "me.data.delete": "Delete everything and start over",
+  "me.delete.heading": "Delete everything?",
+  "me.delete.body":
+    "This removes your check-ins, your conversation, your plan, your contact and your answers from this device. It cannot be undone.",
+  "me.delete.confirmLabel": "Type DELETE to confirm",
+  "me.delete.confirmWord": "DELETE",
+  "me.delete.button": "Delete everything",
+  "me.delete.cancel": "Keep my data",
+  "me.delete.done": "Done. Everything has been cleared.",
+  "human.heading": "Talk to a real person",
+  "human.back": "Back",
+  "human.body": "You can reach a trained counsellor without going through the app.",
+  "human.telemanas.title": "Tele-MANAS — 14416",
+  "human.telemanas.body":
+    "Free, 24 hours, in Bengali or English. One call, no referral needed.",
+  "human.counsellor.title": "Your campus counsellor",
+  "human.counsellor.body":
+    "Every campus has one. If you ask, the app can share a short summary with them first — but only what you approve, and only when you're ready.",
 };
 
 export type Keys = keyof typeof en;

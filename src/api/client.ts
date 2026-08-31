@@ -19,4 +19,6 @@ export interface ApiClient {
   completeOnboarding(): Promise<OnboardingProgress>;
   getCrisisPlan(): Promise<CrisisPlan | null>;
   getContact(): Promise<TrustedContact | null>;
+  saveCrisisPlan(plan: CrisisPlan): Promise<CrisisPlan>;
+  saveContact(contact: TrustedContact): Promise<TrustedContact>;
 }

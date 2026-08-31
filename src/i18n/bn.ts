@@ -259,4 +259,45 @@ export const bn = {
   "data.setup.contact": "বিশ্বস্ত যোগাযোগ",
   "data.setup.contact.none": "কেউ বেছে নেওয়া হয়নি",
   "data.setup.editHint": "এগুলো তোমার প্রোফাইলে গিয়ে বদলাও।",
+
+  // Me — profile and controls
+  "me.heading": "আমি",
+  "me.sub": "তোমার সেটিংস, তোমার কথা, তোমার ডেটা।",
+  "me.language.title": "ভাষা",
+  "me.language.hindiSoon": "শীঘ্রই",
+  "me.plan.title": "তোমার সংকট পরিকল্পনা",
+  "me.plan.none": "তুমি এখনও কোনোটা লেখোনি।",
+  "me.plan.edit": "এডিট করো",
+  "me.plan.save": "সেভ করো",
+  "me.plan.cancel": "বাতিল",
+  "me.plan.saved": "সেভ হয়েছে",
+  "me.contact.title": "বিশ্বস্ত যোগাযোগ",
+  "me.contact.none": "এখনও কেউ বেছে নেওয়া হয়নি।",
+  "me.contact.relationshipLine": "{relationship} · {phone}",
+  "me.human.title": "যেকোনো সময়, একজন সত্যিকারের মানুষ",
+  "me.human.row": "একজন সত্যিকারের মানুষের সঙ্গে কথা বলো",
+  "me.human.always":
+    "“এখনই সাহায্য দরকার” বোতামটা প্রতিটা স্ক্রিনে আছে — কখনও চলে যায় না।",
+  "me.data.title": "তোমার ডেটা",
+  "me.data.see": "আমার সম্পর্কে যা কিছু জমা আছে দেখো",
+  "me.data.retention":
+    "তুমি যা লেখো তা রাখা হয় যাতে সময়ের সঙ্গে প্যাটার্ন দেখা যায়। এই অ্যাপের বাইরে কিছু যায় না, আর তোমার কলেজ কখনও এটা পড়ে না।",
+  "me.data.delete": "সব মুছে ফেলে নতুন করে শুরু করো",
+  "me.delete.heading": "সবকিছু মুছে ফেলবে?",
+  "me.delete.body":
+    "এটা তোমার চেক-ইন, কথোপকথন, পরিকল্পনা, যোগাযোগ আর উত্তরগুলো এই ডিভাইস থেকে মুছে দেয়। এটা আর ফেরানো যায় না।",
+  "me.delete.confirmLabel": "নিশ্চিত করতে DELETE লেখো",
+  "me.delete.confirmWord": "DELETE",
+  "me.delete.button": "সবকিছু মুছে ফেলো",
+  "me.delete.cancel": "আমার ডেটা রেখে দাও",
+  "me.delete.done": "হয়ে গেছে। সবকিছু মুছে ফেলা হয়েছে।",
+  "human.heading": "একজন সত্যিকারের মানুষের সঙ্গে কথা বলো",
+  "human.back": "পিছনে",
+  "human.body": "অ্যাপের মধ্যে দিয়ে না গিয়েও তুমি একজন প্রশিক্ষিত কাউন্সেলরের কাছে পৌঁছাতে পারো।",
+  "human.telemanas.title": "টেলি-মানস — ১৪৪১৬",
+  "human.telemanas.body":
+    "বিনামূল্যে, ২৪ ঘণ্টা, বাংলা বা ইংরেজিতে। একটা ফোন, কোনো রেফারেল লাগে না।",
+  "human.counsellor.title": "তোমার ক্যাম্পাস কাউন্সেলর",
+  "human.counsellor.body":
+    "প্রতিটা ক্যাম্পাসে একজন আছেন। তুমি বললে অ্যাপ আগে তাঁকে একটা ছোট সারসংক্ষেপ পাঠাতে পারে — তবে শুধু তুমি যা অনুমোদন করবে, আর শুধু যখন তুমি প্রস্তুত।",
 } satisfies Record<Keys, string>;
