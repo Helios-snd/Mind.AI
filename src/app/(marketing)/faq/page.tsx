@@ -8,9 +8,10 @@ export const metadata: Metadata = { title: "FAQs | Mind.AI" };
 export default function Page() {
   return (
     <Section>
-      <h1 className="h-display mb-10 text-center text-4xl">
-        Frequently Asked Questions
-      </h1>
+      <div className="editorial-panel mb-10 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">Helpful answers</p>
+        <h1 className="h-display mt-3 text-4xl sm:text-5xl">Frequently Asked Questions</h1>
+      </div>
       <div className="mx-auto max-w-3xl space-y-10">
         {faqCategories.map((cat) => (
           <div key={cat.category}>

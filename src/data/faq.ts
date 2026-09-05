@@ -4,36 +4,28 @@ export type FaqCategory = { category: string; questions: string[] };
 
 export const faqCategories: FaqCategory[] = [
   {
-    category: "Generic",
+    category: "Getting started",
     questions: [
       "What is Mind.AI?",
-      "How do I sign up on the Mind.AI platform?",
-      "How old do I need to be to use Mind.AI’s services?",
-      "What makes Mind.AI different from other mental health platforms?",
+      "How does Mind.AI help students?",
+      "Is Mind.AI a therapist?",
+      "Can I use Mind.AI anonymously?",
     ],
   },
   {
-    category: "Therapy",
+    category: "Privacy & support",
     questions: [
-      "What types of therapy are available?",
-      "How do I book a therapy session?",
-      "Are therapy sessions confidential?",
+      "Is my information private?",
+      "When should I seek human support?",
+      "How does crisis support work?",
     ],
   },
   {
-    category: "Community",
+    category: "Your information",
     questions: [
-      "How can I join the community events?",
-      "What is the Mind.AI community feed?",
-      "Can I remain anonymous in the community?",
-    ],
-  },
-  {
-    category: "Technical",
-    questions: [
-      "How do I reset my password?",
-      "What should I do if I encounter a technical issue?",
-      "Is Mind.AI compatible with mobile devices?",
+      "What happens to my information?",
+      "Who can see what I share?",
+      "Can I change or delete my information?",
     ],
   },
 ];

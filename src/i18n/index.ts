@@ -81,3 +81,14 @@ export function useLanguage() {
   const { language, setLanguage, isSaving } = useI18n();
   return { language, setLanguage, isSaving };
 }
+
+/**
+ * Narrows a server-supplied string to a known translation key.
+ *
+ * Reflection keys arrive from the backend, so the two dictionaries could drift
+ * apart across a deploy. This makes that drift explicit at the boundary rather
+ * than letting an unknown key reach `t()` as an unchecked cast.
+ */
+export function isKey(value: string): value is Keys {
+  return Object.prototype.hasOwnProperty.call(en, value);
+}

@@ -6,25 +6,32 @@ export const metadata: Metadata = { title: "Contact Us | Mind.AI" };
 export default function Page() {
   return (
     <Section>
-      <h1 className="h-display text-center text-4xl">Contact Us</h1>
+      <div className="editorial-panel grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">Contact Mind.AI</p>
+          <h1 className="h-display mt-3 text-5xl">Let&apos;s talk.</h1>
+          <p className="mt-4 max-w-md text-earth">Questions, feedback, or a conversation about caring for students—write to us and we&apos;ll point you in the right direction.</p>
+        </div>
+        <div aria-hidden="true" className="relative mx-auto h-36 w-36 rounded-full bg-brand/10 ring-[18px] ring-brand/[0.06] after:absolute after:-right-7 after:top-2 after:h-12 after:w-12 after:rounded-full after:bg-sage" />
+      </div>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-2">
-        <div>
-          <h2 className="font-display text-2xl text-gray-900">Get in Touch</h2>
-          <p className="mt-3 text-gray-600">
+        <div className="py-2">
+          <h2 className="font-display text-2xl text-ink">Here when you need us.</h2>
+          <p className="mt-3 text-earth">
             We&apos;re here to help. Reach out to us through any of the options
             below, and we&apos;ll get back to you as soon as possible.
           </p>
-          <dl className="mt-6 space-y-4 text-sm">
-            <div>
-              <dt className="font-semibold text-gray-800">Location:</dt>
-              <dd className="text-gray-600">
+          <dl className="mt-6 space-y-3 text-sm">
+            <div className="highlight-panel rounded-2xl border border-brand/10 bg-brand/[0.04] p-4">
+              <dt className="font-semibold text-ink">Location</dt>
+              <dd className="mt-1 text-earth">
                 Ram Nagar, Sodepur, Khardah, Kolkata, West Bengal, 700110
               </dd>
             </div>
-            <div>
-              <dt className="font-semibold text-gray-800">Email:</dt>
-              <dd>
+            <div className="highlight-panel rounded-2xl border border-brand/10 bg-brand/[0.04] p-4">
+              <dt className="font-semibold text-ink">Email</dt>
+              <dd className="mt-1">
                 <a
                   href="mailto:contact@mind.ai"
                   className="text-brand hover:underline"
@@ -33,9 +40,9 @@ export default function Page() {
                 </a>
               </dd>
             </div>
-            <div>
-              <dt className="font-semibold text-gray-800">Phone:</dt>
-              <dd>
+            <div className="highlight-panel rounded-2xl border border-brand/10 bg-brand/[0.04] p-4">
+              <dt className="font-semibold text-ink">Phone</dt>
+              <dd className="mt-1">
                 <a href="tel:+919907061973" className="text-brand hover:underline">
                   +91 99070 61973
                 </a>
@@ -44,14 +51,14 @@ export default function Page() {
           </dl>
         </div>
 
-        <form className="rounded-2xl border border-gray-200 bg-white p-8">
-          <h2 className="font-display text-xl text-gray-900">Send Us a Message</h2>
+        <form className="rounded-[1.75rem] border border-ink/[0.08] bg-cream-alt/90 p-6 shadow-card sm:p-8">
+          <h2 className="font-display text-xl text-ink">Send us a message</h2>
           <div className="mt-5 space-y-4">
             <div>
               <label className="mb-1 block text-sm font-semibold text-gray-700">
                 Your Name
               </label>
-              <input className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand focus:outline-none" />
+              <input className="field" />
             </div>
             <div>
               <label className="mb-1 block text-sm font-semibold text-gray-700">
@@ -59,7 +66,7 @@ export default function Page() {
               </label>
               <input
                 type="email"
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+                className="field"
               />
             </div>
             <div>
@@ -68,7 +75,7 @@ export default function Page() {
               </label>
               <textarea
                 rows={5}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+                className="field min-h-32"
               />
             </div>
             <button type="submit" className="btn-primary w-full">

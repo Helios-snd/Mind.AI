@@ -1,20 +1,25 @@
-import { mockClient } from "@/api/mockClient";
+import { apiClient } from "@/api/hooks";
 
 /**
- * Clears everything this device holds for the student — check-ins, conversation,
- * onboarding answers, plan and contact.
+ * Erases the account.
  *
- * TODO(backend): call the account-deletion endpoint; the server erases the
- * record and the referral history.
+ * With a backend configured this calls the deletion endpoint, which removes
+ * every row and clears the session cookie. The localStorage sweep still runs
+ * because check-ins and the conversation thread are device-local until their
+ * own slices land.
  */
-export function wipeEverything() {
+export async function wipeEverything() {
   if (typeof window === "undefined") return;
+
+  // Server first: if it fails we want the error to surface rather than leaving
+  // a live account behind a cleared device.
+  await apiClient.deleteAllData();
+
   try {
     Object.keys(window.localStorage)
       .filter((key) => key.startsWith("aimind."))
       .forEach((key) => window.localStorage.removeItem(key));
   } catch {
-    // storage blocked — the mock reset below still clears the session
+    // storage blocked — the account is already gone server-side
   }
-  mockClient._reset();
 }

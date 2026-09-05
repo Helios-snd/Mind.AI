@@ -28,7 +28,7 @@ function Text({
       </label>
       <input
         type={type}
-        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand focus:outline-none"
+        className="field"
       />
       {hint && <p className="mt-1 text-xs text-gray-400">{hint}</p>}
     </div>
@@ -41,7 +41,7 @@ function Upload({ label, required, accept }: { label: string; required?: boolean
       <label className="mb-1 block text-sm font-semibold text-gray-700">
         {label} {required && <span className="text-brand">*</span>}
       </label>
-      <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-sm text-gray-500">
+      <div className="rounded-2xl border border-dashed border-brand/30 bg-brand/[0.03] p-6 text-center text-sm text-earth transition hover:bg-brand/[0.06]">
         <p className="font-semibold text-brand">Upload a file</p>
         <p>or drag and drop</p>
         <p className="mt-1 text-xs text-gray-400">{accept}</p>
@@ -52,8 +52,8 @@ function Upload({ label, required, accept }: { label: string; required?: boolean
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <fieldset className="rounded-2xl border border-gray-200 p-6">
-      <legend className="px-2 font-display font-semibold text-gray-900">
+    <fieldset className="rounded-[1.5rem] border border-ink/[0.08] bg-cream-alt/75 p-5 shadow-soft sm:p-6">
+      <legend className="px-2 font-display font-semibold text-ink">
         {title}
       </legend>
       <div className="grid gap-4 sm:grid-cols-2">{children}</div>
@@ -64,11 +64,18 @@ function Group({ title, children }: { title: string; children: React.ReactNode }
 export default function Page() {
   return (
     <Section>
-      <div className="mx-auto max-w-3xl">
-        <h1 className="h-display text-center text-4xl">Careers at Mind.AI</h1>
-        <p className="mt-3 text-center text-gray-600">
-          Care Beyond Clinics. Impact Beyond Boundaries.
-        </p>
+      <div className="mx-auto max-w-4xl">
+        <div className="editorial-panel grid gap-8 sm:grid-cols-[1.3fr_0.7fr] sm:items-end">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">Careers at Mind.AI</p>
+            <h1 className="h-display mt-3 text-4xl sm:text-5xl">Build technology that helps people feel less alone.</h1>
+            <p className="mt-4 max-w-xl text-earth">Care beyond clinics. Impact beyond boundaries. Bring your care, craft and curiosity to work that stays human.</p>
+          </div>
+          <div className="border-t border-brand/15 pt-5 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+            <p className="font-display text-xl text-ink">Meaningful work, thoughtfully made.</p>
+            <p className="mt-2 text-sm leading-relaxed text-earth">Tell us how your perspective can help shape kinder support for students.</p>
+          </div>
+        </div>
 
         <form className="mt-10 space-y-6">
           <Group title="Personal Information">

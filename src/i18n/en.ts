@@ -71,10 +71,34 @@ export const en = {
   "onboarding.crisis.contact.phone": "Phone",
   "onboarding.crisis.contact.helper":
     "Your choice entirely — a friend, a sibling, a roommate, anyone. It doesn't have to be family.",
+  "onboarding.crisis.contact.emergencyDisclosure":
+    "One thing to know: this is the one exception to how Mind.AI usually works. If you're ever in immediate danger and don't respond within a few minutes, we may reach out to this person ourselves. That only happens in that one situation — never otherwise, and never without you seeing it happen first.",
   "onboarding.crisis.error.required": "This one is needed before we finish.",
   "onboarding.crisis.error.phone":
     "A phone number with the digits, please. Spaces and a +91 are fine.",
   "onboarding.crisis.submit": "Save and finish",
+
+  // Onboarding — Step 5: keep your account
+  "onboarding.progress.label": "Step {current} of {total}",
+  "onboarding.claim.heading": "Want to keep this?",
+  "onboarding.claim.subline":
+    "Right now everything lives on this phone alone. Leave an email or a number and you can pick it back up on any device.",
+  "onboarding.claim.label": "Email or phone",
+  "onboarding.claim.placeholder": "you@college.edu, or 98765 43210",
+  "onboarding.claim.send": "Send me a code",
+  "onboarding.claim.codeLabel": "The code we sent",
+  "onboarding.claim.codePlaceholder": "6 digits",
+  "onboarding.claim.verify": "Confirm",
+  "onboarding.claim.skip": "Not now",
+  "onboarding.claim.skipNote":
+    "You can add this later in your profile. Nothing is lost if you skip.",
+  "onboarding.claim.sent": "Sent. Check your messages.",
+  "onboarding.claim.error.destination":
+    "An email address or a phone number, please.",
+  "onboarding.claim.error.code": "That code is not right. Try again.",
+  "onboarding.claim.error.taken":
+    "That one is already linked to another account.",
+  "onboarding.claim.devCode": "Development only — your code is {code}",
 
   // Need help now — button
   "help.button": "Need help now",
@@ -102,6 +126,15 @@ export const en = {
 
   "help.stay.title": "Just stay with me",
   "help.stay.subtitle": "No calls. I'll be here.",
+
+  // Help Now — calming mode (the destination for "Just stay with me")
+  "help.calming.intro": "Let's slow things down for a moment.",
+  "help.calming.inhale": "Breathe in — 4 seconds",
+  "help.calming.hold": "Hold — 2 seconds",
+  "help.calming.exhale": "Breathe out — 6 seconds",
+  "help.calming.repeat": "Repeat a few times, for as long as it helps.",
+  "help.calming.grounding": "Or, notice 3 things you can see around you.",
+  "help.calming.back": "Back to Help Now",
 
   // Navigation
   "nav.label": "Main",
@@ -136,24 +169,6 @@ export const en = {
   "talk.retry": "Try again",
   "talk.day.today": "Today",
   "talk.day.yesterday": "Yesterday",
-  "talk.reply.greeting":
-    "Hi. I'm glad you're here. What's going on for you right now?",
-  "talk.reply.anxiety":
-    "That restless, keyed-up feeling is hard to sit with. Let's slow it down a little — can you feel your feet on the floor right now? Tell me what set it off, if you know.",
-  "talk.reply.somatic":
-    "The body carries a lot of this — a tight chest or a heavy feeling is really common when things build up. Try breathing out slowly, longer than you breathe in, a few times. I'm here while you do.",
-  "talk.reply.lowMood":
-    "When nothing feels good, even small things get heavy. You don't have to talk it into making sense. What's today been like?",
-  "talk.reply.sleep":
-    "Sleep going sideways makes everything harder. What do the nights look like lately — trouble falling asleep, or waking up?",
-  "talk.reply.exam":
-    "Exam stretches have a way of swallowing everything else. What's the next thing you're up against?",
-  "talk.reply.lonely":
-    "Feeling alone with it is its own weight. I'm here now. Who's usually around for you, even a little?",
-  "talk.reply.thanks":
-    "Any time. I'm here whenever you want to pick this back up.",
-  "talk.reply.default": "Thank you for telling me. Can you say a bit more about that?",
-  "talk.reply.default2": "I'm listening. What's underneath that, if you had to guess?",
 
   // Today — daily check-in
   "today.checkin.heading": "How are things today?",
@@ -166,9 +181,37 @@ export const en = {
   "today.mood.4": "Pretty good",
   "today.mood.5": "Really good",
 
+  "today.energy.legend": "How much energy did you have?",
+  "today.energy.1": "Running on empty",
+  "today.energy.2": "Low",
+  "today.energy.3": "Enough to get by",
+  "today.energy.4": "Fairly good",
+  "today.energy.5": "Plenty",
+
+  "today.social.legend": "Did you spend time around people?",
+  "today.social.1": "Kept to myself",
+  "today.social.2": "Barely",
+  "today.social.3": "A little",
+  "today.social.4": "A fair bit",
+  "today.social.5": "Lots",
+
   "today.sleep.legend": "How much sleep did you get?",
   "today.sleep.value": "about {hours} hours",
   "today.sleep.zero": "less than an hour",
+
+  "today.appetite.legend": "How has your appetite been?",
+  "today.appetite.1": "Barely ate",
+  "today.appetite.2": "Less than usual",
+  "today.appetite.3": "About normal",
+  "today.appetite.4": "Good",
+  "today.appetite.5": "Very good",
+
+  "today.activity.legend": "Did you get out at all?",
+  "today.activity.1": "Stayed in my room",
+  "today.activity.2": "Hardly",
+  "today.activity.3": "A bit",
+  "today.activity.4": "A decent amount",
+  "today.activity.5": "Out and about",
 
   "today.note.legend": "What's on your mind?",
   "today.note.placeholder": "Anything at all. A line is enough.",
@@ -182,11 +225,15 @@ export const en = {
     "Microphone access is off. You can turn it on in your browser settings, or just type.",
 
   "today.submit": "That's me for today",
+  "today.submit.saving": "Saving\u2026",
+  "today.submit.failed": "That didn't save. Check your connection and try again.",
 
   "today.back.title": "Good to see you back.",
   "today.back.body": "Nothing to catch up on. Let's just do today.",
 
   "today.done.heading": "Logged.",
+  "today.handoff.body": "Taking you to your patterns\u2026",
+  "today.done.seeTrends": "See your patterns",
   "today.done.addMore": "Add something more",
 
   "today.ack.exam":
@@ -215,23 +262,126 @@ export const en = {
 
   // Trends — the mood meter
   "trends.heading": "Trends",
-  "trends.sub": "Weekly, against your own normal — not anyone else's.",
+  "trends.sub": "Against your own normal \u2014 not anyone else's.",
+
+  // Range selector
+  "trends.range.7d": "7 days",
+  "trends.range.4w": "4 weeks",
+  "trends.range.6w": "6 weeks",
+  "trends.rangeLabel": "How far back to look",
+
+  // Per-series card
+  "trends.average": "Average",
+  "trends.stat.average": "Average",
+  "trends.stat.highest": "Highest",
+  "trends.stat.lowest": "Lowest",
+  "trends.stat.change": "Change",
+  "trends.stat.changeFlat": "No change",
+  "trends.stat.dash": "\u2014",
+  "trends.usual": "Your usual",
+  "trends.usualRange": "{low}\u2013{high}",
+  "trends.latest": "Latest",
+  "trends.noBaselineYet":
+    "Keep checking in and your usual range will appear here.",
+  "trends.single.early": "Just getting started \u2014 one check-in so far.",
+  "trends.single.reference": "Your starting point was {value}.",
+  "trends.notEnoughSeries": "Not enough check-ins yet for this one.",
+
+  // Observations \u2014 what the numbers did. Never a label, never a diagnosis.
+  "trends.obs.belowBaseline":
+    "Your {series} has been lower than your usual range recently.",
+  "trends.obs.aboveBaseline":
+    "Your {series} has been higher than your usual range recently.",
+  "trends.obs.withinBaseline": "Your {series} has been within your usual range.",
+  "trends.obs.declining": "Your {series} has drifted down over this period.",
+  "trends.obs.rising": "Your {series} has been picking up over this period.",
+  "trends.obs.steady": "Your {series} has been fairly steady.",
+
+  // Gentle, non-clinical starting points. Offered only when something moved.
+  "trends.tip.mood":
+    "One small, doable thing today often lifts a low stretch more than waiting for the mood to change first.",
+  "trends.tip.sleep":
+    "A little more consistent sleep may help you feel more rested.",
+  "trends.tip.sleepConsistency":
+    "Try keeping your sleep and wake time roughly consistent for a few days.",
+  "trends.tip.energy":
+    "Low energy often follows short nights. Going easy on yourself for a few days is a reasonable response.",
+  "trends.tip.social":
+    "Consider reaching out to someone you feel comfortable with.",
+  "trends.tipLabel": "A gentle place to start",
+
+  // At a glance
+  "trends.glance.heading": "At a glance",
+  "trends.glance.noticing": "What you're noticing",
+  "trends.change.up": "up {value}",
+  "trends.change.down": "down {value}",
+  "trends.change.none": "about the same",
+  "trends.change.new": "\u2014",
+
+  // Cross-series summaries
+  "trends.summary.sleepAndMood":
+    "Your sleep and mood have both dipped over the last few check-ins.",
+  "trends.summary.socialAndMood":
+    "Your mood has been lower over the same stretch that social contact dropped.",
+  "trends.summary.sleep": "Your sleep has been shorter than usual lately.",
+  "trends.summary.mood": "Your mood has been lower than your usual range lately.",
+  "trends.summary.steady":
+    "Nothing much has shifted lately \u2014 things look fairly steady.",
   "trends.series.mood": "Mood",
   "trends.series.sleep": "Sleep",
   "trends.series.energy": "Energy",
   "trends.series.social": "Social",
-  "trends.chartLabel": "{series}, weekly, over the last {weeks} weeks",
-  "trends.range": "Your usual range: {low}–{high}",
-  "trends.thisWeek": "this week: {value}",
-  "trends.insightLabel": "What I notice",
-  "trends.insight":
-    "Your mood and energy slipped over the last few weeks and are sitting just below your usual range — around the same time your sleep got shorter.",
-  "trends.patternsLabel": "Patterns I've noticed",
-  "trends.pattern.1": "Sleep has been under six hours on most weeknights this month.",
-  "trends.pattern.2": "Mood tends to be lower in the weeks when social contact drops.",
-  "trends.pattern.3":
-    "Energy has tracked your sleep closely — they rise and fall together.",
-  "trends.stored.link": "See everything stored about me",
+  "trends.dash.heading": "Your recent patterns",
+  "trends.dash.sub": "A look at how your days have been moving, based on what you've shared.",
+  "trends.metric.of5": "{value} / 5",
+  "trends.metric.hrs": "{value} hrs",
+  "trends.dir.rising": "improving",
+  "trends.dir.declining": "lower",
+  "trends.dir.steady": "steady",
+  "trends.dir.unknown": "not enough yet",
+
+  "trends.compare.heading": "Your {series} lately",
+  "trends.compare.recent": "Recent average",
+  "trends.compare.baseline": "Your usual",
+  "trends.compare.above": "{value} above your usual",
+  "trends.compare.below": "{value} below your usual",
+  "trends.compare.around": "Around your usual",
+
+  "trends.snapshot.heading": "Your check-in snapshot",
+  "trends.snapshot.sub": "A quick look at what you've been logging lately.",
+
+  "trends.snapshot.checkins.label": "Check-ins",
+  "trends.snapshot.checkins.value": "{logged} / {total}",
+  "trends.snapshot.checkins.caption": "You've checked in on {logged} of the last {total} days.",
+
+  "trends.snapshot.gettingOut.label": "Getting out",
+  "trends.snapshot.gettingOut.value": "{positive} / {total}",
+  "trends.snapshot.gettingOut.caption": "You've logged getting out on {positive} of your last {total} check-in days.",
+  "trends.snapshot.gettingOut.noneCaption": "Log activity in Today and this will start to fill in.",
+
+  "trends.snapshot.appetite.label": "Appetite",
+  "trends.snapshot.appetite.none": "Not enough logged yet",
+  "trends.snapshot.appetite.caption": "Your recent appetite log.",
+  "trends.snapshot.appetite.noneCaption": "A few more check-ins will show a pattern here.",
+  "trends.secondary.direction.rising": "Picking up",
+  "trends.secondary.direction.declining": "Lower than earlier",
+  "trends.secondary.direction.steady": "Mostly steady",
+  "trends.secondary.activity.count": "You got out on {positive} of {total} days",
+  "trends.secondary.none": "Not logged yet",
+
+  "trends.start.heading": "Your starting point",
+  "trends.start.sub": "Where things were when you began, on {date}.",
+  "trends.start.baselineTaken": "You completed your first set of questions.",
+  "trends.start.noValues": "Your earliest check-ins will show here as a reference point.",
+  "trends.start.then": "Then",
+  "trends.start.now": "Now",
+
+  "trends.notes.heading": "A few things you've logged",
+  "trends.notes.tooEarly": "You need a few more check-ins before a useful pattern appears.",
+  "trends.action.heading": "One small thing to try",
+
+  "trends.state.thin": "A few more check-ins will help reveal a pattern.",
+  "trends.empty.cta": "Go to Today",
   "trends.empty.title": "Not enough yet.",
   "trends.empty.body": "Check in for about a week and this starts to fill in.",
 
@@ -307,6 +457,26 @@ export const en = {
   "human.counsellor.title": "Your campus counsellor",
   "human.counsellor.body":
     "Every campus has one. If you ask, the app can share a short summary with them first — but only what you approve, and only when you're ready.",
+
+  // Escalation — the tier-2 interstitial
+  "escalation.reason.trend_decline_mood":
+    "Your mood has been lower than your usual range for a little while. A counsellor might be able to help with that.",
+  "escalation.share.heading": "What we'd share",
+  "escalation.share.checkins": "Your recent check-in pattern",
+  "escalation.share.talkMessages": "Your recent Talk messages",
+  "escalation.share.reason": "The reason we're suggesting support",
+  "escalation.share.nothingElse": "Nothing else from your account will be shared.",
+  "escalation.approve": "Yes, share it",
+  "escalation.notNow": "Not now",
+
+  // Crisis screen — tier 3
+  "crisis.heading": "Let's get you support right now",
+  "crisis.humanReview":
+    "A counsellor will check in with you by the next working day. You don't need to do anything else.",
+  "crisis.back": "Back to Talk",
+  "crisis.countdown.label":
+    "If we don't hear from you, we'll reach out to your trusted contact. Tap anywhere, or Cancel, to let us know you're okay.",
+  "crisis.countdown.cancel": "I'm okay — Cancel",
 };
 
 export type Keys = keyof typeof en;

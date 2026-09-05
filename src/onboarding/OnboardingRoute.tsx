@@ -18,6 +18,8 @@ import StepLanguage from "./StepLanguage";
 import StepBaseline from "./StepBaseline";
 import StepConsent from "./StepConsent";
 import StepCrisisPlan from "./StepCrisisPlan";
+import StepClaim from "./StepClaim";
+import StepProgress from "./StepProgress";
 
 export default function OnboardingRoute() {
   const router = useRouter();
@@ -98,6 +100,8 @@ export default function OnboardingRoute() {
 
   return (
     <OnboardingShell>
+      <StepProgress step={step} />
+
       {step === 1 && (
         <StepLanguage
           busy={save.isPending}
@@ -124,12 +128,25 @@ export default function OnboardingRoute() {
 
       {step === 4 && (
         <StepCrisisPlan
-          busy={save.isPending || complete.isPending}
+          busy={save.isPending}
           existingPlan={data.crisisPlan}
           existingContact={data.contact}
           onBack={back}
           onSubmit={async ({ crisisPlan, contact }) => {
-            await save.mutateAsync({ crisisPlan, contact });
+            await save.mutateAsync({ crisisPlan, contact, step: 5 });
+            setStep(5);
+          }}
+        />
+      )}
+
+      {step === 5 && (
+        <StepClaim
+          busy={complete.isPending}
+          onDone={async () => {
+            // Completion is stamped here, after the claim screen rather than
+            // before it. Stamping at step 4 would trip the completedAt
+            // redirect above and skip this step entirely, and a refresh would
+            // land on /today instead of resuming here.
             await complete.mutateAsync();
             router.push("/today");
           }}

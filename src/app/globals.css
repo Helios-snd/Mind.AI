@@ -8,6 +8,7 @@
 
 body {
   @apply bg-cream text-gray-800 antialiased;
+  background-image: radial-gradient(circle at 85% -10%, rgba(220, 229, 255, 0.9), transparent 30rem), radial-gradient(circle at -10% 40%, rgba(235, 240, 255, 0.9), transparent 28rem);
 }
 
 @layer components {
@@ -16,11 +17,11 @@ body {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark;
+    @apply inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-card focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/25 motion-reduce:transform-none;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center rounded-xl border border-brand px-6 py-3 text-sm font-semibold text-brand transition-colors hover:bg-brand hover:text-white;
+    @apply inline-flex items-center justify-center rounded-xl border border-brand/70 bg-cream-alt/70 px-6 py-3 text-sm font-semibold text-brand shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-brand hover:text-white hover:shadow-card focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/20 motion-reduce:transform-none;
   }
 
   .h-display {
@@ -32,10 +33,55 @@ body {
     @apply rounded-2xl border border-ink/[0.06] bg-cream-alt shadow-soft;
   }
 
+  .surface-card {
+    @apply rounded-3xl border border-ink/[0.07] bg-cream-alt/90 p-6 shadow-card backdrop-blur-sm sm:p-7;
+  }
+
+  .surface-card-interactive {
+    @apply surface-card transition duration-300 hover:-translate-y-1 hover:border-brand/25 hover:shadow-[0_18px_40px_-22px_rgba(47,51,37,0.32)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/15 motion-reduce:transform-none;
+  }
+
+  /* Intentional surface types: use the container that matches the content,
+     rather than turning every part of the product into the same card. */
+  .feature-tile {
+    @apply relative overflow-hidden rounded-[1.75rem] border border-ink/[0.07] bg-cream-alt p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/25 hover:shadow-card motion-reduce:transform-none;
+  }
+
+  .resource-tile {
+    @apply overflow-hidden rounded-[1.6rem] border border-ink/[0.08] bg-cream-alt shadow-soft transition duration-300 hover:-translate-y-1 hover:shadow-card motion-reduce:transform-none;
+  }
+
+  .editorial-panel {
+    @apply relative overflow-hidden rounded-[2rem] border border-brand/10 bg-gradient-to-br from-cream-alt via-cream-alt to-sage/30 p-7 shadow-card sm:p-10;
+  }
+
+  .insight-panel {
+    @apply rounded-[1.5rem] border border-brand/15 bg-brand/[0.06] p-5;
+  }
+
+  .support-panel {
+    @apply rounded-[1.5rem] border border-crisis/15 bg-[#fff4ef] p-5 shadow-soft;
+  }
+
+  .settings-surface {
+    @apply rounded-[1.5rem] border border-ink/[0.07] bg-cream-alt/75 p-4 shadow-soft sm:p-5;
+  }
+  .question-stage { @apply rounded-[2rem] border border-ink/[0.08] bg-cream-alt/90 p-6 shadow-card sm:p-9; }
+  .progress-strip { @apply h-2 overflow-hidden rounded-full bg-brand/10; }
+  .progress-strip span { @apply block h-full rounded-full bg-brand transition-all duration-300 motion-reduce:transition-none; }
+  .answer-choice { @apply flex w-full items-center gap-3 rounded-2xl border border-ink/10 px-5 py-4 text-left font-semibold text-ink transition hover:border-brand/40 hover:bg-brand/[0.03] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/15; }
+  .answer-choice-selected { @apply border-brand bg-brand/[0.08] text-brand; }
+  .result-panel { @apply editorial-panel animate-fade-up text-center; }
+
   /* Text inputs / textareas across the student app. */
   .field {
     @apply w-full rounded-xl border border-ink/10 bg-cream-alt/60 px-4 py-3 text-sm text-gray-900 placeholder:text-earth/50 transition focus:border-brand/50 focus:bg-cream-alt focus:outline-none focus:ring-4 focus:ring-brand/10;
   }
+}
+
+/* A refined default for each product tab's floating navigation. */
+[data-mind-dock] {
+  box-shadow: 0 18px 42px -22px rgba(23, 33, 62, 0.4), 0 2px 8px rgba(23, 33, 62, 0.08);
 }
 
 /* Range slider — used by the Today sleep control. Track fill is set inline. */

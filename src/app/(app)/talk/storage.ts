@@ -1,11 +1,10 @@
 /**
- * Local persistence for the Talk thread.
+ * Talk-local helpers that stay frontend-only even now that the conversation
+ * itself is server-backed (see useTalkThread.ts).
  *
- * Frontend-only: the conversation lives in localStorage so it survives a
- * refresh and "remembers previous conversations" across visits.
- *
- * TODO(backend): replace load/save with the COMPANION thread endpoints. SAFETY
- * reads every inbound message server-side and may inject a crisis interstitial.
+ * ChatMessage is the UI's own shape rather than the wire TalkMessage from
+ * @/api/types: `status` here tracks an in-flight optimistic send ("sending",
+ * "failed") that the server never sees, not the persisted delivery status.
  */
 
 export type ChatRole = "user" | "assistant";
@@ -19,7 +18,6 @@ export type ChatMessage = {
   status?: "sending" | "failed";
 };
 
-const THREAD_KEY = "aimind.talk.thread.v1";
 const DISCLOSURE_KEY = "aimind.talk.disclosureSeen.v1";
 
 export function newId(): string {
@@ -32,41 +30,6 @@ export function localDayKey(date = new Date()): string {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
-}
-
-export function loadThread(): ChatMessage[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const raw = window.localStorage.getItem(THREAD_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    // A message caught mid-send by a refresh is treated as failed.
-    return parsed.filter(isMessage).map((m) =>
-      m.status === "sending" ? { ...m, status: "failed" as const } : m,
-    );
-  } catch {
-    return [];
-  }
-}
-
-export function saveThread(messages: ChatMessage[]): void {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(THREAD_KEY, JSON.stringify(messages));
-  } catch {
-    // storage full or blocked — in-memory state still holds this session
-  }
-}
-
-/** Wipe the whole conversation. */
-export function clearThread(): void {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.removeItem(THREAD_KEY);
-  } catch {
-    // ignore
-  }
 }
 
 export function disclosureSeen(): boolean {
@@ -85,15 +48,4 @@ export function markDisclosureSeen(): void {
   } catch {
     // ignore
   }
-}
-
-function isMessage(value: unknown): value is ChatMessage {
-  if (!value || typeof value !== "object") return false;
-  const v = value as Record<string, unknown>;
-  return (
-    typeof v.id === "string" &&
-    (v.role === "user" || v.role === "assistant") &&
-    typeof v.text === "string" &&
-    typeof v.at === "string"
-  );
 }

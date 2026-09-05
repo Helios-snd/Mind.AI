@@ -22,21 +22,32 @@ const assessments = ["Depression Test", "Anxiety Test", "ADHD Test"];
 export default function Page() {
   return (
     <>
+      <section className="container-x pt-10 sm:pt-16">
+        <div className="editorial-panel">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">Mind.AI resources</p>
+          <h1 className="h-display mt-3 max-w-xl text-4xl sm:text-5xl">Small moments of support, collected in one place.</h1>
+          <div className="mt-6 flex flex-wrap gap-2 text-sm font-semibold text-earth">
+            {[["Videos", "#videos"], ["Blogs", "#blogs"], ["Assessments", "#assessment"], ["Music", "#music"]].map(([label, href]) => (
+              <Link key={href} href={href} className="rounded-full border border-brand/15 bg-white/60 px-4 py-2 transition hover:bg-brand hover:text-white">{label}</Link>
+            ))}
+          </div>
+        </div>
+      </section>
       <Section id="videos">
         <SectionHeading
           title="Watch Expert-Recommended Videos"
           subtitle="Gain valuable insights from short, informative videos curated by mental health experts."
         />
         <div className="grid gap-6 sm:grid-cols-3">
-          {videos.map((v) => (
+          {videos.map((v, index) => (
             <div
               key={v}
-              className="overflow-hidden rounded-2xl border border-gray-200 bg-white"
+              className={`resource-tile group ${index === 0 ? "sm:col-span-2" : ""}`}
             >
               <div className="aspect-video w-full overflow-hidden">
                 <TopicThumb title={v} />
               </div>
-              <div className="p-4">
+              <div className="p-5">
                 <p className="text-xs font-bold uppercase tracking-widest text-brand">
                   Shorts
                 </p>
@@ -58,11 +69,11 @@ export default function Page() {
           subtitle="Read detailed blogs to expand your knowledge on mental health topics."
         />
         <div className="grid gap-6 sm:grid-cols-3">
-          {blogs.map((b) => (
+          {blogs.map((b, index) => (
             <Link
               key={b.title}
               href={b.href}
-              className="group overflow-hidden rounded-2xl border border-gray-200 bg-white"
+              className={`resource-tile group ${index === 0 ? "sm:col-span-2" : ""}`}
             >
               <div className="aspect-video w-full overflow-hidden">
                 <TopicThumb title={b.title} />
@@ -89,19 +100,17 @@ export default function Page() {
           subtitle="Assess your mental health with our easy-to-use online tests."
         />
         <div className="grid gap-6 sm:grid-cols-3">
-          {assessments.map((a) => (
-            <div
+          {assessments.map((a, index) => (
+            <Link
               key={a}
-              className="rounded-2xl border border-gray-200 bg-white p-6 text-center"
+              href={`/assessment/${["depression", "anxiety", "adhd"][index]}`}
+              className={`feature-tile group text-center ${index === 1 ? "bg-brand/[0.05]" : ""}`}
             >
               <LineIcon name="clipboard" className="mx-auto mb-4 h-14 w-14" />
               <h3 className="font-display font-semibold text-gray-900">{a}</h3>
-              <button className="btn-primary mt-4">Take Test</button>
-            </div>
+              <span className="mt-4 inline-flex text-sm font-semibold text-brand">Take assessment →</span>
+            </Link>
           ))}
-        </div>
-        <div className="mt-6 text-center">
-          <button className="btn-outline">View All Assessments</button>
         </div>
       </Section>
 
@@ -114,7 +123,7 @@ export default function Page() {
           {["Focus", "Sleep", "Unwind"].map((m) => (
             <div
               key={m}
-              className="rounded-2xl border border-gray-200 bg-white p-6"
+              className="feature-tile"
             >
               <div className="aspect-video w-full overflow-hidden rounded-lg">
                 <TopicThumb title={m} />

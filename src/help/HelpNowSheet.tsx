@@ -8,18 +8,17 @@ import {
   useRef,
   useState,
 } from "react";
-import { useRouter } from "next/navigation";
 import { useT } from "@/i18n";
 import { useContact, useCrisisPlan } from "@/api/hooks";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
-type View = "list" | "compose" | "plan";
+type View = "list" | "compose" | "plan" | "calming";
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), textarea, input, [tabindex]:not([tabindex="-1"])';
 
 export default function HelpNowSheet({ onClose }: { onClose: () => void }) {
   const t = useT();
-  const router = useRouter();
   const headingId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -70,10 +69,11 @@ export default function HelpNowSheet({ onClose }: { onClose: () => void }) {
   );
 
   // --- actions -------------------------------------------------------------
+  // Stays inside the sheet rather than leaving for /talk -- the student
+  // should never have to exit the safety/support context to be calmed down.
   const stayWithMe = useCallback(() => {
-    onClose();
-    router.push("/talk");
-  }, [onClose, router]);
+    setView("calming");
+  }, []);
 
   return (
     <div
@@ -196,6 +196,10 @@ export default function HelpNowSheet({ onClose }: { onClose: () => void }) {
             plan={plan.data ?? null}
             onBack={() => setView("list")}
           />
+        )}
+
+        {view === "calming" && (
+          <CalmingView onBack={() => setView("list")} />
         )}
       </div>
     </div>
@@ -347,6 +351,66 @@ function PlanView({
           </div>
         </dl>
       )}
+    </div>
+  );
+}
+
+/**
+ * The destination for "Just stay with me" — a short breathing/grounding
+ * exercise, kept inside the sheet so the student never has to leave the
+ * safety/support context to be calmed down. No scoring, no interpretation,
+ * no inferred emotional state: just the steps.
+ */
+function CalmingView({ onBack }: { onBack: () => void }) {
+  const t = useT();
+  const reduced = usePrefersReducedMotion();
+
+  return (
+    <div className="space-y-5">
+      <p className="font-display text-lg font-semibold text-gray-900">
+        {t("help.stay.title")}
+      </p>
+      <p className="text-sm leading-relaxed text-gray-700">
+        {t("help.calming.intro")}
+      </p>
+
+      <div className="flex justify-center py-2">
+        <div
+          aria-hidden="true"
+          className={`h-20 w-20 rounded-full bg-brand/20 ${
+            reduced ? "" : "animate-breathe"
+          }`}
+        />
+      </div>
+
+      <ol className="space-y-2.5">
+        {(["help.calming.inhale", "help.calming.hold", "help.calming.exhale"] as const).map(
+          (key) => (
+            <li
+              key={key}
+              className="rounded-xl border border-gray-200 bg-cream px-4 py-3 text-sm font-semibold text-gray-900"
+            >
+              {t(key)}
+            </li>
+          ),
+        )}
+      </ol>
+
+      <p className="text-sm leading-relaxed text-gray-700">
+        {t("help.calming.repeat")}
+      </p>
+
+      <p className="text-sm leading-relaxed text-gray-600">
+        {t("help.calming.grounding")}
+      </p>
+
+      <button
+        type="button"
+        onClick={onBack}
+        className="text-sm font-semibold text-brand"
+      >
+        {t("help.calming.back")}
+      </button>
     </div>
   );
 }

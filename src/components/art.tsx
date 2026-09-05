@@ -4,12 +4,12 @@
  * #87945A, sage #D9DCA8, cream #F5EBD7, ink #2F3325, earth #8C8A6E.
  */
 
-const INK = "#2F3325";
-const BRAND = "#56663A";
-const LIGHT = "#87945A";
-const PEACH = "#D9DCA8";
-const CREAM = "#F5EBD7";
-const LAV = "#8C8A6E";
+const INK = "#17213E";
+const BRAND = "#4056C8";
+const LIGHT = "#8494E8";
+const PEACH = "#DCE5FF";
+const CREAM = "#F5F7FF";
+const LAV = "#7384C8";
 
 type ArtProps = { className?: string };
 

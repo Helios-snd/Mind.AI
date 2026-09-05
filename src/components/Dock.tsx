@@ -80,6 +80,7 @@ export const Dock = React.forwardRef<HTMLDivElement, DockProps>(
         ref={ref}
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
+        data-mind-dock
         className={`${DOCK_CLASS} ${ALIGN[direction]} ${className}`}
       >
         {renderChildren()}

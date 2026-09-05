@@ -9,16 +9,27 @@ export default function DeleteAccountPage() {
   const t = useT();
   const [typed, setTyped] = useState("");
   const [done, setDone] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [busy, setBusy] = useState(false);
 
   const confirmWord = t("me.delete.confirmWord");
   const armed = typed.trim().toUpperCase() === confirmWord.toUpperCase();
 
-  const wipe = () => {
-    wipeEverything();
+  const wipe = async () => {
+    setBusy(true);
+    setFailed(false);
+    try {
+      await wipeEverything();
+    } catch {
+      // Deletion is not something to report as done when it did not happen.
+      setBusy(false);
+      setFailed(true);
+      return;
+    }
     setDone(true);
     // Full navigation so the query cache and in-memory state reset too.
     window.setTimeout(() => {
-      window.location.href = "/onboarding";
+      window.location.href = "/";
     }, 1200);
   };
 
@@ -58,10 +69,16 @@ export default function DeleteAccountPage() {
         className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
       />
 
+      {failed && (
+        <p role="alert" className="mt-4 text-sm text-crisis">
+          {t("state.error")}
+        </p>
+      )}
+
       <div className="mt-6 flex items-center gap-4">
         <button
           type="button"
-          disabled={!armed}
+          disabled={!armed || busy}
           onClick={wipe}
           className="inline-flex items-center justify-center rounded-lg bg-crisis px-6 py-3 text-sm font-semibold text-white hover:bg-crisis-dark disabled:cursor-not-allowed disabled:opacity-40"
         >

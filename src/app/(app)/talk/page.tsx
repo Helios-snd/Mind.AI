@@ -1,131 +1,33 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n";
-import { useOnboardingProgress } from "@/api/hooks";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+import { CrisisScreen } from "./CrisisScreen";
 import { Disclosure } from "./Disclosure";
+import { EscalationInterstitial } from "./EscalationInterstitial";
 import { MessageList } from "./MessageList";
 import { Composer } from "./Composer";
-import { replyKeyFor } from "./replies";
-import {
-  disclosureSeen,
-  loadThread,
-  markDisclosureSeen,
-  newId,
-  saveThread,
-  type ChatMessage,
-} from "./storage";
+import { useTalkThread } from "./useTalkThread";
+import { disclosureSeen, markDisclosureSeen } from "./storage";
 
 export default function TalkPage() {
   const { t } = useI18n();
-  const router = useRouter();
-  const progress = useOnboardingProgress();
   const reduced = usePrefersReducedMotion();
+  const thread = useTalkThread();
 
-  const [messages, setMessages] = useState<ChatMessage[] | null>(null);
   const [showDisclosure, setShowDisclosure] = useState(false);
-  const [typing, setTyping] = useState(false);
-
   const bottomRef = useRef<HTMLDivElement>(null);
-  const timers = useRef<number[]>([]);
 
   useEffect(() => {
-    setMessages(loadThread());
     setShowDisclosure(!disclosureSeen());
-  }, []);
-
-  // Not onboarded — send them there. (The tab bar will own this later.)
-  useEffect(() => {
-    if (progress.data && !progress.data.completedAt) {
-      router.replace("/onboarding");
-    }
-  }, [progress.data, router]);
-
-  useEffect(() => {
-    const pending = timers.current;
-    return () => pending.forEach((id) => window.clearTimeout(id));
   }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({
       behavior: reduced ? "auto" : "smooth",
     });
-  }, [messages, typing, reduced]);
-
-  const persist = useCallback((next: ChatMessage[]) => {
-    setMessages(next);
-    saveThread(next);
-  }, []);
-
-  const respond = useCallback(
-    (thread: ChatMessage[], userMessage: ChatMessage) => {
-      setTyping(true);
-      const forceFail =
-        typeof window !== "undefined" &&
-        (window as unknown as { __talkFail?: boolean }).__talkFail;
-      const delay = reduced ? 300 : 700 + Math.random() * 700;
-
-      const id = window.setTimeout(() => {
-        setTyping(false);
-        if (forceFail) {
-          persist(
-            thread.map((m) =>
-              m.id === userMessage.id ? { ...m, status: "failed" as const } : m,
-            ),
-          );
-          return;
-        }
-        const userTurns = thread.filter((m) => m.role === "user").length;
-        const delivered = thread.map((m) =>
-          m.id === userMessage.id ? { ...m, status: undefined } : m,
-        );
-        persist([
-          ...delivered,
-          {
-            id: newId(),
-            role: "assistant",
-            text: t(replyKeyFor(userMessage.text, userTurns)),
-            at: new Date().toISOString(),
-          },
-        ]);
-      }, delay);
-
-      timers.current.push(id);
-    },
-    [persist, reduced, t],
-  );
-
-  const send = useCallback(
-    (text: string) => {
-      if (messages === null) return;
-      const userMessage: ChatMessage = {
-        id: newId(),
-        role: "user",
-        text,
-        at: new Date().toISOString(),
-      };
-      const withUser = [...messages, userMessage];
-      persist(withUser);
-      respond(withUser, userMessage);
-    },
-    [messages, persist, respond],
-  );
-
-  const retry = useCallback(
-    (id: string) => {
-      if (messages === null) return;
-      const target = messages.find((m) => m.id === id);
-      if (!target) return;
-      const cleared = messages.map((m) =>
-        m.id === id ? { ...m, status: "sending" as const } : m,
-      );
-      persist(cleared);
-      respond(cleared, { ...target, status: undefined });
-    },
-    [messages, persist, respond],
-  );
+  }, [thread.messages, thread.typing, reduced]);
 
   const dismissDisclosure = () => {
     markDisclosureSeen();
@@ -144,12 +46,24 @@ export default function TalkPage() {
 
       <div className="flex-1 overflow-y-auto px-5 py-6">
         {showDisclosure && <Disclosure onDismiss={dismissDisclosure} />}
+        <EscalationInterstitial />
 
-        {messages === null ? (
+        {thread.isPending ? (
           <p role="status" className="text-earth">
             {t("state.loading")}
           </p>
-        ) : messages.length === 0 ? (
+        ) : thread.isError ? (
+          <div role="alert">
+            <p className="text-earth">{t("state.error")}</p>
+            <button
+              type="button"
+              className="btn-outline mt-4"
+              onClick={() => thread.retryLoad()}
+            >
+              {t("action.retry")}
+            </button>
+          </div>
+        ) : thread.messages && thread.messages.length === 0 ? (
           <div className="mt-16 flex flex-col items-center text-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10">
               <svg
@@ -167,13 +81,27 @@ export default function TalkPage() {
             <p className="mt-4 text-earth">{t("talk.body")}</p>
           </div>
         ) : (
-          <MessageList messages={messages} typing={typing} onRetry={retry} />
+          thread.messages && (
+            <MessageList
+              messages={thread.messages}
+              typing={thread.typing}
+              onRetry={thread.retry}
+            />
+          )
         )}
 
         <div ref={bottomRef} />
       </div>
 
-      <Composer onSend={send} />
+      <Composer onSend={thread.send} />
+
+      {thread.tier3Kind && thread.safetyAssessmentId && (
+        <CrisisScreen
+          tier3Kind={thread.tier3Kind}
+          safetyAssessmentId={thread.safetyAssessmentId}
+          onClose={thread.clearTier3Kind}
+        />
+      )}
     </div>
   );
 }

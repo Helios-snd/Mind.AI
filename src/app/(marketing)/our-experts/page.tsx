@@ -8,17 +8,18 @@ export const metadata: Metadata = { title: "Our Experts | Mind.AI" };
 export default function Page() {
   return (
     <Section>
-      <h1 className="h-display mb-10 text-center text-4xl">
-        Meet Our Expert Doctors
-      </h1>
+      <div className="editorial-panel mb-10 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">People first</p>
+        <h1 className="h-display mt-3 text-4xl sm:text-5xl">Meet Our Expert Doctors</h1>
+      </div>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {experts.map((e) => (
           <div
             key={e.name}
-            className="rounded-2xl border border-gray-200 bg-white p-6"
+            className="feature-tile group"
           >
             <div className="flex items-center gap-4">
-              <div className="h-16 w-16 shrink-0">
+              <div className="h-16 w-16 shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <Avatar name={e.name} />
               </div>
               <div>

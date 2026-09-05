@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import TabDock from "@/components/TabDock";
+import StudentDock from "@/components/StudentDock";
 import { HelpNowGateProvider } from "@/help/HelpNowGate";
 import HelpNowLauncher from "@/help/HelpNowLauncher";
 
@@ -18,8 +18,9 @@ export default function MarketingLayout({
       <HelpNowGateProvider>
         <HelpNowLauncher raised />
       </HelpNowGateProvider>
-      {/* Same app dock as the authenticated shell — visible across the site. */}
-      <TabDock />
+      {/* The student tab bar follows an onboarded visitor onto the public
+          site, but a logged-out reader never sees tabs they cannot open. */}
+      <StudentDock />
     </>
   );
 }

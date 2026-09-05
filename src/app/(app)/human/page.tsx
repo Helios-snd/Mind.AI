@@ -22,7 +22,7 @@ export default function HumanPage() {
       <div className="mt-8 space-y-4">
         <a
           href="tel:14416"
-          className="block rounded-xl border border-gray-200 p-4 hover:border-brand/40 hover:bg-cream"
+          className="support-panel block transition hover:-translate-y-0.5 hover:border-crisis/30"
         >
           <p className="font-semibold text-gray-900">
             {t("human.telemanas.title")}
@@ -32,7 +32,7 @@ export default function HumanPage() {
           </p>
         </a>
 
-        <div className="rounded-xl border border-gray-200 p-4">
+        <div className="surface-card">
           <p className="font-semibold text-gray-900">
             {t("human.counsellor.title")}
           </p>

@@ -71,10 +71,33 @@ export const bn = {
   "onboarding.crisis.contact.phone": "ফোন",
   "onboarding.crisis.contact.helper":
     "সম্পূর্ণ তোমার পছন্দ — বন্ধু, ভাইবোন, রুমমেট, যে কেউ। পরিবারের কেউ হতেই হবে এমন নয়।",
+  "onboarding.crisis.contact.emergencyDisclosure":
+    "একটা কথা জেনে রাখো: Mind.AI সাধারণত যেভাবে কাজ করে, এটা তার একমাত্র ব্যতিক্রম। তুমি যদি কখনও তাৎক্ষণিক বিপদে থাকো আর কয়েক মিনিটের মধ্যে সাড়া না দাও, আমরা নিজেরাই এই মানুষটির সঙ্গে যোগাযোগ করতে পারি। এটা শুধু ওই একটা পরিস্থিতিতেই হয় — অন্য কখনও নয়, আর তুমি নিজে দেখার আগে কখনও নয়।",
   "onboarding.crisis.error.required": "শেষ করার আগে এটা দরকার।",
   "onboarding.crisis.error.phone":
     "সংখ্যাসহ একটা ফোন নম্বর দাও। স্পেস আর +৯১ থাকলেও চলবে।",
   "onboarding.crisis.submit": "জমা দিয়ে শেষ করো",
+
+  // Onboarding — Step 5: keep your account
+  "onboarding.progress.label": "ধাপ {current} / {total}",
+  "onboarding.claim.heading": "এটা রেখে দিতে চাও?",
+  "onboarding.claim.subline":
+    "এখন সবকিছু শুধু এই ফোনেই আছে। একটা ইমেল বা নম্বর দিয়ে রাখলে যেকোনো ডিভাইস থেকে আবার শুরু করতে পারবে।",
+  "onboarding.claim.label": "ইমেল বা ফোন",
+  "onboarding.claim.placeholder": "you@college.edu, বা ৯৮৭৬৫ ৪৩২১০",
+  "onboarding.claim.send": "আমাকে একটা কোড পাঠাও",
+  "onboarding.claim.codeLabel": "যে কোডটা পাঠানো হয়েছে",
+  "onboarding.claim.codePlaceholder": "৬ সংখ্যা",
+  "onboarding.claim.verify": "নিশ্চিত করো",
+  "onboarding.claim.skip": "এখন না",
+  "onboarding.claim.skipNote":
+    "পরে প্রোফাইল থেকেও যোগ করতে পারবে। এখন বাদ দিলে কিছুই হারাবে না।",
+  "onboarding.claim.sent": "পাঠানো হয়েছে। মেসেজ দেখে নাও।",
+  "onboarding.claim.error.destination": "একটা ইমেল বা ফোন নম্বর দাও।",
+  "onboarding.claim.error.code": "কোডটা ঠিক হয়নি। আবার চেষ্টা করো।",
+  "onboarding.claim.error.taken":
+    "এটা আগে থেকেই অন্য একটা অ্যাকাউন্টের সঙ্গে যুক্ত।",
+  "onboarding.claim.devCode": "শুধু ডেভেলপমেন্টের জন্য — তোমার কোড {code}",
 
   // Need help now — button
   "help.button": "এখনই সাহায্য দরকার",
@@ -102,6 +125,15 @@ export const bn = {
 
   "help.stay.title": "শুধু আমার পাশে থাকো",
   "help.stay.subtitle": "কোনো ফোন নয়। আমি এখানেই আছি।",
+
+  // Help Now — calming mode ("শুধু আমার পাশে থাকো"-র গন্তব্য)
+  "help.calming.intro": "চলো, একটু ধীরে করি।",
+  "help.calming.inhale": "শ্বাস নাও — ৪ সেকেন্ড",
+  "help.calming.hold": "ধরে রাখো — ২ সেকেন্ড",
+  "help.calming.exhale": "শ্বাস ছাড়ো — ৬ সেকেন্ড",
+  "help.calming.repeat": "যতক্ষণ ভালো লাগে, কয়েকবার করো।",
+  "help.calming.grounding": "অথবা, চারপাশে দেখা যায় এমন ৩টা জিনিস খেয়াল করো।",
+  "help.calming.back": "হেল্প নাউ-এ ফিরে যাও",
 
   // Navigation
   "nav.label": "প্রধান",
@@ -136,24 +168,6 @@ export const bn = {
   "talk.retry": "আবার চেষ্টা করো",
   "talk.day.today": "আজ",
   "talk.day.yesterday": "গতকাল",
-  "talk.reply.greeting":
-    "হাই। তুমি এসেছ, ভালো লাগল। এখন তোমার মনে কী চলছে?",
-  "talk.reply.anxiety":
-    "ওই ছটফটে, টানটান লাগাটা সহ্য করা কঠিন। একটু ধীরে করি — এখন কি পায়ের নিচে মাটিটা টের পাচ্ছ? কী থেকে শুরু হলো, যদি জানো, বলো।",
-  "talk.reply.somatic":
-    "শরীর অনেকটা বয়ে নেয় — চাপ বাড়লে বুকে চাপ বা ভারী লাগা খুব সাধারণ। কয়েকবার ধীরে করে শ্বাস ছাড়ো, নেওয়ার চেয়ে ছাড়াটা লম্বা করে। তুমি করতে করতে আমি আছি।",
-  "talk.reply.lowMood":
-    "যখন কিছুই ভালো লাগে না, ছোট জিনিসও ভারী হয়ে যায়। সব কিছু গুছিয়ে বলতে হবে এমন নয়। আজকের দিনটা কেমন গেল?",
-  "talk.reply.sleep":
-    "ঘুম এলোমেলো হলে সব কিছু কঠিন লাগে। ইদানীং রাতগুলো কেমন — ঘুম আসতে দেরি, নাকি মাঝরাতে ভেঙে যাওয়া?",
-  "talk.reply.exam":
-    "পরীক্ষার সময়টা যেন বাকি সব গিলে ফেলে। এর পরে কীসের সামনে দাঁড়াতে হবে?",
-  "talk.reply.lonely":
-    "এটা একা একা বয়ে বেড়ানোরও নিজের একটা ওজন আছে। আমি এখন আছি। সাধারণত কে তোমার আশেপাশে থাকে, একটুও হলেও?",
-  "talk.reply.thanks":
-    "যেকোনো সময়। আবার যখন কথা বলতে চাইবে, আমি আছি।",
-  "talk.reply.default": "বলার জন্য ধন্যবাদ। এটা নিয়ে আরও একটু বলবে?",
-  "talk.reply.default2": "আমি শুনছি। এর পিছনে কী আছে বলে তোমার মনে হয়?",
 
   // Today — daily check-in
   "today.checkin.heading": "আজ কেমন চলছে?",
@@ -166,9 +180,37 @@ export const bn = {
   "today.mood.4": "মোটামুটি ভালো",
   "today.mood.5": "বেশ ভালো",
 
+  "today.energy.legend": "আজ শক্তি কেমন ছিল?",
+  "today.energy.1": "একদম ফাঁকা লাগছিল",
+  "today.energy.2": "কম",
+  "today.energy.3": "চলে যাওয়ার মতো",
+  "today.energy.4": "মোটামুটি ভালো",
+  "today.energy.5": "অনেকটাই",
+
+  "today.social.legend": "মানুষের সঙ্গে সময় কাটিয়েছ?",
+  "today.social.1": "একাই ছিলাম",
+  "today.social.2": "প্রায় না",
+  "today.social.3": "একটু",
+  "today.social.4": "বেশ কিছুটা",
+  "today.social.5": "অনেকটা",
+
   "today.sleep.legend": "কতটা ঘুম হয়েছে?",
   "today.sleep.value": "মোটামুটি {hours} ঘণ্টা",
   "today.sleep.zero": "এক ঘণ্টারও কম",
+
+  "today.appetite.legend": "\u0996\u09be\u0993\u09df\u09be\u09b0 \u09b0\u09c1\u099a\u09bf \u0995\u09c7\u09ae\u09a8 \u099b\u09bf\u09b2?",
+  "today.appetite.1": "\u0995\u09bf\u099b\u09c1\u0987 \u0996\u09be\u0987\u09a8\u09bf \u09ac\u09b2\u09a4\u09c7 \u0997\u09c7\u09b2\u09c7",
+  "today.appetite.2": "\u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u0995\u09ae",
+  "today.appetite.3": "\u09ae\u09cb\u099f\u09be\u09ae\u09c1\u099f\u09bf \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995",
+  "today.appetite.4": "\u09ad\u09be\u09b2\u09cb",
+  "today.appetite.5": "\u09ac\u09c7\u09b6 \u09ad\u09be\u09b2\u09cb",
+
+  "today.activity.legend": "\u0995\u09cb\u09a5\u09be\u0993 \u09ac\u09c7\u09b0\u09bf\u09df\u09c7\u099b\u09bf\u09b2\u09c7?",
+  "today.activity.1": "\u0998\u09b0\u09c7\u0987 \u099b\u09bf\u09b2\u09be\u09ae",
+  "today.activity.2": "\u0996\u09c1\u09ac \u098f\u0995\u099f\u09be \u09a8\u09be",
+  "today.activity.3": "\u0985\u09b2\u09cd\u09aa",
+  "today.activity.4": "\u09ae\u09cb\u099f\u09be\u09ae\u09c1\u099f\u09bf",
+  "today.activity.5": "\u09ac\u09c7\u09b6 \u0998\u09cb\u09b0\u09be\u09ab\u09c7\u09b0\u09be \u09b9\u09df\u09c7\u099b\u09c7",
 
   "today.note.legend": "মনে কী চলছে?",
   "today.note.placeholder": "যা কিছু। এক লাইনই যথেষ্ট।",
@@ -182,11 +224,15 @@ export const bn = {
     "মাইক্রোফোনের অনুমতি বন্ধ আছে। ব্রাউজারের সেটিংসে চালু করতে পারো, নয়তো শুধু টাইপ করো।",
 
   "today.submit": "আজকের মতো এটুকুই",
+  "today.submit.saving": "সেভ হচ্ছে\u2026",
+  "today.submit.failed": "সেভ হয়নি। কানেকশন দেখে আবার চেষ্টা করো।",
 
   "today.back.title": "আবার দেখা হয়ে ভালো লাগল।",
   "today.back.body": "পিছনের কিছু পুষিয়ে নেওয়ার দরকার নেই। চলো শুধু আজকেরটা করি।",
 
   "today.done.heading": "লিখে রাখা হলো।",
+  "today.handoff.body": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09a7\u09be\u09b0\u09be\u09df \u09a8\u09bf\u09df\u09c7 \u09af\u09be\u099a\u09cd\u099b\u09bf\u2026",
+  "today.done.seeTrends": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09a7\u09be\u09b0\u09be \u09a6\u09c7\u0996\u09cb",
   "today.done.addMore": "আরও কিছু যোগ করো",
 
   "today.ack.exam":
@@ -215,23 +261,133 @@ export const bn = {
 
   // Trends — the mood meter
   "trends.heading": "প্রবণতা",
-  "trends.sub": "সাপ্তাহিক, তোমার নিজের স্বাভাবিকের সঙ্গে — অন্য কারও সঙ্গে নয়।",
+  "trends.sub": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09a8\u09bf\u099c\u09b0 \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u09a4\u09be\u09b0 \u09b8\u0999\u09cd\u0997\u09c7 \u2014 \u0985\u09a8\u09cd\u09af \u0995\u09be\u09b0\u09cb \u09b8\u0999\u09cd\u0997\u09c7 \u09a8\u09df\u0964",
+
+  // Range selector
+  "trends.range.7d": "\u09ed \u09a6\u09bf\u09a8",
+  "trends.range.4w": "\u09ea \u09b8\u09aa\u09cd\u09a4\u09be\u09b9",
+  "trends.range.6w": "\u09ec \u09b8\u09aa\u09cd\u09a4\u09be\u09b9",
+  "trends.rangeLabel": "\u0995\u09a4\u09a6\u09bf\u09a8 \u09aa\u09bf\u099b\u09a8 \u09aa\u09b0\u09cd\u09af\u09a8\u09cd\u09a4 \u09a6\u09c7\u0996\u09ac\u09c7",
+
+  // Per-series card
+  "trends.average": "\u0997\u09a1\u09bc",
+  "trends.stat.average": "\u0997\u09a1\u09bc",
+  "trends.stat.highest": "\u09b8\u09b0\u09cd\u09ac\u09cb\u099a\u09cd\u099a",
+  "trends.stat.lowest": "\u09b8\u09b0\u09cd\u09ac\u09a8\u09bf\u09ae\u09cd\u09a8",
+  "trends.stat.change": "\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8",
+  "trends.stat.changeFlat": "\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8 \u09b9\u09df\u09a8\u09bf",
+  "trends.stat.dash": "\u2014",
+  "trends.usual": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995",
+  "trends.usualRange": "{low}\u2013{high}",
+  "trends.latest": "\u09b8\u09b0\u09cd\u09ac\u09b6\u09c7\u09b7",
+  "trends.noBaselineYet":
+    "\u099a\u09c7\u0995-\u0987\u09a8 \u099a\u09be\u09b2\u09bf\u09df\u09c7 \u0997\u09c7\u09b2\u09c7 \u09a4\u09cb\u09ae\u09be\u09b0 \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995 \u09aa\u09b0\u09bf\u09b8\u09b0\u099f\u09be \u098f\u0996\u09be\u09a8\u09c7 \u09a6\u09c7\u0996\u09be \u09af\u09be\u09ac\u09c7\u0964",
+  "trends.single.early": "\u098f\u0987\u09ae\u09be\u09a4\u09cd\u09b0 \u09b6\u09c1\u09b0\u09c1 \u09b9\u09b2\u09cb \u2014 \u098f\u0996\u09a8\u0993 \u09aa\u09b0\u09cd\u09af\u09a8\u09cd\u09a4 \u098f\u0995\u099f\u09be\u0987 \u099a\u09c7\u0995-\u0987\u09a8\u0964",
+  "trends.single.reference": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09b6\u09c1\u09b0\u09c1\u09b0 \u099c\u09be\u09df\u0997\u09be \u099b\u09bf\u09b2 {value}\u0964",
+  "trends.notEnoughSeries":
+    "\u098f\u099f\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u098f\u0996\u09a8\u09cb \u09af\u09a5\u09c7\u09b7\u09cd\u099f \u099a\u09c7\u0995-\u0987\u09a8 \u09b9\u09df\u09a8\u09bf\u0964",
+
+  // Observations
+  "trends.obs.belowBaseline":
+    "\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995 \u09b8\u09ae\u09df\u09c7 \u09a4\u09cb\u09ae\u09be\u09b0 {series} \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995 \u09aa\u09b0\u09bf\u09b8\u09b0\u09c7\u09b0 \u09a8\u09bf\u099a\u09c7 \u099b\u09bf\u09b2\u0964",
+  "trends.obs.aboveBaseline":
+    "\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995 \u09b8\u09ae\u09df\u09c7 \u09a4\u09cb\u09ae\u09be\u09b0 {series} \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995 \u09aa\u09b0\u09bf\u09b8\u09b0\u09c7\u09b0 \u0989\u09aa\u09b0\u09c7 \u099b\u09bf\u09b2\u0964",
+  "trends.obs.withinBaseline":
+    "\u09a4\u09cb\u09ae\u09be\u09b0 {series} \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995 \u09aa\u09b0\u09bf\u09b8\u09b0\u09c7\u0987 \u099b\u09bf\u09b2\u0964",
+  "trends.obs.declining":
+    "\u098f\u0987 \u09b8\u09ae\u09df\u099f\u09be\u09df \u09a4\u09cb\u09ae\u09be\u09b0 {series} \u0995\u09ae\u09c7 \u098f\u09b8\u09c7\u099b\u09c7\u0964",
+  "trends.obs.rising":
+    "\u098f\u0987 \u09b8\u09ae\u09df\u099f\u09be\u09df \u09a4\u09cb\u09ae\u09be\u09b0 {series} \u09ac\u09be\u09a1\u09bc\u099b\u09c7\u0964",
+  "trends.obs.steady":
+    "\u09a4\u09cb\u09ae\u09be\u09b0 {series} \u09ae\u09cb\u099f\u09be\u09ae\u09c1\u099f\u09bf \u098f\u0995\u09b0\u0995\u09ae \u099b\u09bf\u09b2\u0964",
+
+  // Tips
+  "trends.tip.mood":
+    "\u0996\u09be\u09b0\u09be\u09aa \u09b8\u09ae\u09df\u09c7 \u09ae\u09a8 \u09ac\u09a6\u09b2\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u0985\u09aa\u09c7\u0995\u09cd\u09b7\u09be \u0995\u09b0\u09be\u09b0 \u099a\u09c7\u09df\u09c7 \u099b\u09cb\u099f \u098f\u0995\u099f\u09be \u0995\u09be\u099c \u0995\u09b0\u09be \u09ac\u09c7\u09b6\u09bf \u0995\u09be\u099c\u09c7 \u09a6\u09c7\u09df\u0964",
+  "trends.tip.sleep":
+    "\u0998\u09c1\u09ae\u09c7\u09b0 \u09b8\u09ae\u09df \u0986\u09b0\u09c7\u0995\u099f\u09c1 \u09a8\u09bf\u09df\u09ae\u09bf\u09a4 \u09b9\u09b2\u09c7 \u09b9\u09df\u09a4\u09cb \u09ac\u09c7\u09b6\u09bf \u09ac\u09bf\u09b6\u09cd\u09b0\u09be\u09ae \u09aa\u09be\u09ac\u09c7\u0964",
+  "trends.tip.sleepConsistency":
+    "\u0995\u09df\u09c7\u0995 \u09a6\u09bf\u09a8 \u0998\u09c1\u09ae\u09be\u09a4\u09c7 \u09af\u09be\u0993\u09df\u09be \u0986\u09b0 \u0993\u09a0\u09be\u09b0 \u09b8\u09ae\u09df \u09ae\u09cb\u099f\u09be\u09ae\u09c1\u099f\u09bf \u098f\u0995\u09b0\u0995\u09ae \u09b0\u09be\u0996\u09be\u09b0 \u099a\u09c7\u09b7\u09cd\u099f\u09be \u0995\u09b0\u09cb\u0964",
+  "trends.tip.energy":
+    "\u0995\u09ae \u0998\u09c1\u09ae\u09c7\u09b0 \u09aa\u09b0 \u09b6\u0995\u09cd\u09a4\u09bf \u0995\u09ae\u09c7 \u09af\u09be\u0993\u09df\u09be \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u0964 \u0995\u09df\u09c7\u0995\u099f\u09be \u09a6\u09bf\u09a8 \u09a8\u09bf\u099c\u09c7\u09b0 \u0989\u09aa\u09b0 \u099a\u09be\u09aa \u0995\u09ae \u09a6\u09be\u0993\u0964",
+  "trends.tip.social":
+    "\u09af\u09be\u09b0 \u09b8\u0999\u09cd\u0997\u09c7 \u09b8\u09b9\u099c \u09b2\u09be\u0997\u09c7, \u09a4\u09be\u0995\u09c7 \u098f\u0995\u09ac\u09be\u09b0 \u09ac\u09b2\u09be\u09b0 \u0995\u09a5\u09be \u09ad\u09be\u09ac\u09a4\u09c7 \u09aa\u09be\u09b0\u09cb\u0964",
+  "trends.tipLabel": "\u09b6\u09c1\u09b0\u09c1 \u0995\u09b0\u09be\u09b0 \u098f\u0995\u099f\u09be \u09b8\u09b9\u099c \u099c\u09be\u09df\u0997\u09be",
+
+  // At a glance
+  "trends.glance.heading": "\u098f\u0995 \u09a8\u099c\u09b0\u09c7",
+  "trends.glance.noticing": "\u09af\u09be \u099a\u09cb\u0996\u09c7 \u09aa\u09a1\u09bc\u099b\u09c7",
+  "trends.change.up": "{value} \u09ac\u09c7\u09a1\u09bc\u09c7\u099b\u09c7",
+  "trends.change.down": "{value} \u0995\u09ae\u09c7\u099b\u09c7",
+  "trends.change.none": "\u09aa\u09cd\u09b0\u09be\u09df \u098f\u0995\u0987",
+  "trends.change.new": "\u2014",
+
+  // Cross-series summaries
+  "trends.summary.sleepAndMood":
+    "\u09b6\u09c7\u09b7 \u0995\u09df\u09c7\u0995\u099f\u09be \u099a\u09c7\u0995-\u0987\u09a8\u09c7 \u09a4\u09cb\u09ae\u09be\u09b0 \u0998\u09c1\u09ae \u0986\u09b0 \u09ae\u09a8 \u09a6\u09c1\u099f\u09cb\u0987 \u0995\u09ae\u09c7\u099b\u09c7\u0964",
+  "trends.summary.socialAndMood":
+    "\u09af\u09c7 \u09b8\u09ae\u09df\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09b8\u0999\u09cd\u0997 \u0995\u09ae\u09c7\u099b\u09c7, \u09b8\u09c7\u0987 \u09b8\u09ae\u09df\u09c7\u0987 \u09a4\u09cb\u09ae\u09be\u09b0 \u09ae\u09a8\u0993 \u0995\u09ae \u099b\u09bf\u09b2\u0964",
+  "trends.summary.sleep":
+    "\u0987\u09a6\u09be\u09a8\u09c0\u0982 \u09a4\u09cb\u09ae\u09be\u09b0 \u0998\u09c1\u09ae \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u0995\u09ae \u09b9\u099a\u09cd\u099b\u09c7\u0964",
+  "trends.summary.mood":
+    "\u0987\u09a6\u09be\u09a8\u09c0\u0982 \u09a4\u09cb\u09ae\u09be\u09b0 \u09ae\u09a8 \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995 \u09aa\u09b0\u09bf\u09b8\u09b0\u09c7\u09b0 \u09a8\u09bf\u099a\u09c7 \u099b\u09bf\u09b2\u0964",
+  "trends.summary.steady":
+    "\u0987\u09a6\u09be\u09a8\u09c0\u0982 \u09ac\u09a1\u09bc \u0995\u09bf\u099b\u09c1 \u09ac\u09a6\u09b2\u09be\u09df\u09a8\u09bf \u2014 \u09ae\u09cb\u099f\u09be\u09ae\u09c1\u099f\u09bf \u098f\u0995\u09b0\u0995\u09ae \u0986\u099b\u09c7\u0964",
   "trends.series.mood": "মন",
   "trends.series.sleep": "ঘুম",
   "trends.series.energy": "শক্তি",
   "trends.series.social": "মেলামেশা",
-  "trends.chartLabel": "{series}, সাপ্তাহিক, গত {weeks} সপ্তাহে",
-  "trends.range": "তোমার সাধারণ পরিসর: {low}–{high}",
-  "trends.thisWeek": "এই সপ্তাহে: {value}",
-  "trends.insightLabel": "আমি যা খেয়াল করছি",
-  "trends.insight":
-    "গত কয়েক সপ্তাহে তোমার মন আর শক্তি নেমে গেছে, আর এখন তোমার সাধারণ পরিসরের একটু নিচে — মোটামুটি যখন থেকে তোমার ঘুম কমে গেছে।",
-  "trends.patternsLabel": "যেসব প্যাটার্ন খেয়াল করেছি",
-  "trends.pattern.1": "এই মাসে সপ্তাহের কাজের দিনগুলোয় বেশিরভাগ রাতে ঘুম ছয় ঘণ্টার কম।",
-  "trends.pattern.2": "যেসব সপ্তাহে মেলামেশা কমে, সেই সপ্তাহগুলোয় মন সাধারণত নিচু থাকে।",
-  "trends.pattern.3":
-    "শক্তি তোমার ঘুমকে ঘনিষ্ঠভাবে অনুসরণ করেছে — একসঙ্গে ওঠে আর নামে।",
-  "trends.stored.link": "আমার সম্পর্কে যা কিছু জমা আছে দেখো",
+  "trends.dash.heading": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995 \u09a7\u09be\u09b0\u09be",
+  "trends.dash.sub": "\u09a4\u09c1\u09ae\u09bf \u09af\u09be \u099c\u09be\u09a8\u09bf\u09df\u09c7\u099b, \u09a4\u09be\u09b0 \u09ad\u09bf\u09a4\u09cd\u09a4\u09bf\u09a4\u09c7 \u09a4\u09cb\u09ae\u09be\u09b0 \u09a6\u09bf\u09a8\u0997\u09c1\u09b2\u09cb \u0995\u09c7\u09ae\u09a8 \u09af\u09be\u099a\u09cd\u099b\u09c7\u0964",
+  "trends.metric.of5": "{value} / \u09eb",
+  "trends.metric.hrs": "{value} \u0998\u09a8\u09cd\u099f\u09be",
+  "trends.dir.rising": "\u09ac\u09be\u09a1\u09bc\u099b\u09c7",
+  "trends.dir.declining": "\u0995\u09ae\u09c7\u099b\u09c7",
+  "trends.dir.steady": "\u098f\u0995\u09b0\u0995\u09ae",
+  "trends.dir.unknown": "\u098f\u0996\u09a8\u09cb \u0995\u09ae \u09a4\u09a5\u09cd\u09af",
+
+  "trends.compare.heading": "\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995 {series}",
+  "trends.compare.recent": "\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995 \u0997\u09a1\u09bc",
+  "trends.compare.baseline": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995",
+  "trends.compare.above": "\u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 {value} \u09ac\u09c7\u09b6\u09bf",
+  "trends.compare.below": "\u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 {value} \u0995\u09ae",
+  "trends.compare.around": "\u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995\u09c7\u09b0 \u0986\u09b6\u09aa\u09be\u09b6\u09c7",
+
+  "trends.snapshot.heading": "\u09a4\u09cb\u09ae\u09be\u09b0 \u099a\u09c7\u0995-\u0987\u09a8 \u09b8\u09cd\u09a8\u09cd\u09af\u09be\u09aa\u09b6\u099f",
+  "trends.snapshot.sub": "\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995\u09c7 \u09a4\u09c1\u09ae\u09bf \u0995\u09c0 \u09b2\u09bf\u0996\u099b, \u09a4\u09be\u09b0 \u098f\u0995 \u099d\u09b2\u0995 \u09a6\u09c3\u09b6\u09cd\u09af\u0964",
+
+  "trends.snapshot.checkins.label": "\u099a\u09c7\u0995-\u0987\u09a8",
+  "trends.snapshot.checkins.value": "{logged} / {total}",
+  "trends.snapshot.checkins.caption": "\u0997\u09a4 {total} \u09a6\u09bf\u09a8\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 {logged} \u09a6\u09bf\u09a8 \u09a4\u09c1\u09ae\u09bf \u099a\u09c7\u0995-\u0987\u09a8 \u0995\u09b0\u09c7\u099b\u0964",
+
+  "trends.snapshot.gettingOut.label": "\u09ac\u09be\u0987\u09b0\u09c7 \u09ac\u09c7\u09b0\u09cb\u09a8\u09cb",
+  "trends.snapshot.gettingOut.value": "{positive} / {total}",
+  "trends.snapshot.gettingOut.caption": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09b6\u09c7\u09b7 {total} \u099f\u09be \u099a\u09c7\u0995-\u0987\u09a8 \u09a6\u09bf\u09a8\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 {positive} \u09a6\u09bf\u09a8 \u09ac\u09be\u0987\u09b0\u09c7 \u09ac\u09c7\u09b0\u09bf\u09df\u09c7\u099b\u09c7\u09be\u0964",
+  "trends.snapshot.gettingOut.noneCaption": "\u099f\u09c1\u09a1\u09c7-\u098f \u0995\u09be\u09b0\u09cd\u09af\u0995\u09b2\u09be\u09aa \u09b2\u09bf\u0996\u09b2\u09c7 \u098f\u099f\u09be \u098f\u0996\u09be\u09a8\u09c7 \u09a6\u09c7\u0996\u09be \u09af\u09be\u09ac\u09c7\u0964",
+
+  "trends.snapshot.appetite.label": "\u0996\u09be\u0993\u09df\u09be\u09b0 \u09b0\u09c1\u099a\u09bf",
+  "trends.snapshot.appetite.none": "\u098f\u0996\u09a8\u09cb \u09af\u09a5\u09c7\u09b7\u09cd\u099f \u09b2\u09c7\u0996\u09be \u09b9\u09df\u09a8\u09bf",
+  "trends.snapshot.appetite.caption": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995 \u0996\u09be\u0993\u09df\u09be\u09b0 \u09b0\u09c1\u099a\u09bf\u09b0 \u09b2\u0997\u0964",
+  "trends.snapshot.appetite.noneCaption": "\u0986\u09b0\u0993 \u0995\u09df\u09c7\u0995\u099f\u09be \u099a\u09c7\u0995-\u0987\u09a8 \u098f\u0996\u09be\u09a8\u09c7 \u098f\u0995\u099f\u09be \u09a7\u09be\u09b0\u09be \u09a6\u09c7\u0996\u09be\u09ac\u09c7\u0964",
+  "trends.secondary.direction.rising": "\u09ac\u09be\u09a1\u09bc\u099b\u09c7",
+  "trends.secondary.direction.declining": "\u0986\u0997\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u0995\u09ae",
+  "trends.secondary.direction.steady": "\u09ae\u09cb\u099f\u09be\u09ae\u09c1\u099f\u09bf \u098f\u0995\u09b0\u0995\u09ae",
+  "trends.secondary.activity.count": "{total} \u09a6\u09bf\u09a8\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 {positive} \u09a6\u09bf\u09a8 \u09ac\u09c7\u09b0\u09bf\u09df\u09c7\u099b",
+  "trends.secondary.none": "\u098f\u0996\u09a8\u09cb \u09b2\u09c7\u0996\u09be \u09b9\u09df\u09a8\u09bf",
+
+  "trends.start.heading": "\u09b6\u09c1\u09b0\u09c1\u09b0 \u099c\u09be\u09df\u0997\u09be",
+  "trends.start.sub": "{date} \u09a4\u09be\u09b0\u09bf\u0996\u09c7 \u09af\u0996\u09a8 \u09b6\u09c1\u09b0\u09c1 \u0995\u09b0\u09c7\u099b\u09bf\u09b2\u09c7\u0964",
+  "trends.start.baselineTaken": "\u09aa\u09cd\u09b0\u09a5\u09ae \u09aa\u09b0\u09cd\u09ac\u09c7\u09b0 \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u0997\u09c1\u09b2\u09cb \u09a4\u09c1\u09ae\u09bf \u09b6\u09c7\u09b7 \u0995\u09b0\u09c7\u099b\u09bf\u09b2\u09c7\u0964",
+  "trends.start.noValues": "\u09a4\u09cb\u09ae\u09be\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09a6\u09bf\u0995\u09c7\u09b0 \u099a\u09c7\u0995-\u0987\u09a8 \u098f\u0996\u09be\u09a8\u09c7 \u09a4\u09c1\u09b2\u09a8\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u09a6\u09c7\u0996\u09be \u09af\u09be\u09ac\u09c7\u0964",
+  "trends.start.then": "\u09a4\u0996\u09a8",
+  "trends.start.now": "\u098f\u0996\u09a8",
+
+  "trends.notes.heading": "\u09a4\u09c1\u09ae\u09bf \u09af\u09be \u09af\u09be \u09b2\u09bf\u0996\u09c7\u099b",
+  "trends.notes.tooEarly": "\u0995\u09be\u099c\u09c7 \u09b2\u09be\u0997\u09be\u09b0 \u09ae\u09a4\u09cb \u09a7\u09be\u09b0\u09be \u09a6\u09c7\u0996\u09a4\u09c7 \u0986\u09b0\u0993 \u0995\u09df\u09c7\u0995\u099f\u09be \u099a\u09c7\u0995-\u0987\u09a8 \u09a6\u09b0\u0995\u09be\u09b0\u0964",
+  "trends.action.heading": "\u099b\u09cb\u099f \u098f\u0995\u099f\u09be \u099a\u09c7\u09b7\u09cd\u099f\u09be",
+
+  "trends.state.thin": "\u0986\u09b0\u0993 \u0995\u09df\u09c7\u0995\u099f\u09be \u099a\u09c7\u0995-\u0987\u09a8 \u09b9\u09b2\u09c7 \u09a7\u09be\u09b0\u09be\u099f\u09be \u09b8\u09cd\u09aa\u09b7\u09cd\u099f \u09b9\u09ac\u09c7\u0964",
+  "trends.empty.cta": "\u099f\u09c1\u09a1\u09c7\u09a4\u09c7 \u09af\u09be\u0993",
   "trends.empty.title": "এখনও যথেষ্ট নয়।",
   "trends.empty.body": "সপ্তাহখানেক চেক-ইন করো, তাহলে এটা ভরতে শুরু করবে।",
 
@@ -307,4 +463,24 @@ export const bn = {
   "human.counsellor.title": "তোমার ক্যাম্পাস কাউন্সেলর",
   "human.counsellor.body":
     "প্রতিটা ক্যাম্পাসে একজন আছেন। তুমি বললে অ্যাপ আগে তাঁকে একটা ছোট সারসংক্ষেপ পাঠাতে পারে — তবে শুধু তুমি যা অনুমোদন করবে, আর শুধু যখন তুমি প্রস্তুত।",
+
+  // Escalation — the tier-2 interstitial
+  "escalation.reason.trend_decline_mood":
+    "তোমার মন-মেজাজ কিছুদিন ধরে তোমার স্বাভাবিক মাত্রার চেয়ে নিচে আছে। এক্ষেত্রে একজন কাউন্সেলর সাহায্য করতে পারেন।",
+  "escalation.share.heading": "আমরা কী শেয়ার করব",
+  "escalation.share.checkins": "তোমার সাম্প্রতিক চেক-ইনের ধরন",
+  "escalation.share.talkMessages": "তোমার সাম্প্রতিক 'কথা বলো' বার্তা",
+  "escalation.share.reason": "কেন সাহায্যের পরামর্শ দেওয়া হচ্ছে, তার কারণ",
+  "escalation.share.nothingElse": "তোমার অ্যাকাউন্ট থেকে আর কিছু শেয়ার করা হবে না।",
+  "escalation.approve": "হ্যাঁ, শেয়ার করো",
+  "escalation.notNow": "এখন না",
+
+  // Crisis screen — tier 3
+  "crisis.heading": "চলো, এখনই তোমার জন্য সাহায্যের ব্যবস্থা করি",
+  "crisis.humanReview":
+    "পরের কর্মদিবসের মধ্যে একজন কাউন্সেলর তোমার সঙ্গে যোগাযোগ করবেন। তোমাকে আর কিছু করতে হবে না।",
+  "crisis.back": "'কথা বলো'-তে ফিরে যাও",
+  "crisis.countdown.label":
+    "যদি আমরা তোমার থেকে সাড়া না পাই, তোমার বিশ্বস্ত মানুষটির সঙ্গে যোগাযোগ করব। তুমি ঠিক আছো জানাতে যেকোনো জায়গায় ট্যাপ করো, বা Cancel করো।",
+  "crisis.countdown.cancel": "আমি ঠিক আছি — বাতিল করো",
 } satisfies Record<Keys, string>;

@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useI18n } from "@/i18n";
 import type { Keys } from "@/i18n/en";
-import { useOnboardingProgress } from "@/api/hooks";
 import {
-  deleteCheckIn,
-  loadCheckIns,
-  type CheckIn,
-} from "../today/storage";
-import { clearThread, loadThread, type ChatMessage } from "../talk/storage";
+  useCheckIns,
+  useDeleteCheckIn,
+  useDeleteConversation,
+  useOnboardingProgress,
+  useTalkConversation,
+} from "@/api/hooks";
 
 const MOOD_LABEL: Record<number, Keys> = {
   1: "data.mood.1",
@@ -24,13 +23,14 @@ export default function StoredDataPage() {
   const { t, n, language } = useI18n();
   const progress = useOnboardingProgress();
 
-  const [checkIns, setCheckIns] = useState<CheckIn[] | null>(null);
-  const [thread, setThread] = useState<ChatMessage[]>([]);
+  // Check-ins and the conversation both come from the server now.
+  const checkInsQuery = useCheckIns();
+  const removeCheckInMutation = useDeleteCheckIn();
+  const checkIns = checkInsQuery.data ?? null;
 
-  useEffect(() => {
-    setCheckIns(loadCheckIns());
-    setThread(loadThread());
-  }, []);
+  const conversationQuery = useTalkConversation();
+  const removeConversationMutation = useDeleteConversation();
+  const thread = conversationQuery.data?.messages ?? null;
 
   const fmtDate = (iso: string) =>
     new Intl.DateTimeFormat(language === "bn" ? "bn-BD" : "en-IN", {
@@ -44,12 +44,10 @@ export default function StoredDataPage() {
       ? t("today.sleep.zero")
       : `${hours % 1 === 0 ? n(hours) : `${n(Math.floor(hours))}½`}h`;
 
-  const removeCheckIn = (at: string) => setCheckIns(deleteCheckIn(at));
+  // Deleting hits the server, so nothing survives locally to reappear later.
+  const removeCheckIn = (date: string) => removeCheckInMutation.mutate(date);
 
-  const removeThread = () => {
-    clearThread();
-    setThread([]);
-  };
+  const removeThread = () => removeConversationMutation.mutate();
 
   const setup = progress.data;
 
@@ -75,7 +73,7 @@ export default function StoredDataPage() {
           <p className="mt-3 text-sm text-gray-500">{t("data.checkins.empty")}</p>
         ) : (
           <ul className="mt-3 divide-y divide-gray-100">
-            {[...checkIns].reverse().map((entry) => (
+            {checkIns.map((entry) => (
               <li
                 key={entry.at}
                 className="flex items-start justify-between gap-3 py-3"
@@ -94,7 +92,7 @@ export default function StoredDataPage() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => removeCheckIn(entry.at)}
+                  onClick={() => removeCheckIn(entry.date)}
                   className="shrink-0 text-xs font-semibold text-crisis"
                 >
                   {t("data.delete")}
@@ -110,7 +108,9 @@ export default function StoredDataPage() {
         <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">
           {t("data.convo.title")}
         </h2>
-        {thread.length === 0 ? (
+        {thread === null ? (
+          <p className="mt-3 text-sm text-gray-500">{t("state.loading")}</p>
+        ) : thread.length === 0 ? (
           <p className="mt-3 text-sm text-gray-500">{t("data.convo.empty")}</p>
         ) : (
           <div className="mt-3 flex items-start justify-between gap-3">

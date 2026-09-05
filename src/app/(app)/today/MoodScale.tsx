@@ -3,8 +3,7 @@
 import { useT } from "@/i18n";
 import type { Keys } from "@/i18n/en";
 import type { MoodValue } from "./storage";
-
-const MOODS: MoodValue[] = [1, 2, 3, 4, 5];
+import { Scale5 } from "./Scale5";
 
 const LABEL_KEYS: Record<MoodValue, Keys> = {
   1: "today.mood.1",
@@ -48,58 +47,20 @@ export function MoodScale({
 }) {
   const t = useT();
 
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    const current = value ?? 3;
-    if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-      event.preventDefault();
-      onChange(Math.min(5, current + 1) as MoodValue);
-    } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-      event.preventDefault();
-      onChange(Math.max(1, current - 1) as MoodValue);
-    }
-  };
-
   return (
-    <div>
-      <div
-        role="radiogroup"
-        aria-label={t("today.mood.legend")}
-        onKeyDown={onKeyDown}
-        className="flex items-stretch gap-2"
-      >
-        {MOODS.map((mood) => {
-          const selected = value === mood;
-          return (
-            <button
-              key={mood}
-              type="button"
-              role="radio"
-              aria-checked={selected}
-              aria-label={t(LABEL_KEYS[mood])}
-              tabIndex={selected || (value === null && mood === 3) ? 0 : -1}
-              onClick={() => onChange(mood)}
-              className={`flex flex-1 items-center justify-center rounded-2xl py-3.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand/15 ${
-                selected
-                  ? "bg-brand text-white shadow-soft"
-                  : "bg-cream-alt/60 text-earth/40 hover:bg-cream-alt hover:text-earth"
-              }`}
-            >
-              <Face
-                mood={mood}
-                className={`h-8 w-8 transition-transform duration-200 ${
-                  selected ? "scale-110" : ""
-                }`}
-              />
-            </button>
-          );
-        })}
-      </div>
-      <p
-        className="mt-2.5 h-4 text-center text-xs font-semibold text-earth"
-        aria-live="polite"
-      >
-        {value ? t(LABEL_KEYS[value]) : ""}
-      </p>
-    </div>
+    <Scale5
+      value={value}
+      onChange={onChange}
+      groupLabel={t("today.mood.legend")}
+      labelFor={(mood) => t(LABEL_KEYS[mood])}
+      renderIcon={(mood, selected) => (
+        <Face
+          mood={mood}
+          className={`h-8 w-8 transition-transform duration-200 ${
+            selected ? "scale-110" : ""
+          }`}
+        />
+      )}
+    />
   );
 }

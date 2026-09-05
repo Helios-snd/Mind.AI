@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { Section, SectionHeading } from "@/components/Section";
-import { CONTACT_EMAIL } from "@/data/nav";
 import {
   MeditationScene,
-  MatchScene,
   CareScene,
   ConditionGlyph,
   FeatureGlyph,
@@ -21,7 +19,6 @@ const offerings = [
   {
     title: "Diagnosis and Therapy",
     icon: "therapy" as const,
-    status: "Start Your Journey",
     points: [
       "Personalized care and treatment plans",
       "Cognitive behavioral therapy and mindfulness",
@@ -31,7 +28,6 @@ const offerings = [
   {
     title: "Self-care and Progress",
     icon: "progress" as const,
-    status: "Coming Soon",
     points: [
       "Track your self-care journey with personalized tools",
       "Set and monitor mental health goals",
@@ -41,7 +37,6 @@ const offerings = [
   {
     title: "Community",
     icon: "community" as const,
-    status: "Coming Soon",
     points: [
       "Group discussions and peer support",
       "Expert advice from mental health professionals",
@@ -120,8 +115,10 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-cream">
-        <div className="container-x grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2">
+      <section className="relative overflow-hidden bg-cream">
+        <div aria-hidden="true" className="absolute -right-24 top-6 h-80 w-80 rounded-full bg-sage/45 blur-3xl" />
+        <div aria-hidden="true" className="absolute -bottom-32 left-[35%] h-64 w-64 rounded-full bg-white/70 blur-3xl" />
+        <div className="container-x relative grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2">
           <div>
             <h1 className="h-display text-5xl leading-[1.05] sm:text-6xl">
               Mental Wellness{" "}
@@ -136,14 +133,11 @@ export default function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/onboarding" className="btn-primary">
-                Start your Journey
-              </Link>
-              <Link href="/find-your-doctor" className="btn-outline">
-                Find a therapist
+                Let&apos;s Find What Works for You
               </Link>
             </div>
           </div>
-          <div className="mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-2xl lg:mr-0">
+          <div className="mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-[2rem] border border-ink/[0.06] shadow-card lg:mr-0">
             <MeditationScene />
           </div>
         </div>
@@ -160,7 +154,7 @@ export default function HomePage() {
             <Link
               key={c.name}
               href={c.href}
-              className="group rounded-2xl border border-gray-200 bg-white p-6 text-center transition-colors hover:border-brand/40 hover:bg-cream"
+              className="surface-card-interactive group text-center"
             >
               <ConditionGlyph kind={c.kind} className="mx-auto mb-3 h-14 w-14" />
               <h3 className="font-display text-lg font-semibold text-gray-900">
@@ -179,28 +173,6 @@ export default function HomePage() {
         </p>
       </Section>
 
-      {/* Find the right therapist */}
-      <Section className="bg-cream-alt">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div className="mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-2xl">
-            <MatchScene />
-          </div>
-          <div>
-            <h2 className="h-display text-3xl sm:text-4xl">
-              Find the Right Therapist for You
-            </h2>
-            <p className="mt-4 text-gray-600">
-              Let’s find the right person for you to talk to. Just answer a few
-              simple questions, and we’ll introduce you to a therapist who truly
-              gets you. It only takes a couple of minutes.
-            </p>
-            <Link href="/find-your-doctor" className="btn-primary mt-6">
-              Start Your Journey
-            </Link>
-          </div>
-        </div>
-      </Section>
-
       {/* Offerings */}
       <Section id="offerings">
         <SectionHeading
@@ -211,7 +183,7 @@ export default function HomePage() {
           {offerings.map((o) => (
             <div
               key={o.title}
-              className="flex flex-col rounded-2xl border border-gray-200 bg-white p-7"
+              className="surface-card-interactive flex flex-col"
             >
               <LineIcon name={o.icon} className="mb-4 h-14 w-14" />
               <h3 className="font-display text-lg font-semibold text-gray-900">
@@ -225,15 +197,6 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <span
-                className={`mt-5 inline-flex w-fit rounded-lg px-4 py-2 text-sm font-semibold ${
-                  o.status === "Coming Soon"
-                    ? "bg-gray-100 text-gray-500"
-                    : "bg-brand text-white"
-                }`}
-              >
-                {o.status}
-              </span>
             </div>
           ))}
         </div>
@@ -244,7 +207,7 @@ export default function HomePage() {
         <SectionHeading title="Why Mind.AI Works for You?" />
         <div className="grid gap-6 sm:grid-cols-3">
           {whyMindAi.map((w) => (
-            <div key={w.title} className="rounded-2xl bg-white p-7 shadow-sm">
+            <div key={w.title} className="surface-card">
               <FeatureGlyph kind={w.kind} className="mb-4 h-14 w-14" />
               <h3 className="font-display text-lg font-semibold text-gray-900">
                 {w.title}
@@ -325,7 +288,7 @@ export default function HomePage() {
       <Section>
         <SectionHeading
           title="Join us and take the first step towards a brighter future."
-          subtitle="Change starts with one step — and we’ve helped many take it. Ready to start your journey? We’re walking with you."
+          subtitle="Change starts with one step — and we’ve helped many take it. We’re walking with you."
         />
         <div className="grid gap-6 sm:grid-cols-2">
           {testimonials.map((t) => (
@@ -344,7 +307,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Concerned about someone */}
+      {/* A calm closing, not a competing contact CTA. */}
       <Section className="bg-cream">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
@@ -356,9 +319,6 @@ export default function HomePage() {
               Care Consultant is here to help you find the best support for
               yourself or a loved one.
             </p>
-            <Link href="/contact-us" className="btn-primary mt-6">
-              Connect with Us
-            </Link>
           </div>
           <div className="mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-2xl">
             <CareScene />
@@ -366,19 +326,6 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* Contact strip */}
-      <Section>
-        <div className="rounded-3xl border border-gray-200 bg-white p-10 text-center">
-          <h2 className="h-display text-2xl">Connect with Us</h2>
-          <p className="mx-auto mt-3 max-w-xl text-gray-600">
-            If you need any assistance, feel free to contact us at{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold text-brand">
-              {CONTACT_EMAIL}
-            </a>
-            . We’re here to support you every step of the way.
-          </p>
-        </div>
-      </Section>
     </>
   );
 }

@@ -15,11 +15,11 @@ export default function ServicePage({ data }: { data: ServiceContent }) {
               {data.heroTitle}
             </h1>
             <p className="mt-5 text-gray-600">{data.heroLead}</p>
-            <Link href="/find-your-doctor" className="btn-primary mt-8">
-              Start Your Journey
+            <Link href="/onboarding" className="btn-primary mt-8">
+              Let&apos;s Find What Works for You
             </Link>
           </div>
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-2xl lg:mr-0">
+          <div className="relative mx-auto aspect-[4/3] w-full max-w-[420px] overflow-hidden rounded-3xl border border-ink/[0.06] shadow-card lg:mr-0">
             <CalmScene />
             <div className="absolute bottom-4 right-4 h-14 w-14 drop-shadow">
               <ConditionGlyph kind={data.slug} />
@@ -35,17 +35,17 @@ export default function ServicePage({ data }: { data: ServiceContent }) {
           {data.types.map((t) => (
             <div
               key={t.name}
-              className="rounded-2xl border border-gray-200 bg-white p-6"
+              className="surface-card-interactive group relative overflow-hidden"
             >
-              <div className="mb-4 h-14 w-14 overflow-hidden rounded-lg">
+              <div className="mb-5 grid h-14 w-14 place-items-center overflow-hidden rounded-2xl bg-sage/45 ring-1 ring-brand/10 transition-transform duration-300 group-hover:scale-105">
                 <TopicThumb title={t.name} />
               </div>
               <h3 className="font-display text-lg font-semibold text-gray-900">
                 {t.name}
               </h3>
               <p className="mt-2 text-sm text-gray-600">{t.blurb}</p>
-              <button className="mt-4 text-sm font-semibold text-brand">
-                Read More →
+              <button className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand transition-transform group-hover:translate-x-1">
+                Read More <span aria-hidden="true">→</span>
               </button>
             </div>
           ))}
@@ -59,7 +59,7 @@ export default function ServicePage({ data }: { data: ServiceContent }) {
           {data.signs.map((cluster) => (
             <div
               key={cluster.title}
-              className="rounded-2xl bg-white p-6 shadow-sm"
+              className="surface-card relative overflow-hidden"
             >
               <h3 className="mb-3 font-display font-semibold text-brand">
                 {cluster.title}
@@ -79,7 +79,10 @@ export default function ServicePage({ data }: { data: ServiceContent }) {
 
       {/* CTA */}
       <Section>
-        <div className="rounded-3xl bg-brand px-8 py-12 text-center text-white">
+        <div className="relative overflow-hidden rounded-[2rem] bg-brand px-8 py-12 text-center text-white shadow-card">
+          <div aria-hidden="true" className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-sage/20 blur-2xl" />
+          <div aria-hidden="true" className="absolute -bottom-20 -left-12 h-48 w-48 rounded-full bg-cream/15 blur-2xl" />
+          <div className="relative">
           <h2 className="h-display text-2xl text-white sm:text-3xl">
             Not sure what kind of support you need?
           </h2>
@@ -88,11 +91,12 @@ export default function ServicePage({ data }: { data: ServiceContent }) {
             we’ll help you find the kind of care that actually fits your needs.
           </p>
           <Link
-            href="/find-your-doctor"
+            href="/onboarding"
             className="mt-6 inline-flex rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brand hover:bg-cream"
           >
-            Start Your Journey
+            Let&apos;s Find What Works for You
           </Link>
+          </div>
         </div>
       </Section>
 

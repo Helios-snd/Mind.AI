@@ -168,6 +168,29 @@ export default function StepCrisisPlan({
         <p className="mt-4 text-sm text-gray-600">
           {t("onboarding.crisis.contact.helper")}
         </p>
+
+        {/* The one disclosed exception to "nothing is shared without you
+            seeing it first" -- see docs/blueprint/08-safety-and-privacy.md,
+            which flagged this as undisclosed. Lives next to the contact
+            fields themselves, since that's the person it's actually about. */}
+        <div className="mt-4 flex gap-3 rounded-xl border border-brand/15 bg-brand/[0.06] p-4">
+          <svg
+            viewBox="0 0 24 24"
+            className="mt-0.5 h-5 w-5 shrink-0 text-brand"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v5M12 8h.01" />
+          </svg>
+          <p className="text-sm leading-relaxed text-gray-700">
+            {t("onboarding.crisis.contact.emergencyDisclosure")}
+          </p>
+        </div>
       </fieldset>
 
       <div className="mt-8 flex items-center gap-4">
