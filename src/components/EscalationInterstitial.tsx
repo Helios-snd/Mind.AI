@@ -12,12 +12,20 @@ const SHARE_KEYS: Record<string, Keys> = {
   checkins: "escalation.share.checkins",
   talk_messages: "escalation.share.talkMessages",
   reason: "escalation.share.reason",
+  // F3: a student-initiated request from /human, not a Trend-fired offer --
+  // "reason" reads as "the reason we're suggesting support", which is
+  // backwards for an ask the student made themselves. See
+  // backend/app/modules/escalations/service.py::MANUAL_SHARE_SCOPE.
+  request: "escalation.share.request",
 };
 
 /**
- * The tier-2 offer of human support: "here's what we noticed" and a concrete
- * list of what a release to a counsellor would include. Nothing is marked
- * releasable until the student approves — see backend/app/modules/
+ * A pending offer of human support -- either Trend noticed something (E1)
+ * or the student asked directly (F3, "Request support" on /human). Same
+ * "here's what we noticed/here's what you asked for" plus a concrete list of
+ * what a release to a counsellor would include, rendered wherever a pending
+ * brief exists: /talk (where E1 first showed it) and /human (F3). Nothing is
+ * marked releasable until the student approves — see backend/app/modules/
  * escalations, where released_to_counsellor_at stays null until then.
  */
 export function EscalationInterstitial() {

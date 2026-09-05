@@ -31,6 +31,10 @@ export const queryKeys = {
   trends: ["trends"] as const,
   talk: ["talk"] as const,
   escalation: ["escalation"] as const,
+  me: ["me"] as const,
+  meSummary: ["meSummary"] as const,
+  dataInventory: ["dataInventory"] as const,
+  escalationHistory: ["escalationHistory"] as const,
 };
 
 export function useOnboardingProgress() {
@@ -196,7 +200,12 @@ export function useApproveEscalation() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => api.approveEscalation(id),
-    onSuccess: () => qc.invalidateQueries({ queryKey: queryKeys.escalation }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: queryKeys.escalation });
+      // F3's /human Recent activity reads this -- a decision moves a row
+      // out of "pending" and into history, so both go stale together.
+      qc.invalidateQueries({ queryKey: queryKeys.escalationHistory });
+    },
   });
 }
 
@@ -204,6 +213,20 @@ export function useDeclineEscalation() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: (id: string) => api.declineEscalation(id),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: queryKeys.escalation });
+      qc.invalidateQueries({ queryKey: queryKeys.escalationHistory });
+    },
+  });
+}
+
+/** F3: /human's "Request support" button. No id to act on yet -- the new
+ *  (or reused-pending) brief comes back through the usual useEscalation()
+ *  poll once this invalidates it, same as approve/decline already do. */
+export function useRequestSupport() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: () => api.requestSupport(),
     onSuccess: () => qc.invalidateQueries({ queryKey: queryKeys.escalation }),
   });
 }
@@ -224,5 +247,53 @@ export function useExpireCountdown() {
   return useMutation({
     mutationFn: (safetyAssessmentId: string) =>
       api.expireCountdown(safetyAssessmentId),
+  });
+}
+
+/**
+ * The real account/profile summary for `/me`. Two separate reads, matching
+ * the backend split: identity (GET /me) vs. a derived, plain-language-only
+ * safety/screening rollup (GET /me/summary) — see the Slice F / F1 plan for
+ * why those stay apart.
+ */
+export function useMe() {
+  return useQuery({
+    queryKey: queryKeys.me,
+    queryFn: () => api.getMe(),
+  });
+}
+
+export function useMeSummary() {
+  return useQuery({
+    queryKey: queryKeys.meSummary,
+    queryFn: () => api.getMeSummary(),
+  });
+}
+
+/**
+ * The rest of /data (F2): signals count + the consent audit trail, and the
+ * escalation history — kept as two separate reads because that's how the
+ * backend exposes them (GET /me/inventory and GET /escalations/history
+ * respectively), not one aggregating call.
+ */
+export function useDataInventory() {
+  return useQuery({
+    queryKey: queryKeys.dataInventory,
+    queryFn: () => api.getDataInventory(),
+  });
+}
+
+export function useEscalationHistory() {
+  return useQuery({
+    queryKey: queryKeys.escalationHistory,
+    queryFn: () => api.getEscalationHistory(),
+  });
+}
+
+/** A button click, not a page load -- a mutation fits "fetch this now" here
+ *  better than a query that would run automatically on mount. */
+export function useExportMyData() {
+  return useMutation({
+    mutationFn: () => api.exportMyData(),
   });
 }

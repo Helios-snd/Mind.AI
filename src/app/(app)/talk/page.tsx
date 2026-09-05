@@ -5,7 +5,7 @@ import { useI18n } from "@/i18n";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 import { CrisisScreen } from "./CrisisScreen";
 import { Disclosure } from "./Disclosure";
-import { EscalationInterstitial } from "./EscalationInterstitial";
+import { EscalationInterstitial } from "@/components/EscalationInterstitial";
 import { MessageList } from "./MessageList";
 import { Composer } from "./Composer";
 import { useTalkThread } from "./useTalkThread";

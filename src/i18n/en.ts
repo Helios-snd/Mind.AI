@@ -417,9 +417,71 @@ export const en = {
   "data.setup.contact.none": "None chosen",
   "data.setup.editHint": "Edit these in your profile.",
 
+  // Everything stored about you -- F2 additions. Screenings/Safety copy
+  // deliberately reuses me.wellbeing.* verbatim -- same GET /me/summary,
+  // same words, no second translation to drift out of sync.
+  "data.signals.title": "Observations",
+  "data.signals.summary":
+    "{count} observations recorded from your check-ins and messages.",
+  "data.signals.empty": "No observations recorded yet.",
+  "data.screenings.title": "Screenings",
+  "data.safety.title": "Safety checks",
+  "data.consent.title": "Consent history",
+  "data.consent.empty": "No consent recorded yet.",
+  "data.consent.item": "{kind} — {date}",
+  "data.consent.kind.onboarding": "Agreed to terms",
+  "data.escalations.title": "Support offers",
+  "data.escalations.empty": "No support offers yet.",
+  "data.escalations.status.approved": "Shared with a counsellor",
+  "data.escalations.status.declined": "Declined",
+  "data.escalations.status.expired": "Expired",
+  "data.export.title": "Export your data",
+  "data.export.body":
+    "Download a full copy of everything stored about you, as a single file.",
+  "data.export.button": "Export my data",
+  "data.export.working": "Preparing…",
+  "data.export.error": "Something went wrong. Try again.",
+
   // Me — profile and controls
   "me.heading": "Me",
   "me.sub": "Your settings, your words, your data.",
+
+  // Me — account status (F1)
+  "me.account.title": "Account",
+  "me.account.anonymous": "Anonymous account",
+  "me.account.anonymousBody":
+    "This account isn't connected to an email or phone yet.",
+  "me.account.connected": "Account connected",
+  "me.account.connectedBody": "{contact}",
+
+  // Me — your patterns (reuses Trends' own numbers, never a second calculation)
+  "me.patterns.title": "Your patterns",
+  "me.patterns.empty": "Check in on Today to start seeing patterns here.",
+  "me.patterns.checkins": "{count} check-ins",
+  "me.patterns.seeTrends": "See full Trends",
+
+  // Me — talk
+  "me.talk.title": "Talk",
+  "me.talk.empty": "No conversation yet.",
+  "me.talk.messages": "{count} messages",
+  "me.talk.open": "Open Talk",
+
+  // Me — wellbeing checks (safety + screenings, plain language only —
+  // never a tier number, never "3a"/"3b", never a severity band)
+  "me.wellbeing.title": "Wellbeing checks",
+  "me.wellbeing.safety.default":
+    "Our safety check runs quietly on every message you send.",
+  "me.wellbeing.safety.flagged":
+    "{count} recent messages were checked more closely by our safety check.",
+  "me.wellbeing.safety.pendingReview":
+    "A counsellor may follow up with you soon.",
+  "me.wellbeing.screenings.empty": "No screenings completed yet.",
+  "me.wellbeing.screenings.item": "{instrument} — completed {date}",
+  "me.wellbeing.screenings.phq9": "PHQ-9",
+  "me.wellbeing.screenings.gad7": "GAD-7",
+  "me.wellbeing.screenings.asrsV11": "ASRS",
+  "me.wellbeing.screenings.dass21": "Your starting check-in",
+
   "me.language.title": "Language",
   "me.language.hindiSoon": "soon",
   "me.plan.title": "Your crisis plan",
@@ -455,16 +517,21 @@ export const en = {
   "human.telemanas.body":
     "Free, 24 hours, in Bengali or English. One call, no referral needed.",
   "human.counsellor.title": "Your campus counsellor",
-  "human.counsellor.body":
-    "Every campus has one. If you ask, the app can share a short summary with them first — but only what you approve, and only when you're ready.",
+  "human.request.intro":
+    "Every campus has one. Ask, and we'll show you exactly what a short summary would include before anything is shared — only what you approve, and only when you're ready.",
+  "human.request.button": "Ask a counsellor to check in with me",
+  "human.recent.title": "Recent activity",
 
-  // Escalation — the tier-2 interstitial
+  // Escalation — the tier-2 interstitial (E1) and a student's own request (F3)
   "escalation.reason.trend_decline_mood":
     "Your mood has been lower than your usual range for a little while. A counsellor might be able to help with that.",
+  "escalation.reason.manual_request":
+    "You asked for a counsellor to check in with you.",
   "escalation.share.heading": "What we'd share",
   "escalation.share.checkins": "Your recent check-in pattern",
   "escalation.share.talkMessages": "Your recent Talk messages",
   "escalation.share.reason": "The reason we're suggesting support",
+  "escalation.share.request": "Why you asked for support",
   "escalation.share.nothingElse": "Nothing else from your account will be shared.",
   "escalation.approve": "Yes, share it",
   "escalation.notNow": "Not now",

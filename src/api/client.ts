@@ -2,7 +2,12 @@ import type {
   CheckIn,
   CheckInDraft,
   CrisisPlan,
+  DataInventory,
   EscalationBrief,
+  EscalationHistoryItem,
+  MeExport,
+  MeProfile,
+  MeSummary,
   OnboardingProgress,
   TalkConversation,
   TrendRange,
@@ -54,9 +59,27 @@ export interface ApiClient {
   getPendingEscalation(): Promise<EscalationBrief | null>;
   approveEscalation(id: string): Promise<void>;
   declineEscalation(id: string): Promise<void>;
+  /** F3: the student asking directly, from /human's "Request support"
+   *  button -- not a risk signal. Reuses the same pending → approve
+   *  lifecycle as every other escalation; the id comes back through the
+   *  usual getPendingEscalation() poll, not this call's own response. */
+  requestSupport(): Promise<void>;
 
   /** The tier-3b countdown: recorded as a fact, never a real contact send
    *  (see backend/app/modules/talk/service.py::resolve_countdown). */
   cancelCountdown(safetyAssessmentId: string): Promise<void>;
   expireCountdown(safetyAssessmentId: string): Promise<void>;
+
+  /** Real account identity — see /me/page.tsx. */
+  getMe(): Promise<MeProfile>;
+  /** Plain-language safety/screening summary, never a tier or a band. */
+  getMeSummary(): Promise<MeSummary>;
+
+  /** The rest of /data: signals count + the full consent audit trail. */
+  getDataInventory(): Promise<DataInventory>;
+  /** Past (non-pending) escalations — /data's history section. */
+  getEscalationHistory(): Promise<EscalationHistoryItem[]>;
+  /** A full, backend-assembled copy of everything stored — same
+   *  plain-language rule as every on-screen page. */
+  exportMyData(): Promise<MeExport>;
 }

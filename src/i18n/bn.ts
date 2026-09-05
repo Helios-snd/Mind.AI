@@ -423,9 +423,71 @@ export const bn = {
   "data.setup.contact.none": "কেউ বেছে নেওয়া হয়নি",
   "data.setup.editHint": "এগুলো তোমার প্রোফাইলে গিয়ে বদলাও।",
 
+  // তোমার সম্পর্কে যা কিছু জমা আছে -- F2 সংযোজন। Screenings/Safety-র লেখা
+  // ইচ্ছাকৃতভাবে me.wellbeing.* হুবহু ব্যবহার করে -- একই GET /me/summary,
+  // একই শব্দ, আলাদা অনুবাদ নেই যা আলাদা হয়ে যেতে পারে।
+  "data.signals.title": "পর্যবেক্ষণ",
+  "data.signals.summary":
+    "তোমার চেক-ইন আর মেসেজ থেকে {count}টা পর্যবেক্ষণ নথিভুক্ত হয়েছে।",
+  "data.signals.empty": "এখনও কোনো পর্যবেক্ষণ নথিভুক্ত হয়নি।",
+  "data.screenings.title": "স্ক্রিনিং",
+  "data.safety.title": "সেফটি চেক",
+  "data.consent.title": "সম্মতির ইতিহাস",
+  "data.consent.empty": "এখনও কোনো সম্মতি নথিভুক্ত হয়নি।",
+  "data.consent.item": "{kind} — {date}",
+  "data.consent.kind.onboarding": "শর্তে সম্মতি দেওয়া হয়েছে",
+  "data.escalations.title": "সাহায্যের প্রস্তাব",
+  "data.escalations.empty": "এখনও কোনো সাহায্যের প্রস্তাব নেই।",
+  "data.escalations.status.approved": "একজন কাউন্সেলরের সঙ্গে শেয়ার করা হয়েছে",
+  "data.escalations.status.declined": "প্রত্যাখ্যান করা হয়েছে",
+  "data.escalations.status.expired": "মেয়াদ শেষ হয়ে গেছে",
+  "data.export.title": "তোমার ডেটা এক্সপোর্ট করো",
+  "data.export.body":
+    "তোমার সম্পর্কে জমা থাকা সবকিছুর একটা সম্পূর্ণ কপি, একটামাত্র ফাইলে ডাউনলোড করো।",
+  "data.export.button": "আমার ডেটা এক্সপোর্ট করো",
+  "data.export.working": "তৈরি হচ্ছে…",
+  "data.export.error": "কিছু একটা ভুল হয়েছে। আবার চেষ্টা করো।",
+
   // Me — profile and controls
   "me.heading": "আমি",
   "me.sub": "তোমার সেটিংস, তোমার কথা, তোমার ডেটা।",
+
+  // Me — account status (F1)
+  "me.account.title": "অ্যাকাউন্ট",
+  "me.account.anonymous": "নাম-পরিচয়হীন অ্যাকাউন্ট",
+  "me.account.anonymousBody":
+    "এই অ্যাকাউন্টটা এখনও কোনো ইমেইল বা ফোনের সঙ্গে যুক্ত নয়।",
+  "me.account.connected": "অ্যাকাউন্ট যুক্ত করা আছে",
+  "me.account.connectedBody": "{contact}",
+
+  // Me — your patterns (Trends-এর নিজের হিসাবই ব্যবহার করে, আলাদা হিসাব নয়)
+  "me.patterns.title": "তোমার প্যাটার্ন",
+  "me.patterns.empty": "প্যাটার্ন দেখতে Today-তে চেক-ইন শুরু করো।",
+  "me.patterns.checkins": "{count}টা চেক-ইন",
+  "me.patterns.seeTrends": "সম্পূর্ণ প্রবণতা দেখো",
+
+  // Me — talk
+  "me.talk.title": "কথা বলো",
+  "me.talk.empty": "এখনও কোনো কথোপকথন নেই।",
+  "me.talk.messages": "{count}টা মেসেজ",
+  "me.talk.open": "কথা বলো খোলো",
+
+  // Me — wellbeing checks (safety + screenings, শুধু সহজ ভাষায় —
+  // কখনও টায়ার নম্বর নয়, কখনও "3a"/"3b" নয়, কখনও severity band নয়)
+  "me.wellbeing.title": "সুস্থতা পরীক্ষা",
+  "me.wellbeing.safety.default":
+    "তুমি যা পাঠাও প্রতিটার উপর আমাদের সেফটি চেক নিঃশব্দে কাজ করে।",
+  "me.wellbeing.safety.flagged":
+    "সম্প্রতি {count}টা মেসেজ আমাদের সেফটি চেক আরও গভীরভাবে দেখেছে।",
+  "me.wellbeing.safety.pendingReview":
+    "শীঘ্রই একজন কাউন্সেলর তোমার সঙ্গে যোগাযোগ করতে পারেন।",
+  "me.wellbeing.screenings.empty": "এখনও কোনো স্ক্রিনিং সম্পন্ন হয়নি।",
+  "me.wellbeing.screenings.item": "{instrument} — {date}-এ সম্পন্ন হয়েছে",
+  "me.wellbeing.screenings.phq9": "PHQ-9",
+  "me.wellbeing.screenings.gad7": "GAD-7",
+  "me.wellbeing.screenings.asrsV11": "ASRS",
+  "me.wellbeing.screenings.dass21": "তোমার শুরুর চেক-ইন",
+
   "me.language.title": "ভাষা",
   "me.language.hindiSoon": "শীঘ্রই",
   "me.plan.title": "তোমার সংকট পরিকল্পনা",
@@ -461,16 +523,21 @@ export const bn = {
   "human.telemanas.body":
     "বিনামূল্যে, ২৪ ঘণ্টা, বাংলা বা ইংরেজিতে। একটা ফোন, কোনো রেফারেল লাগে না।",
   "human.counsellor.title": "তোমার ক্যাম্পাস কাউন্সেলর",
-  "human.counsellor.body":
-    "প্রতিটা ক্যাম্পাসে একজন আছেন। তুমি বললে অ্যাপ আগে তাঁকে একটা ছোট সারসংক্ষেপ পাঠাতে পারে — তবে শুধু তুমি যা অনুমোদন করবে, আর শুধু যখন তুমি প্রস্তুত।",
+  "human.request.intro":
+    "প্রতিটা ক্যাম্পাসে একজন আছেন। জিজ্ঞেস করো, আর কিছু শেয়ার হওয়ার আগে আমরা ঠিক দেখাব একটা ছোট সারসংক্ষেপে কী থাকবে — শুধু তুমি যা অনুমোদন করবে, আর শুধু যখন তুমি প্রস্তুত।",
+  "human.request.button": "একজন কাউন্সেলরকে আমার সঙ্গে যোগাযোগ করতে বলো",
+  "human.recent.title": "সাম্প্রতিক কার্যক্রম",
 
-  // Escalation — the tier-2 interstitial
+  // Escalation — the tier-2 interstitial (E1) এবং নিজের অনুরোধ (F3)
   "escalation.reason.trend_decline_mood":
     "তোমার মন-মেজাজ কিছুদিন ধরে তোমার স্বাভাবিক মাত্রার চেয়ে নিচে আছে। এক্ষেত্রে একজন কাউন্সেলর সাহায্য করতে পারেন।",
+  "escalation.reason.manual_request":
+    "তুমি একজন কাউন্সেলরকে তোমার সঙ্গে যোগাযোগ করতে বলেছ।",
   "escalation.share.heading": "আমরা কী শেয়ার করব",
   "escalation.share.checkins": "তোমার সাম্প্রতিক চেক-ইনের ধরন",
   "escalation.share.talkMessages": "তোমার সাম্প্রতিক 'কথা বলো' বার্তা",
   "escalation.share.reason": "কেন সাহায্যের পরামর্শ দেওয়া হচ্ছে, তার কারণ",
+  "escalation.share.request": "কেন তুমি সাহায্য চেয়েছ",
   "escalation.share.nothingElse": "তোমার অ্যাকাউন্ট থেকে আর কিছু শেয়ার করা হবে না।",
   "escalation.approve": "হ্যাঁ, শেয়ার করো",
   "escalation.notNow": "এখন না",

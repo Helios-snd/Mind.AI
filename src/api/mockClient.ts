@@ -3,6 +3,11 @@ import type {
   CheckIn,
   CheckInDraft,
   CrisisPlan,
+  DataInventory,
+  EscalationHistoryItem,
+  MeExport,
+  MeProfile,
+  MeSummary,
   OnboardingProgress,
   TalkConversation,
   TalkMessage,
@@ -268,6 +273,13 @@ export const mockClient: MockClient = {
     await guard();
   },
 
+  // Same honesty rule as getPendingEscalation above: there's no server-side
+  // escalation lifecycle in the mock, so "requesting" one has nothing to
+  // attach to -- a no-op, not a fabricated pending brief.
+  async requestSupport() {
+    await guard();
+  },
+
   // No tier-3 verdict is ever produced offline, so there is never a real
   // countdown to resolve -- these exist only to satisfy the interface.
   async cancelCountdown() {
@@ -276,6 +288,73 @@ export const mockClient: MockClient = {
 
   async expireCountdown() {
     await guard();
+  },
+
+  async getMe(): Promise<MeProfile> {
+    await guard();
+    // Honest, not fabricated: the mock has no claim flow at all, so a mock
+    // account is always anonymous -- same principle getTrends follows by
+    // returning hasEnoughData: false rather than a fake chart.
+    return {
+      userId: "mock",
+      language: progress.language ?? "en",
+      name: null,
+      email: null,
+      phone: null,
+      claimed: false,
+      onboarded: !!progress.completedAt,
+    };
+  },
+
+  async getMeSummary(): Promise<MeSummary> {
+    await guard();
+    // The mock never runs Safety and never persists a screening, so there
+    // is nothing to summarise -- an honest empty state, not invented data.
+    return {
+      safety: { recentFlagCount: 0, pendingReview: false },
+      screenings: [],
+    };
+  },
+
+  async getDataInventory(): Promise<DataInventory> {
+    await guard();
+    // The mock has no Signal or ConsentEvent concept -- honest zero/empty,
+    // not invented data.
+    return { signalsCount: 0, consentEvents: [] };
+  },
+
+  async getEscalationHistory(): Promise<EscalationHistoryItem[]> {
+    await guard();
+    // The mock never runs Trend's escalation trigger.
+    return [];
+  },
+
+  async exportMyData(): Promise<MeExport> {
+    await guard();
+    const conversation = loadTalkConversation();
+    return {
+      exportedAt: new Date().toISOString(),
+      profile: {
+        userId: "mock",
+        language: progress.language ?? "en",
+        name: null,
+        email: null,
+        phone: null,
+        claimed: false,
+        onboarded: !!progress.completedAt,
+      },
+      onboarding: structuredClone(progress),
+      consentEvents: [],
+      checkIns: loadCheckIns(),
+      signals: [],
+      safety: { recentFlagCount: 0, pendingReview: false },
+      screenings: [],
+      conversation: {
+        messageCount: conversation.messages.length,
+        messages: conversation.messages,
+      },
+      escalationHistory: [],
+    };
   },
 
   _reset() {

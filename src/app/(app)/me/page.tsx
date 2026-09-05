@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useT } from "@/i18n";
+import { useI18n } from "@/i18n";
 import { AppHeader } from "@/components/AppHeader";
+import { useTalkConversation } from "@/api/hooks";
+import { AccountStatus } from "./AccountStatus";
 import { LanguageControl } from "./LanguageControl";
 import { CrisisPlanControl } from "./CrisisPlanControl";
 import { ContactControl } from "./ContactControl";
+import { PatternsSummary } from "./PatternsSummary";
+import { WellbeingSummary } from "./WellbeingSummary";
 
 function RowLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -22,13 +26,43 @@ function RowLink({ href, children }: { href: string; children: React.ReactNode }
 }
 
 export default function MePage() {
-  const t = useT();
+  const { t, n } = useI18n();
+  const talk = useTalkConversation();
 
   return (
     <div className="container-x max-w-xl pt-8 pb-28 sm:pt-12">
       <AppHeader title={t("me.heading")} subtitle={t("me.sub")} />
 
       <div className="mt-7 animate-fade-up space-y-6">
+        <Section title={t("me.account.title")}>
+          <AccountStatus />
+        </Section>
+
+        <Section title={t("me.patterns.title")}>
+          <PatternsSummary />
+        </Section>
+
+        <Section title={t("me.talk.title")}>
+          {talk.isPending ? (
+            <p className="text-sm text-earth">{t("state.loading")}</p>
+          ) : talk.isError || !talk.data ? (
+            <p className="text-sm text-earth">{t("state.error")}</p>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-sm text-earth">
+                {talk.data.messages.length === 0
+                  ? t("me.talk.empty")
+                  : t("me.talk.messages", { count: n(talk.data.messages.length) })}
+              </p>
+              <RowLink href="/talk">{t("me.talk.open")}</RowLink>
+            </div>
+          )}
+        </Section>
+
+        <Section title={t("me.wellbeing.title")}>
+          <WellbeingSummary />
+        </Section>
+
         <Section title={t("me.language.title")}>
           <LanguageControl />
         </Section>

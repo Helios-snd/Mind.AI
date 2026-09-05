@@ -24,6 +24,13 @@ function isProtected(pathname: string): boolean {
   );
 }
 
+// The counsellor console: a fully independent gate, on a different cookie,
+// for a different principal type entirely (see backend/app/modules/
+// counsellors). Added alongside the student gate above, never merged into
+// it -- the two must never be checked by the same code path.
+const CONSOLE_SESSION_COOKIE = "console_session";
+const CONSOLE_LOGIN = "/console/login";
+
 /** Reads the `onb` claim without verifying anything. A forged cookie buys a
  *  render, then the API rejects every call the page makes. */
 function looksOnboarded(token: string | undefined): boolean {
@@ -45,6 +52,25 @@ function looksOnboarded(token: string | undefined): boolean {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // The console gate is independent of everything below -- checked first,
+  // and returns before any student-cookie logic ever runs for /console/*.
+  if (pathname.startsWith("/console")) {
+    const hasConsoleSession = !!request.cookies.get(CONSOLE_SESSION_COOKIE)?.value;
+
+    if (pathname !== CONSOLE_LOGIN && !hasConsoleSession) {
+      const url = request.nextUrl.clone();
+      url.pathname = CONSOLE_LOGIN;
+      return NextResponse.redirect(url);
+    }
+    if (pathname === CONSOLE_LOGIN && hasConsoleSession) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/console";
+      return NextResponse.redirect(url);
+    }
+    return NextResponse.next();
+  }
+
   const token = request.cookies.get(SESSION_COOKIE)?.value;
   const onboarded = looksOnboarded(token);
 
@@ -80,5 +106,6 @@ export const config = {
     "/data/:path*",
     "/human/:path*",
     "/onboarding",
+    "/console/:path*",
   ],
 };

@@ -3,7 +3,12 @@ import type {
   CheckIn,
   CheckInDraft,
   CrisisPlan,
+  DataInventory,
   EscalationBrief,
+  EscalationHistoryItem,
+  MeExport,
+  MeProfile,
+  MeSummary,
   OnboardingProgress,
   TalkConversation,
   TalkStreamEvent,
@@ -147,6 +152,8 @@ export const httpClient: ApiClient = {
   declineEscalation: (id) =>
     request<void>(`/escalations/${id}/decline`, { method: "POST" }),
 
+  requestSupport: () => request<void>("/escalations/request", { method: "POST" }),
+
   cancelCountdown: (safetyAssessmentId) =>
     request<void>(`/talk/safety/${safetyAssessmentId}/cancel`, {
       method: "POST",
@@ -156,6 +163,17 @@ export const httpClient: ApiClient = {
     request<void>(`/talk/safety/${safetyAssessmentId}/expire`, {
       method: "POST",
     }),
+
+  getMe: () => request<MeProfile>("/me"),
+
+  getMeSummary: () => request<MeSummary>("/me/summary"),
+
+  getDataInventory: () => request<DataInventory>("/me/inventory"),
+
+  getEscalationHistory: () =>
+    request<EscalationHistoryItem[]>("/escalations/history"),
+
+  exportMyData: () => request<MeExport>("/me/export"),
 };
 
 function parseSseBlock(block: string): { event: string; data: string } | null {

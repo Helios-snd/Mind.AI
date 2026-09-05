@@ -202,3 +202,87 @@ export type AssessmentResult = {
   requiresSafetyReview: boolean;
   completedAt: string;
 };
+
+export type MeProfile = {
+  userId: string;
+  language: Language;
+  name: string | null;
+  email: string | null;
+  phone: string | null;
+  claimed: boolean;
+  onboarded: boolean;
+};
+
+/**
+ * Wider than AssessmentInstrument: every onboarded student has a DASS-21
+ * baseline session too, but that one is only ever created by onboarding,
+ * never by POST /screenings/complete -- so it never appears on
+ * AssessmentResult, only here, on the history/summary/export views.
+ */
+export type ScreeningInstrument = AssessmentInstrument | "dass21";
+
+/**
+ * A completed screening's date only -- never the score or band. Matches the
+ * same "plain language, never a label" rule PHQ-9/GAD-7/DASS already follow
+ * everywhere else in this app.
+ */
+export type ScreeningHistoryItem = {
+  instrument: ScreeningInstrument;
+  completedAt: string;
+};
+
+export type MeSummary = {
+  safety: {
+    /** Never a tier number -- just a count, for "our safety check runs on
+     *  every message" style copy. */
+    recentFlagCount: number;
+    pendingReview: boolean;
+  };
+  screenings: ScreeningHistoryItem[];
+};
+
+export type ConsentEventItem = {
+  kind: string;
+  policyVersion: string;
+  at: string;
+};
+
+/** The pieces of /data that MeSummary doesn't already cover. */
+export type DataInventory = {
+  signalsCount: number;
+  consentEvents: ConsentEventItem[];
+};
+
+/** A past (approved/declined/expired) escalation -- /data's history section.
+ *  Never the internal tier int or fired_by source, same "plain language
+ *  only" rule as everything else derived from safety/escalation data. */
+export type EscalationHistoryItem = {
+  status: "approved" | "declined" | "expired";
+  reasonSummaryKey: string;
+  createdAt: string;
+  resolvedAt: string | null;
+};
+
+export type ConversationExport = {
+  messageCount: number;
+  messages: TalkMessage[];
+};
+
+/**
+ * GET /me/export's full shape. Follows the exact same plain-language rule
+ * as every on-screen page: no score, no band, no tier -- see the F2 plan.
+ * Everything else (conversation text, check-in notes, the crisis plan) is
+ * included verbatim, since none of that was ever redacted in-app either.
+ */
+export type MeExport = {
+  exportedAt: string;
+  profile: MeProfile;
+  onboarding: OnboardingProgress;
+  consentEvents: ConsentEventItem[];
+  checkIns: CheckIn[];
+  signals: { kind: string; value: unknown; source: string; observedAt: string }[];
+  safety: MeSummary["safety"];
+  screenings: ScreeningHistoryItem[];
+  conversation: ConversationExport;
+  escalationHistory: EscalationHistoryItem[];
+};
