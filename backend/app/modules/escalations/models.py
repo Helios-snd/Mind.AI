@@ -1,10 +1,12 @@
 """Escalation events and the student-facing brief that precedes a referral.
 
 Two tables, deliberately not the blueprint's full referral/appointment/
-counsellor-note sketch: there is no counsellor console yet to read a released
-brief, so that plumbing would be an unused abstraction. `fired_by` exists so
-this table can be shared later by Safety-triggered tier-3 escalations (E2/E3)
-without a second, competing table -- but only 'trend' is written today.
+counsellor-note sketch -- G's console reads a purpose-built, share_scope-
+bounded view composed from these two plus checkins/talk, not a generic
+"referral" abstraction. `fired_by` is 'trend' (E1, Trend-driven), 'manual'
+(F3, the student asking directly from /human), or 'safety' (reserved --
+E2/E3 ended up using safety_assessments.review_status instead, since tier-3
+acts without asking permission; nothing writes 'safety' here today).
 """
 
 from datetime import datetime
@@ -25,7 +27,9 @@ class EscalationEvent(UUIDPrimaryKey, Timestamped, Base):
         index=True,
     )
 
-    # 'trend' | 'safety' | 'manual'. Only 'trend' is produced today (E1).
+    # 'trend' | 'safety' | 'manual'. 'trend' (E1) and 'manual' (F3) are
+    # produced today; 'safety' is reserved but unused -- see the module
+    # docstring above.
     fired_by: Mapped[str] = mapped_column(String(20), nullable=False)
 
     # Set only for a future Safety-fired row (E2/E3); null for a trend-fired
@@ -47,6 +51,20 @@ class EscalationEvent(UUIDPrimaryKey, Timestamped, Base):
 
     resolved_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
+        nullable=True,
+    )
+
+    # G: distinct from resolved_at/status above, which are the *student's*
+    # decision (approve/decline). This is whether a counsellor has since
+    # looked at an approved one -- the state that actually lets the console
+    # queue empty out. Null status columns above already predate this; a
+    # declined escalation is never released, so it never reaches this field.
+    counsellor_reviewed_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True,
+    )
+    reviewed_by_counsellor_id: Mapped[UUID | None] = mapped_column(
+        ForeignKey("counsellors.id", ondelete="SET NULL"),
         nullable=True,
     )
 

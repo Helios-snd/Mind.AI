@@ -17,6 +17,7 @@ dependencies = [
     # Calls the self-hosted LLM runtime (Ollama/vLLM) and, later, an STT
     # service. Real runtime traffic now, not just a test-time convenience.
     "httpx>=0.28",
+    "bcrypt>=5.0.0",
 ]
 
 [project.optional-dependencies]

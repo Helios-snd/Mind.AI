@@ -165,3 +165,150 @@ async def test_escalations_are_scoped_to_their_own_account(
     assert (await client.get("/api/v1/escalations/pending")).json() is None
     resp = await client.post(f"/api/v1/escalations/{pending['id']}/approve")
     assert resp.status_code == 404
+
+
+# --- /escalations/history (F2) -----------------------------------------------
+
+
+async def test_history_excludes_a_still_pending_escalation(
+    client, onboarding_payload
+):
+    await _onboard(client, onboarding_payload)
+    today = utcnow().date()
+    await _seed_baseline_and_decline(client, today)
+
+    history = (await client.get("/api/v1/escalations/history")).json()
+    assert history == []
+
+
+async def test_an_approved_escalation_appears_in_history(client, onboarding_payload):
+    await _onboard(client, onboarding_payload)
+    today = utcnow().date()
+    await _seed_baseline_and_decline(client, today)
+    pending = (await client.get("/api/v1/escalations/pending")).json()
+    await client.post(f"/api/v1/escalations/{pending['id']}/approve")
+
+    history = (await client.get("/api/v1/escalations/history")).json()
+    assert len(history) == 1
+    assert history[0]["status"] == "approved"
+    assert history[0]["reasonSummaryKey"] == "escalation.reason.trend_decline_mood"
+    assert history[0]["resolvedAt"] is not None
+    # Never the internal tier int or fired_by source -- /data's history is
+    # status + reason + dates, nothing else.
+    assert "tier" not in history[0]
+    assert "firedBy" not in history[0]
+
+
+async def test_a_declined_escalation_appears_in_history_too(
+    client, onboarding_payload
+):
+    await _onboard(client, onboarding_payload)
+    today = utcnow().date()
+    await _seed_baseline_and_decline(client, today)
+    pending = (await client.get("/api/v1/escalations/pending")).json()
+    await client.post(f"/api/v1/escalations/{pending['id']}/decline")
+
+    history = (await client.get("/api/v1/escalations/history")).json()
+    assert len(history) == 1
+    assert history[0]["status"] == "declined"
+
+
+async def test_history_is_scoped_to_the_requesting_user(client, onboarding_payload):
+    await _onboard(client, onboarding_payload)
+    today = utcnow().date()
+    await _seed_baseline_and_decline(client, today)
+    pending = (await client.get("/api/v1/escalations/pending")).json()
+    await client.post(f"/api/v1/escalations/{pending['id']}/approve")
+
+    client.cookies.clear()
+    await _onboard(client, onboarding_payload, language="bn")
+
+    assert (await client.get("/api/v1/escalations/history")).json() == []
+
+
+# --- /escalations/request (F3) -----------------------------------------------
+
+
+async def test_requesting_support_creates_a_manual_pending_escalation(
+    client, session, onboarding_payload
+):
+    await _onboard(client, onboarding_payload)
+
+    resp = await client.post("/api/v1/escalations/request")
+    assert resp.status_code == 204
+
+    body = (await client.get("/api/v1/escalations/pending")).json()
+    assert body is not None
+    assert body["reasonSummaryKey"] == "escalation.reason.manual_request"
+    assert set(body["shareScope"]) == {"talk_messages", "checkins", "request"}
+
+    event = await session.get(EscalationEvent, body["id"])
+    assert event.fired_by == "manual"
+    assert event.tier == 0
+    # Never exposed to the client -- confirmed directly against the row.
+    assert "firedBy" not in body
+    assert "tier" not in body
+
+
+async def test_requesting_support_twice_does_not_duplicate(
+    client, session, onboarding_payload
+):
+    await _onboard(client, onboarding_payload)
+
+    await client.post("/api/v1/escalations/request")
+    await client.post("/api/v1/escalations/request")
+
+    count = await session.scalar(select(func.count()).select_from(EscalationEvent))
+    assert count == 1
+
+
+async def test_requesting_support_ignores_a_still_cooling_down_decline(
+    client, session, onboarding_payload
+):
+    """The one behaviour F3 adds to create_if_needed: an explicit ask must
+    never be silently blocked by an earlier decline's re_offer_after, unlike
+    a fresh Trend-fired offer would be."""
+    await _onboard(client, onboarding_payload)
+    today = utcnow().date()
+    await _seed_baseline_and_decline(client, today)
+    pending = (await client.get("/api/v1/escalations/pending")).json()
+    await client.post(f"/api/v1/escalations/{pending['id']}/decline")
+
+    # Confirms the cooldown is actually in effect for the Trend path first --
+    # otherwise this test would pass for the wrong reason.
+    await _check_in(client, str(today + timedelta(days=1)), mood=1)
+    assert (await client.get("/api/v1/escalations/pending")).json() is None
+
+    resp = await client.post("/api/v1/escalations/request")
+    assert resp.status_code == 204
+
+    body = (await client.get("/api/v1/escalations/pending")).json()
+    assert body is not None
+    assert body["reasonSummaryKey"] == "escalation.reason.manual_request"
+
+    count = await session.scalar(select(func.count()).select_from(EscalationEvent))
+    assert count == 2
+
+
+async def test_approving_a_manual_request_releases_it_like_any_other(
+    client, session, onboarding_payload
+):
+    await _onboard(client, onboarding_payload)
+    await client.post("/api/v1/escalations/request")
+    pending = (await client.get("/api/v1/escalations/pending")).json()
+
+    resp = await client.post(f"/api/v1/escalations/{pending['id']}/approve")
+    assert resp.status_code == 204
+
+    event = await session.get(EscalationEvent, pending["id"])
+    assert event.status == "approved"
+    brief = await session.scalar(
+        select(StudentBrief).where(StudentBrief.escalation_event_id == event.id)
+    )
+    assert brief.approved_by_student_at is not None
+    assert brief.released_to_counsellor_at is not None
+
+    history = (await client.get("/api/v1/escalations/history")).json()
+    assert len(history) == 1
+    assert history[0]["status"] == "approved"
+    assert history[0]["reasonSummaryKey"] == "escalation.reason.manual_request"

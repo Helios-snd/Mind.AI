@@ -1,23 +1,13 @@
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.v1.deps import current_user
+from app.api.v1.deps import current_user, onboarded_user
 from app.db.session import get_session
-from app.modules.onboarding.models import OnboardingProgress
-from app.modules.users.models import User, UserProfile
+from app.modules.users import service
+from app.modules.users.models import User
+from app.modules.users.schemas import DataInventoryOut, MeExportOut, MeOut, MeSummaryOut
 
 router = APIRouter(tags=["users"])
-
-
-class MeOut(BaseModel):
-    user_id: str
-    language: str
-    name: str | None = None
-    email: str | None = None
-    phone: str | None = None
-    claimed: bool
-    onboarded: bool
 
 
 @router.get("/me", response_model=MeOut)
@@ -25,14 +15,28 @@ async def read_me(
     user: User = Depends(current_user),
     session: AsyncSession = Depends(get_session),
 ) -> MeOut:
-    profile = await session.get(UserProfile, user.id)
-    progress = await session.get(OnboardingProgress, user.id)
-    return MeOut(
-        user_id=str(user.id),
-        language=profile.language if profile else "en",
-        name=profile.name if profile else None,
-        email=profile.email if profile else None,
-        phone=profile.phone if profile else None,
-        claimed=bool(profile and profile.claimed_at),
-        onboarded=bool(progress and progress.completed_at),
-    )
+    return await service.get_profile(session, user.id)
+
+
+@router.get("/me/summary", response_model=MeSummaryOut)
+async def read_me_summary(
+    user: User = Depends(onboarded_user),
+    session: AsyncSession = Depends(get_session),
+) -> MeSummaryOut:
+    return await service.get_summary(session, user.id)
+
+
+@router.get("/me/inventory", response_model=DataInventoryOut)
+async def read_me_inventory(
+    user: User = Depends(onboarded_user),
+    session: AsyncSession = Depends(get_session),
+) -> DataInventoryOut:
+    return await service.get_data_inventory(session, user.id)
+
+
+@router.get("/me/export", response_model=MeExportOut)
+async def read_me_export(
+    user: User = Depends(onboarded_user),
+    session: AsyncSession = Depends(get_session),
+) -> MeExportOut:
+    return await service.get_export(session, user.id)

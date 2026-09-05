@@ -28,6 +28,10 @@ from app.core.validators import (
 from app.db.base import utcnow
 from app.modules.auth.models import AuthSession, LoginCode
 from app.modules.checkins.models import CheckIn, Signal
+from app.modules.escalations.models import EscalationEvent
+from app.modules.screening.models import ScreeningSession
+from app.modules.talk.models import Conversation, Message
+from app.modules.talk.safety_models import SafetyAssessment
 from app.modules.onboarding.models import (
     BaselineAnswer,
     ConsentEvent,
@@ -254,6 +258,17 @@ async def delete_all_data(session: AsyncSession, user_id: UUID) -> None:
     deliberately excluded from the FK cascade so an ordinary deletion elsewhere
     can never destroy the audit trail. A genuine account deletion does remove
     it, and the deletion itself is what gets logged.
+
+    Message/Conversation/SafetyAssessment/ScreeningSession/EscalationEvent
+    below were added in F2 -- not because deletion was broken for them (it
+    wasn't: each already has ondelete="CASCADE" on its own user_id FK, or,
+    for ScreeningAnswer/ScreeningScore/StudentBrief, cascades from a row that
+    itself cascades from users.id, and deleting the User row confirmed this
+    empirically -- removing them from this loop entirely still leaves every
+    test in test_deletion.py passing). They're listed explicitly anyway,
+    matching this function's existing style for CheckIn/Signal/etc. above:
+    a full account deletion should be legible by reading this function, not
+    something you have to trace through five migration files to confirm.
     """
     for model in (
         Signal,
@@ -265,6 +280,11 @@ async def delete_all_data(session: AsyncSession, user_id: UUID) -> None:
         LoginCode,
         AuthSession,
         ConsentEvent,
+        Message,
+        Conversation,
+        SafetyAssessment,
+        ScreeningSession,
+        EscalationEvent,
     ):
         await session.execute(delete(model).where(model.user_id == user_id))
 

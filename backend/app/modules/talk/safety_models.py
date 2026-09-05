@@ -97,6 +97,15 @@ class SafetyAssessment(
         nullable=True,
     )
 
+    # Who, not just when -- G's counsellor console. ON DELETE SET NULL:
+    # losing the attribution of who reviewed a case must never cascade into
+    # losing the review itself (reviewed_at/review_status are untouched by a
+    # counsellor account going away).
+    reviewed_by_counsellor_id: Mapped[UUID | None] = mapped_column(
+        ForeignKey("counsellors.id", ondelete="SET NULL"),
+        nullable=True,
+    )
+
     review_status: Mapped[str] = mapped_column(
         String(30),
         default="not_required",

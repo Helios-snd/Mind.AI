@@ -7,6 +7,13 @@ Two cookies, both httpOnly so nothing is readable from JavaScript:
                 redirect decision only -- it is never the authorization
                 boundary. The API verifies the signature on every request.
   mind_refresh  opaque random token. Only its hash is stored.
+
+A separate, parallel pair exists for the counsellor console
+(console_session/console_refresh, below) -- a different cookie name, a
+different claim shape (`typ: "counsellor"`, checked explicitly rather than
+only implied by which cookie it arrived on), and a different principal
+entirely (Counsellor, never User). See app/modules/counsellors and the G
+plan's Context for why the two are never allowed to share a code path.
 """
 
 import hashlib
@@ -15,6 +22,7 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from uuid import UUID
 
+import bcrypt
 import jwt
 from fastapi import Response
 
@@ -137,3 +145,73 @@ def refresh_expiry() -> datetime:
 
 def login_code_expiry() -> datetime:
     return _now() + timedelta(minutes=settings.login_code_ttl_minutes)
+
+
+def hash_password(password: str) -> str:
+    """bcrypt, unlike hash_token/hash_login_code above -- a counsellor's
+    password is user-chosen and comparatively low-entropy, so it needs a
+    slow, salted hash rather than a fast one."""
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+
+def verify_password(password: str, stored_hash: str) -> bool:
+    return bcrypt.checkpw(password.encode(), stored_hash.encode())
+
+
+# --- Counsellor console: a fully separate token pair -------------------------
+
+CONSOLE_ACCESS_COOKIE = "console_session"
+CONSOLE_REFRESH_COOKIE = "console_refresh"
+
+
+def create_console_access_token(counsellor_id: UUID) -> str:
+    expires = _now() + timedelta(minutes=settings.access_token_minutes)
+    payload = {
+        "sub": str(counsellor_id),
+        # Checked explicitly by current_counsellor, not just implied by
+        # which cookie the token arrived on -- defense in depth against the
+        # two principal types ever being confused with each other.
+        "typ": "counsellor",
+        "iat": int(_now().timestamp()),
+        "exp": int(expires.timestamp()),
+    }
+    return jwt.encode(payload, settings.jwt_secret, algorithm=settings.jwt_algorithm)
+
+
+def decode_console_access_token(token: str) -> dict:
+    try:
+        claims = jwt.decode(
+            token, settings.jwt_secret, algorithms=[settings.jwt_algorithm]
+        )
+    except jwt.PyJWTError as exc:
+        raise NotAuthenticated("Session token is not valid") from exc
+    if claims.get("typ") != "counsellor":
+        raise NotAuthenticated("Not a counsellor session")
+    return claims
+
+
+def set_console_session_cookies(
+    response: Response, access: str, refresh: str | None
+) -> None:
+    response.set_cookie(
+        CONSOLE_ACCESS_COOKIE,
+        access,
+        max_age=settings.access_token_minutes * 60,
+        **_cookie_kwargs(),
+    )
+    if refresh is not None:
+        response.set_cookie(
+            CONSOLE_REFRESH_COOKIE,
+            refresh,
+            max_age=settings.refresh_token_days * 86400,
+            **_cookie_kwargs(),
+        )
+
+
+def clear_console_session_cookies(response: Response) -> None:
+    for name in (CONSOLE_ACCESS_COOKIE, CONSOLE_REFRESH_COOKIE):
+        response.delete_cookie(
+            name,
+            path="/",
+            domain=settings.cookie_domain or None,
+        )

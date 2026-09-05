@@ -23,5 +23,6 @@ from app.modules.screening.models import (  # noqa: F401
     ScreeningSession,
 )
 from app.modules.users.models import Institution, User, UserProfile  # noqa: F401
+from app.modules.counsellors.models import Counsellor, CounsellorSession  # noqa: F401
 
 __all__ = ["Base"]

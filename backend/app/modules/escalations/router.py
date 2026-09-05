@@ -12,7 +12,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.v1.deps import onboarded_user
 from app.db.session import get_session
 from app.modules.escalations import service
-from app.modules.escalations.schemas import EscalationBriefOut
+from app.modules.escalations.schemas import EscalationBriefOut, EscalationHistoryItemOut
 from app.modules.users.models import User
 
 router = APIRouter(prefix="/escalations", tags=["escalations"])
@@ -34,6 +34,35 @@ async def get_pending_escalation(
         share_scope=brief.share_scope,
         created_at=event.created_at,
     )
+
+
+@router.get("/history", response_model=list[EscalationHistoryItemOut])
+async def get_escalation_history(
+    user: User = Depends(onboarded_user),
+    session: AsyncSession = Depends(get_session),
+) -> list[EscalationHistoryItemOut]:
+    rows = await service.get_history(session, user.id)
+    return [
+        EscalationHistoryItemOut(
+            status=event.status,
+            reason_summary_key=brief.reason_summary_key if brief else "",
+            created_at=event.created_at,
+            resolved_at=event.resolved_at,
+        )
+        for event, brief in rows
+    ]
+
+
+@router.post("/request", status_code=204)
+async def request_support(
+    user: User = Depends(onboarded_user),
+    session: AsyncSession = Depends(get_session),
+) -> Response:
+    """F3's one new action: a student asking directly, from /human. No
+    response body -- the frontend re-fetches GET /escalations/pending,
+    exactly like approve/decline already do."""
+    await service.request_manual(session, user.id)
+    return Response(status_code=204)
 
 
 @router.post("/{escalation_id}/approve", status_code=204)

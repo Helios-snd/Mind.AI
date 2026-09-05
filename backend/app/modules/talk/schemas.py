@@ -7,8 +7,16 @@ from pydantic import BaseModel, Field
 class MessageOut(BaseModel):
     id: UUID
     role: str
-    text: str = Field(alias="content")
-    at: datetime = Field(alias="created_at")
+    # validation_alias only, not alias -- this needs to read the ORM's
+    # `content`/`created_at` columns when populating from a Message row, but
+    # must NOT also write those names back out on serialization. That used
+    # to be one `alias=` doing both jobs, which was harmless everywhere this
+    # was dumped with response_model_by_alias=False (GET /talk/conversation)
+    # but silently leaked `content`/`created_at` into GET /me/export, whose
+    # WireModel wrapper dumps by alias -- found by inspecting a real export
+    # payload while verifying F2, not by a test.
+    text: str = Field(validation_alias="content")
+    at: datetime = Field(validation_alias="created_at")
     status: str
 
     model_config = {
